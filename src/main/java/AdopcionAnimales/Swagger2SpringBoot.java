@@ -1,14 +1,12 @@
-package AdopcionAnimales.main.java.io.swagger;
+package AdopcionAnimales;
 
 import org.springframework.boot.CommandLineRunner;
 import org.springframework.boot.ExitCodeGenerator;
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
-
 import springfox.documentation.swagger2.annotations.EnableSwagger2;
 
 @SpringBootApplication
-@EnableSwagger2
 public class Swagger2SpringBoot implements CommandLineRunner {
 
     @Override

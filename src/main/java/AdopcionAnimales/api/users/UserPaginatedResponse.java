@@ -1,6 +1,6 @@
 package AdopcionAnimales.api.users;
 
-import AdopcionAnimales.main.java.io.swagger.model.PaginationInfo;
+import AdopcionAnimales.api.PaginationInfo;
 import com.fasterxml.jackson.annotation.JsonProperty;
 import io.swagger.annotations.ApiModelProperty;
 import org.springframework.validation.annotation.Validated;

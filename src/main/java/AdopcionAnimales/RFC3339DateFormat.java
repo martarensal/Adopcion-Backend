@@ -1,4 +1,4 @@
-package swagger;
+package AdopcionAnimales;
 
 import com.fasterxml.jackson.databind.util.ISO8601DateFormat;
 import com.fasterxml.jackson.databind.util.ISO8601Utils;
