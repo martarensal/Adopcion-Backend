@@ -11,7 +11,7 @@ public class Type {
     @Id
     private Long id;
 
-    @OneToMany
+    @OneToMany(mappedBy = "type")
     private Set<Animal> animals;
 
     public Type(){}

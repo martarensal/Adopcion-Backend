@@ -4,9 +4,11 @@ import org.springframework.boot.CommandLineRunner;
 import org.springframework.boot.ExitCodeGenerator;
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
-import springfox.documentation.swagger2.annotations.EnableSwagger2;
+import org.springframework.context.annotation.ComponentScan;
+import org.springframework.context.annotation.Configuration;
 
 @SpringBootApplication
+@ComponentScan(basePackages = { "AdopcionAnimales", "AdopcionAnimales.api", "AdopcionAnimales.configuration" })
 public class Swagger2SpringBoot implements CommandLineRunner {
 
     @Override

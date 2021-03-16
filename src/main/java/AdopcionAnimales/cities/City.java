@@ -15,7 +15,7 @@ public class City {
     private String postalCode;
     private String country;
 
-    @OneToMany
+    @OneToMany(mappedBy = "city")
     private Set<Animal> animals;
 
     public City(String name,String postalCode, String country){

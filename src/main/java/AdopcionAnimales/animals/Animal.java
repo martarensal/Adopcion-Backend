@@ -29,7 +29,7 @@ public class Animal {
 
     @ManyToOne
     private User user;
-    @OneToMany
+    @OneToMany(mappedBy = "animal")
     private Set<Request> request;
     @ManyToOne
     private City city;
