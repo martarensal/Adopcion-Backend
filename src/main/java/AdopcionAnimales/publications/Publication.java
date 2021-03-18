@@ -3,7 +3,7 @@ package AdopcionAnimales.publications;
 import AdopcionAnimales.users.User;
 
 import javax.persistence.*;
-import java.util.Date;
+import java.time.OffsetDateTime;
 
 @Entity
 public class Publication {
@@ -11,13 +11,12 @@ public class Publication {
     @GeneratedValue(strategy = GenerationType.AUTO)
     @Id
     private Long id;
-
-    private Date publicationDate;
+    private OffsetDateTime publicationDate;
 
     @ManyToOne
     private User user;
 
-    public Publication(Date publicationDate){
+    public Publication(OffsetDateTime publicationDate){
         this.publicationDate = publicationDate;
     }
     public Publication(){}
@@ -30,11 +29,11 @@ public class Publication {
         return id;
     }
 
-    public Date getPublicationDate() {
+    public OffsetDateTime getPublicationDate() {
         return publicationDate;
     }
 
-    public void setPublicationDate(Date publicationDate) {
+    public void setPublicationDate(OffsetDateTime publicationDate) {
         this.publicationDate = publicationDate;
     }
 

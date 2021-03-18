@@ -18,13 +18,13 @@ public class Animal {
     private String name;
     private int age;
     /* 0 pequeño, 1 mediano, 2 grande */
-    private Integer size;
+    private String size;
     /* 0 marrón, 1 blanco, 2 negro, 3 beige, 4 naranja, 5 rojo, 6 verde, 7 azul, 8 amarillo*/
-    private Integer colour;
+    private String colour;
     /* 0 hembra, 1 macho*/
-    private Integer sex;
+    private String sex;
     /* 0 sin hogar, 1 adoptado, 2 acogido*/
-    private Integer status;
+    private String status;
     private String image;
 
     @ManyToOne
@@ -36,21 +36,28 @@ public class Animal {
     @ManyToOne
     private Type type;
 
-    public Animal(String name, int age, Integer size, Integer colour, Integer sex, String image){
+    public Animal(Long id, String name, int age, String size, String colour, String sex, String status, String image, User user, Set<Request> request, City city, Type type) {
+        this.id = id;
         this.name = name;
         this.age = age;
         this.size = size;
         this.colour = colour;
         this.sex = sex;
+        this.status = status;
         this.image = image;
+        this.user = user;
+        this.request = request;
+        this.city = city;
+        this.type = type;
     }
     public Animal(){}
-    public void setIdAnimal(Long id) {
-        this.id = id;
+
+    public Long getId() {
+        return id;
     }
 
-    public Long getIdAnimal() {
-        return id;
+    public void setId(Long id) {
+        this.id = id;
     }
 
     public String getName() {
@@ -69,35 +76,35 @@ public class Animal {
         this.age = age;
     }
 
-    public Integer getSize() {
+    public String getSize() {
         return size;
     }
 
-    public void setSize(Integer size) {
+    public void setSize(String size) {
         this.size = size;
     }
 
-    public Integer getColour() {
+    public String getColour() {
         return colour;
     }
 
-    public void setColour(Integer colour) {
+    public void setColour(String colour) {
         this.colour = colour;
     }
 
-    public Integer getSex() {
+    public String getSex() {
         return sex;
     }
 
-    public void setSex(Integer sex) {
+    public void setSex(String sex) {
         this.sex = sex;
     }
 
-    public Integer getStatus() {
+    public String getStatus() {
         return status;
     }
 
-    public void setStatus(Integer status) {
+    public void setStatus(String status) {
         this.status = status;
     }
 
