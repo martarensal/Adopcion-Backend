@@ -5,10 +5,13 @@ import AdopcionAnimales.api.publications.PublicationCreationRequest;
 import AdopcionAnimales.api.publications.PublicationResponse;
 import AdopcionAnimales.api.requests.RequestPaginatedResponse;
 import AdopcionAnimales.api.types.TypeResponse;
+import AdopcionAnimales.users.UniqueUsernameException;
+import AdopcionAnimales.users.UsersService;
 import com.fasterxml.jackson.databind.ObjectMapper;
 import io.swagger.annotations.ApiParam;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Controller;
@@ -30,10 +33,13 @@ public class UsersApiController implements UsersApi {
 
     private final HttpServletRequest request;
 
-    @org.springframework.beans.factory.annotation.Autowired
-    public UsersApiController(ObjectMapper objectMapper, HttpServletRequest request) {
+    private UsersService userService;
+
+    @Autowired
+    public UsersApiController(ObjectMapper objectMapper, HttpServletRequest request, UsersService userService) {
         this.objectMapper = objectMapper;
         this.request = request;
+        this.userService = userService;
     }
 
     public ResponseEntity<Void> addAnimal(@ApiParam(value = "",required=true) @PathVariable("username") String username,@ApiParam(value = "Animal to add"  )  @Valid @RequestBody AnimalCreationRequest body) {
@@ -46,9 +52,9 @@ public class UsersApiController implements UsersApi {
         return new ResponseEntity<Void>(HttpStatus.NOT_IMPLEMENTED);
     }
 
-    public ResponseEntity<Void> addUser(@ApiParam(value = "User to add"  )  @Valid @RequestBody UserRegistrationRequest body) {
-        String accept = request.getHeader("Accept");
-        return new ResponseEntity<Void>(HttpStatus.NOT_IMPLEMENTED);
+    public ResponseEntity<Void> addUser(@ApiParam(value = "User to add"  )  @Valid @RequestBody UserRegistrationRequest body) throws UniqueUsernameException {
+        userService.registerUser(body);
+        return new ResponseEntity<Void>(HttpStatus.OK);
     }
 
     public ResponseEntity<Void> deleteAnimal(@ApiParam(value = "",required=true) @PathVariable("username") String username,@ApiParam(value = "By passing in the appropriate animal code, you can delete the animal.",required=true) @PathVariable("idAnimal") String idAnimal) {
@@ -56,9 +62,9 @@ public class UsersApiController implements UsersApi {
         return new ResponseEntity<Void>(HttpStatus.NOT_IMPLEMENTED);
     }
 
-    public ResponseEntity<Void> deleteUser(@ApiParam(value = "By passing in the appropriate username, you can delete the user.",required=true) @PathVariable("username") String username) {
-        String accept = request.getHeader("Accept");
-        return new ResponseEntity<Void>(HttpStatus.NOT_IMPLEMENTED);
+    public ResponseEntity<Void> deleteUser(@ApiParam(value = "By passing in the appropriate username, you can delete the user.",required=true) @PathVariable("username") String username)throws IllegalArgumentException{
+        userService.deleteUser(username);
+        return new ResponseEntity<Void>(HttpStatus.OK);
     }
 
     public ResponseEntity<UserResponse> getUser(@ApiParam(value = "By passing in the appropriate username, you can get the user.",required=true) @PathVariable("username") String username) {
@@ -161,9 +167,13 @@ public class UsersApiController implements UsersApi {
         return new ResponseEntity<List<TypeResponse>>(HttpStatus.NOT_IMPLEMENTED);
     }
 
-    public ResponseEntity<List<UserPaginatedResponse>> searchUser(@ApiParam(value = "the username to be searched") @Valid @RequestParam(value = "username", required = false) String username,@ApiParam(value = "the number of the page") @Valid @RequestParam(value = "page", required = false) Integer page,@ApiParam(value = "the number of element per page") @Valid @RequestParam(value = "size", required = false) Integer size) {
-        String accept = request.getHeader("Accept");
-        return new ResponseEntity<List<UserPaginatedResponse>>(HttpStatus.NOT_IMPLEMENTED);
+    public ResponseEntity<UserPaginatedResponse> searchUser(@ApiParam(value = "the username to be searched")
+                                                                  @Valid @RequestParam(value = "username", required = true) String username,
+                                                                  @ApiParam(value = "the number of the page")
+                                                                  @Valid @RequestParam(value = "page", required = false, defaultValue = "0") Integer page,
+                                                                  @ApiParam(value = "the number of element per page")
+                                                                  @Valid @RequestParam(value = "size", required = false, defaultValue = "25") Integer size) {
+        return new ResponseEntity <UserPaginatedResponse>(userService.searchUsersByUsername(username, page, size), HttpStatus.OK);
     }
 
 }

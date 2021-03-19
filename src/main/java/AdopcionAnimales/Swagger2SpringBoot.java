@@ -6,8 +6,10 @@ import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
 import org.springframework.context.annotation.ComponentScan;
 import org.springframework.context.annotation.Configuration;
+import springfox.documentation.swagger2.annotations.EnableSwagger2;
 
 @SpringBootApplication
+@EnableSwagger2
 @ComponentScan(basePackages = { "AdopcionAnimales", "AdopcionAnimales.api", "AdopcionAnimales.configuration" })
 public class Swagger2SpringBoot implements CommandLineRunner {
 

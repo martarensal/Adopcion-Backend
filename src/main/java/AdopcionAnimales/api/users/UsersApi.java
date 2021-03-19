@@ -10,6 +10,7 @@ import AdopcionAnimales.api.publications.PublicationCreationRequest;
 import AdopcionAnimales.api.publications.PublicationResponse;
 import AdopcionAnimales.api.requests.RequestPaginatedResponse;
 import AdopcionAnimales.api.types.TypeResponse;
+import AdopcionAnimales.users.UniqueUsernameException;
 import io.swagger.annotations.*;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
@@ -53,7 +54,7 @@ public interface UsersApi {
     @RequestMapping(value = "/users",
         consumes = { "application/json" },
         method = RequestMethod.POST)
-    ResponseEntity<Void> addUser(@ApiParam(value = "User to add"  )  @Valid @RequestBody UserRegistrationRequest body);
+    ResponseEntity<Void> addUser(@ApiParam(value = "User to add"  )  @Valid @RequestBody UserRegistrationRequest body) throws UniqueUsernameException;
 
 
     @ApiOperation(value = "Deletes an animal", nickname = "deleteAnimal", notes = "Deletes the animal linked to a user", authorizations = {
@@ -330,6 +331,6 @@ public interface UsersApi {
     @RequestMapping(value = "/users",
         produces = { "application/json" }, 
         method = RequestMethod.GET)
-    ResponseEntity<List<UserPaginatedResponse>> searchUser(@ApiParam(value = "the username to be searched") @Valid @RequestParam(value = "username", required = false) String username,@ApiParam(value = "the number of the page") @Valid @RequestParam(value = "page", required = false) Integer page,@ApiParam(value = "the number of element per page") @Valid @RequestParam(value = "size", required = false) Integer size);
+    ResponseEntity<UserPaginatedResponse> searchUser(@ApiParam(value = "the username to be searched") @Valid @RequestParam(value = "username", required = false) String username,@ApiParam(value = "the number of the page") @Valid @RequestParam(value = "page", required = false) Integer page,@ApiParam(value = "the number of element per page") @Valid @RequestParam(value = "size", required = false) Integer size);
 
 }

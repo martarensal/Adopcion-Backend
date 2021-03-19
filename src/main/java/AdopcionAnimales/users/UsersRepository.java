@@ -10,17 +10,17 @@ import org.springframework.stereotype.Repository;
 @Repository
 public interface UsersRepository extends CrudRepository<User, Long> {
     @Query("select u from User u where u.username = :username")
-    public User findUserByUsername(@Param("username") String username);
+    User findUserByUsername(@Param("username") String username);
 
     @Query("select u from User u LEFT JOIN FETCH u.animals c where u.username = :username")
-    public User findUserByUsernameWithAnimals(@Param("username") String username);
+    User findUserByUsernameWithAnimals(@Param("username") String username);
 
     @Query("select u from User u LEFT JOIN FETCH u.publications c where u.username = :username")
-    public User findUserByUsernameWithPublications(@Param("username") String username);
+    User findUserByUsernameWithPublications(@Param("username") String username);
 
     @Query("select u from User u LEFT JOIN FETCH u.requests c where u.username = :username")
-    public User findUserByUsernameWithRequests(@Param("username") String username);
+    User findUserByUsernameWithRequests(@Param("username") String username);
 
     @Query("select u from User u where u.username LIKE :username")
-    public Page<User> searchUserWithUsername(@Param("username") String username, Pageable page);
+    Page<User> searchUserWithUsername(@Param("username") String username, Pageable page);
 }

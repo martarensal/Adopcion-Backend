@@ -15,6 +15,7 @@ import javax.persistence.EntityNotFoundException;
 import javax.transaction.Transactional;
 import java.util.List;
 import java.util.stream.Collectors;
+import java.util.stream.Stream;
 
 @Service
 public class UsersServiceImpl implements UsersService {
@@ -24,12 +25,12 @@ public class UsersServiceImpl implements UsersService {
     private UserMapper userMapper;
 
     @Autowired
-    public UsersServiceImpl(UsersRepository userRepository, PasswordEncoder passwordEncoder) {
+    public UsersServiceImpl(UsersRepository userRepository, PasswordEncoder passwordEncoder, UserMapper userMapper) {
         super();
         this.userRepository = userRepository;
         this.passwordEncoder = passwordEncoder;
+        this.userMapper = userMapper;
     }
-
 
     @Override
     @Transactional
@@ -137,8 +138,12 @@ public class UsersServiceImpl implements UsersService {
     public UserPaginatedResponse searchUsersByUsername(String username, Integer page, Integer size) {
         Page<User> matchedUsers = userRepository.searchUserWithUsername(username, PageRequest.of(page, size));
 
-        List<UserResponse> userResponses = matchedUsers.map(user -> userMapper.userToUserResponse(user)).stream()
-                .collect(Collectors.toList());
+
+
+        //Stream<UserResponse> userResponsesStream = matchedUsers.map(user -> userMapper.userToUserResponse(user));
+        Page<UserResponse> userResponsesObject = matchedUsers.map(user -> userMapper.userToUserResponse(user));
+        Stream<UserResponse> userResponsesStream = userResponsesObject.stream();
+        List<UserResponse> userResponses = userResponsesStream.collect(Collectors.toList());
         PaginationInfo paginationInfo = new PaginationInfo();
         paginationInfo.setTotalElements(matchedUsers.getNumberOfElements());
         paginationInfo.setTotalPages(matchedUsers.getTotalPages());
