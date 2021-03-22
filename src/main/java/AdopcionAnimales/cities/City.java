@@ -8,7 +8,7 @@ import java.util.Set;
 @Entity
 public class City {
 
-    @GeneratedValue(strategy = GenerationType.AUTO)
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Id
     private Long id;
     private String name;

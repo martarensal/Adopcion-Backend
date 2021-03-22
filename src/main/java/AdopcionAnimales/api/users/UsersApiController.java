@@ -19,6 +19,7 @@ import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestParam;
 
+import javax.persistence.EntityNotFoundException;
 import javax.servlet.http.HttpServletRequest;
 import javax.validation.Valid;
 import java.util.List;
@@ -52,10 +53,12 @@ public class UsersApiController implements UsersApi {
         return new ResponseEntity<Void>(HttpStatus.NOT_IMPLEMENTED);
     }
 
-    public ResponseEntity<Void> addUser(@ApiParam(value = "User to add"  )  @Valid @RequestBody UserRegistrationRequest body) throws UniqueUsernameException {
+    public ResponseEntity<Void> addUser(@ApiParam(value = "User to add") @Valid @RequestBody UserRegistrationRequest body)
+            throws UniqueUsernameException {
         userService.registerUser(body);
         return new ResponseEntity<Void>(HttpStatus.OK);
     }
+
 
     public ResponseEntity<Void> deleteAnimal(@ApiParam(value = "",required=true) @PathVariable("username") String username,@ApiParam(value = "By passing in the appropriate animal code, you can delete the animal.",required=true) @PathVariable("idAnimal") String idAnimal) {
         String accept = request.getHeader("Accept");
@@ -67,9 +70,10 @@ public class UsersApiController implements UsersApi {
         return new ResponseEntity<Void>(HttpStatus.OK);
     }
 
-    public ResponseEntity<UserResponse> getUser(@ApiParam(value = "By passing in the appropriate username, you can get the user.",required=true) @PathVariable("username") String username) {
-        String accept = request.getHeader("Accept");
-        return new ResponseEntity<UserResponse>(HttpStatus.NOT_IMPLEMENTED);
+    public ResponseEntity<UserResponse> getUser(
+            @ApiParam(value = "By passing in the appropriate user id, you can get the user.", required = true) @PathVariable("idUser") Long idUser)
+            throws EntityNotFoundException {
+        return new ResponseEntity<UserResponse>(userService.getUserById(idUser), HttpStatus.OK);
     }
 
     public ResponseEntity<Void> modifyAnimalAge(@ApiParam(value = "",required=true) @PathVariable("username") String username,@ApiParam(value = "By passing in the appropriate animal code, you can modify the animal.",required=true) @PathVariable("idAnimal") String idAnimal,@ApiParam(value = "The animal's new age"  )  @Valid @RequestBody AnimalAgeChangeRequest body) {
@@ -168,7 +172,7 @@ public class UsersApiController implements UsersApi {
     }
 
     public ResponseEntity<UserPaginatedResponse> searchUser(@ApiParam(value = "the username to be searched")
-                                                                  @Valid @RequestParam(value = "username", required = true) String username,
+                                                                  @Valid @RequestParam(value = "username", required = false) String username,
                                                                   @ApiParam(value = "the number of the page")
                                                                   @Valid @RequestParam(value = "page", required = false, defaultValue = "0") Integer page,
                                                                   @ApiParam(value = "the number of element per page")

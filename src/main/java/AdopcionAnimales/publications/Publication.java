@@ -8,7 +8,7 @@ import java.time.OffsetDateTime;
 @Entity
 public class Publication {
 
-    @GeneratedValue(strategy = GenerationType.AUTO)
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Id
     private Long id;
     private OffsetDateTime publicationDate;

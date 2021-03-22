@@ -7,7 +7,7 @@ import java.util.Set;
 
 @Entity
 public class Type {
-    @GeneratedValue(strategy = GenerationType.AUTO)
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Id
     private Long id;
 

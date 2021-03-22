@@ -10,7 +10,7 @@ import java.time.OffsetDateTime;
 @Entity
 public class Request {
 
-    @GeneratedValue(strategy = GenerationType.AUTO)
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Id
     private Long id;
 

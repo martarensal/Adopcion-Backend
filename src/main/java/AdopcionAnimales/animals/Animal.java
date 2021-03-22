@@ -11,19 +11,15 @@ import java.util.Set;
 @Entity
 public class Animal {
 
-    @GeneratedValue(strategy = GenerationType.AUTO)
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Id
     private Long id;
 
     private String name;
     private int age;
-    /* 0 pequeño, 1 mediano, 2 grande */
     private String size;
-    /* 0 marrón, 1 blanco, 2 negro, 3 beige, 4 naranja, 5 rojo, 6 verde, 7 azul, 8 amarillo*/
     private String colour;
-    /* 0 hembra, 1 macho*/
     private String sex;
-    /* 0 sin hogar, 1 adoptado, 2 acogido*/
     private String status;
     private String image;
 

@@ -80,19 +80,18 @@ public interface UsersApi {
         method = RequestMethod.DELETE)
     ResponseEntity<Void> deleteUser(@ApiParam(value = "By passing in the appropriate username, you can delete the user.",required=true) @PathVariable("username") String username);
 
-
     @ApiOperation(value = "Finds a user", nickname = "getUser", notes = "", response = UserResponse.class, authorizations = {
-        @Authorization(value = "ApiKeyAuth")    }, tags={  })
-    @ApiResponses(value = { 
-        @ApiResponse(code = 200, message = "search results matching criteria", response = UserResponse.class),
-        @ApiResponse(code = 400, message = "bad input parameter"),
-        @ApiResponse(code = 404, message = "user not found"),
-        @ApiResponse(code = 401, message = "The requested page needs a username and a password") })
-    @RequestMapping(value = "/users/{username}",
-        produces = { "application/json" }, 
-        method = RequestMethod.GET)
-    ResponseEntity<UserResponse> getUser(@ApiParam(value = "By passing in the appropriate username, you can get the user.",required=true) @PathVariable("username") String username);
-
+            @Authorization(value = "ApiKeyAuth")    }, tags={ })
+    @ApiResponses(value = {
+            @ApiResponse(code = 200, message = "search results matching criteria", response = UserResponse.class),
+            @ApiResponse(code = 400, message = "bad input parameter"),
+            @ApiResponse(code = 404, message = "user not found"),
+            @ApiResponse(code = 401, message = "The requested page needs a username and a password") })
+    @RequestMapping(value = "/users/{idUser}",
+            produces = { "application/json" },
+            method = RequestMethod.GET)
+    ResponseEntity<UserResponse> getUser(@ApiParam(value = "By passing in the appropriate user id, you can get the user.",required=true) @PathVariable("idUser") Long userId
+    );
 
     @ApiOperation(value = "Modifies the animal's age", nickname = "modifyAnimalAge", notes = "", authorizations = {
         @Authorization(value = "ApiKeyAuth")    }, tags={  })
@@ -321,16 +320,17 @@ public interface UsersApi {
         method = RequestMethod.GET)
     ResponseEntity<List<TypeResponse>> searchType(@ApiParam(value = "",required=true) @PathVariable("username") String username, @ApiParam(value = "",required=true) @PathVariable("idAnimal") String idAnimal, @ApiParam(value = "",required=true) @PathVariable("idType") String idType);
 
-
     @ApiOperation(value = "Searches for a user", nickname = "searchUser", notes = "Searches for a user. This operation is permited for both user and admin", response = UserPaginatedResponse.class, responseContainer = "List", authorizations = {
-        @Authorization(value = "ApiKeyAuth")    }, tags={  })
-    @ApiResponses(value = { 
-        @ApiResponse(code = 200, message = "The search was successfull", response = UserPaginatedResponse.class, responseContainer = "List"),
-        @ApiResponse(code = 401, message = "The requested page needs a username and a password"),
-        @ApiResponse(code = 500, message = "Internal server error") })
+            @Authorization(value = "ApiKeyAuth")    }, tags={ })
+    @ApiResponses(value = {
+            @ApiResponse(code = 200, message = "The search was successfull", response = UserPaginatedResponse.class),
+            @ApiResponse(code = 401, message = "The requested page needs a username and a password"),
+            @ApiResponse(code = 500, message = "Internal server error") })
     @RequestMapping(value = "/users",
-        produces = { "application/json" }, 
-        method = RequestMethod.GET)
-    ResponseEntity<UserPaginatedResponse> searchUser(@ApiParam(value = "the username to be searched") @Valid @RequestParam(value = "username", required = false) String username,@ApiParam(value = "the number of the page") @Valid @RequestParam(value = "page", required = false) Integer page,@ApiParam(value = "the number of element per page") @Valid @RequestParam(value = "size", required = false) Integer size);
-
+            produces = { "application/json" },
+            method = RequestMethod.GET)
+    ResponseEntity<UserPaginatedResponse> searchUser(@ApiParam(value = "the username to be searched") @Valid @RequestParam(value = "username", required = true) String username
+            ,@ApiParam(value = "the number of the page") @Valid @RequestParam(value = "page", required = false) Integer page
+            ,@ApiParam(value = "the number of element per page") @Valid @RequestParam(value = "size", required = false) Integer size
+    );
 }
