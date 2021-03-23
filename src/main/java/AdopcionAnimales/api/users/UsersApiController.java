@@ -6,6 +6,7 @@ import AdopcionAnimales.api.publications.PublicationResponse;
 import AdopcionAnimales.api.requests.RequestPaginatedResponse;
 import AdopcionAnimales.api.types.TypeResponse;
 import AdopcionAnimales.users.UniqueUsernameException;
+import AdopcionAnimales.users.UserMapper;
 import AdopcionAnimales.users.UsersService;
 import com.fasterxml.jackson.databind.ObjectMapper;
 import io.swagger.annotations.ApiParam;
@@ -34,13 +35,16 @@ public class UsersApiController implements UsersApi {
 
     private final HttpServletRequest request;
 
+    private UserMapper userMapper;
+
     private UsersService userService;
 
     @Autowired
-    public UsersApiController(ObjectMapper objectMapper, HttpServletRequest request, UsersService userService) {
+    public UsersApiController(ObjectMapper objectMapper, HttpServletRequest request, UsersService userService, UserMapper userMapper) {
         this.objectMapper = objectMapper;
         this.request = request;
         this.userService = userService;
+        this.userMapper = userMapper;
     }
 
     public ResponseEntity<Void> addAnimal(@ApiParam(value = "",required=true) @PathVariable("username") String username,@ApiParam(value = "Animal to add"  )  @Valid @RequestBody AnimalCreationRequest body) {
@@ -58,7 +62,6 @@ public class UsersApiController implements UsersApi {
         userService.registerUser(body);
         return new ResponseEntity<Void>(HttpStatus.OK);
     }
-
 
     public ResponseEntity<Void> deleteAnimal(@ApiParam(value = "",required=true) @PathVariable("username") String username,@ApiParam(value = "By passing in the appropriate animal code, you can delete the animal.",required=true) @PathVariable("idAnimal") String idAnimal) {
         String accept = request.getHeader("Accept");
@@ -115,10 +118,11 @@ public class UsersApiController implements UsersApi {
         String accept = request.getHeader("Accept");
         return new ResponseEntity<Void>(HttpStatus.NOT_IMPLEMENTED);
     }
-
-    public ResponseEntity<Void> modifyUserLastname(@ApiParam(value = "",required=true) @PathVariable("username") String username,@ApiParam(value = "The new user's lastname"  )  @Valid @RequestBody UserLastnameChangeRequest body) {
-        String accept = request.getHeader("Accept");
-        return new ResponseEntity<Void>(HttpStatus.NOT_IMPLEMENTED);
+    public ResponseEntity<Void> modifyUserLastnames(
+            @ApiParam(value = "", required = true) @PathVariable("username") String username,
+            @ApiParam(value = "The new user's lastnames") @Valid @RequestBody UserLastnameChangeRequest body) {
+        userService.modifyUserLastnames(body, username);
+        return new ResponseEntity<Void>(HttpStatus.OK);
     }
 
     public ResponseEntity<Void> modifyUserName(@ApiParam(value = "",required=true) @PathVariable("username") String username,@ApiParam(value = "The new user's name"  )  @Valid @RequestBody UserNameChangeRequest body) {

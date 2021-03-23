@@ -13,7 +13,7 @@ public interface UsersService extends UserDetailsService {
     void registerUser(UserRegistrationRequest registrationRequest) throws UniqueUsernameException;
     UserResponse getUserByUsername(String username) throws EntityNotFoundException;
     void deleteUser(String username) throws IllegalArgumentException;
-    void modifyUserLastname(UserLastnameChangeRequest userLastnameChangeRequest, String username);
+    void modifyUserLastnames(UserLastnameChangeRequest userLastnameChangeRequest, String username);
     void modifyUserName(UserNameChangeRequest userNameChangeRequest, String username);
     void modifyUserPassword(UserPasswordChangeRequest userPasswordChangeRequest, String username);
     void modifyUserUsername(UserUsernameChangeRequest usernameChangeRequest, String username) throws UniqueUsernameException;

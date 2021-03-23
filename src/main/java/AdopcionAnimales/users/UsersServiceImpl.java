@@ -83,12 +83,11 @@ public class UsersServiceImpl implements UsersService {
 
     @Override
     @Transactional
-    public void modifyUserLastname(UserLastnameChangeRequest userLastnameChangeRequest, String username) {
+    public void modifyUserLastnames(UserLastnameChangeRequest userLastnameChangeRequest, String username) {
         User user = findUserByUsername(username);
 
         user.setLastnames(userLastnameChangeRequest.getNewLastname());
         userRepository.save(user);
-
     }
 
     @Override

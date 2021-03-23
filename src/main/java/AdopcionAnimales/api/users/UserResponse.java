@@ -19,8 +19,8 @@ public class UserResponse   {
   @JsonProperty("name")
   private String name = null;
 
-  @JsonProperty("lastname")
-  private String lastname = null;
+  @JsonProperty("lastnames")
+  private String lastnames = null;
 
   @JsonProperty("email")
   private String email = null;
@@ -68,24 +68,24 @@ public class UserResponse   {
     this.name = name;
   }
 
-  public UserResponse lastname(String lastname) {
-    this.lastname = lastname;
+  public UserResponse lastnames(String lastnames) {
+    this.lastnames = lastnames;
     return this;
   }
 
   /**
-   * Get lastname
-   * @return lastname
+   * Get lastnames
+   * @return lastnames
   **/
   @ApiModelProperty(example = "Doe", required = true, value = "")
   @NotNull
 
-  public String getLastname() {
-    return lastname;
+  public String getLastnames() {
+    return lastnames;
   }
 
-  public void setLastname(String lastname) {
-    this.lastname = lastname;
+  public void setLastnames(String lastnames) {
+    this.lastnames = lastnames;
   }
 
   public UserResponse email(String email) {
@@ -140,14 +140,14 @@ public class UserResponse   {
     UserResponse userResponse = (UserResponse) o;
     return Objects.equals(this.username, userResponse.username) &&
         Objects.equals(this.name, userResponse.name) &&
-        Objects.equals(this.lastname, userResponse.lastname) &&
+        Objects.equals(this.lastnames, userResponse.lastnames) &&
         Objects.equals(this.email, userResponse.email) &&
         Objects.equals(this.phone, userResponse.phone);
   }
 
   @Override
   public int hashCode() {
-    return Objects.hash(username, name, lastname, email, phone);
+    return Objects.hash(username, name, lastnames, email, phone);
   }
 
   @Override
@@ -157,7 +157,7 @@ public class UserResponse   {
     
     sb.append("    username: ").append(toIndentedString(username)).append("\n");
     sb.append("    name: ").append(toIndentedString(name)).append("\n");
-    sb.append("    lastname: ").append(toIndentedString(lastname)).append("\n");
+    sb.append("    lastnames: ").append(toIndentedString(lastnames)).append("\n");
     sb.append("    email: ").append(toIndentedString(email)).append("\n");
     sb.append("    phone: ").append(toIndentedString(phone)).append("\n");
     sb.append("}");

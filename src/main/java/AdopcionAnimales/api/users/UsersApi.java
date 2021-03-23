@@ -189,16 +189,16 @@ public interface UsersApi {
     ResponseEntity<Void> modifyUserEmail(@ApiParam(value = "",required=true) @PathVariable("username") String username,@ApiParam(value = "The new user's email"  )  @Valid @RequestBody UserEmailChangeRequest body);
 
 
-    @ApiOperation(value = "Modifies the user's lastname", nickname = "modifyUserLastname", notes = "The user username you want to modify", authorizations = {
+    @ApiOperation(value = "Modifies the user's lastnames", nickname = "modifyUserLastnames", notes = "The user username you want to modify", authorizations = {
         @Authorization(value = "ApiKeyAuth")    }, tags={  })
     @ApiResponses(value = { 
         @ApiResponse(code = 400, message = "bad input parameter"),
         @ApiResponse(code = 200, message = "operation completed successfully"),
         @ApiResponse(code = 401, message = "The requested page needs a username and a password") })
-    @RequestMapping(value = "/users/{username}/lastname",
+    @RequestMapping(value = "/users/{username}/lastnames",
         consumes = { "application/json" },
         method = RequestMethod.PUT)
-    ResponseEntity<Void> modifyUserLastname(@ApiParam(value = "",required=true) @PathVariable("username") String username,@ApiParam(value = "The new user's lastname"  )  @Valid @RequestBody UserLastnameChangeRequest body);
+    ResponseEntity<Void> modifyUserLastnames(@ApiParam(value = "",required=true) @PathVariable("username") String username,@ApiParam(value = "The new user's lastnames"  )  @Valid @RequestBody UserLastnameChangeRequest body);
 
 
     @ApiOperation(value = "Modifies the user's name", nickname = "modifyUserName", notes = "The user username you want to modify", authorizations = {

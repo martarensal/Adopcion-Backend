@@ -21,8 +21,8 @@ public class UserRegistrationRequest   {
   @JsonProperty("name")
   private String name = null;
 
-  @JsonProperty("lastname")
-  private String lastname = null;
+  @JsonProperty("lastnames")
+  private String lastnames = null;
 
   @JsonProperty("email")
   private String email = null;
@@ -106,24 +106,24 @@ public class UserRegistrationRequest   {
     this.name = name;
   }
 
-  public UserRegistrationRequest lastname(String lastname) {
-    this.lastname = lastname;
+  public UserRegistrationRequest lastnames(String lastnames) {
+    this.lastnames = lastnames;
     return this;
   }
 
   /**
-   * Get lastname
-   * @return lastname
-  **/
+   * Get lastnames
+   * @return lastnames
+   **/
   @ApiModelProperty(example = "Doe", required = true, value = "")
   @NotNull
 
-  public String getLastname() {
-    return lastname;
+  public String getLastnames() {
+    return lastnames;
   }
 
-  public void setLastname(String lastname) {
-    this.lastname = lastname;
+  public void setLastnames(String lastnames) {
+    this.lastnames = lastnames;
   }
 
   public UserRegistrationRequest email(String email) {
@@ -175,7 +175,7 @@ public class UserRegistrationRequest   {
    * Get phone
    * @return phone
   **/
-  @ApiModelProperty(required = true, value = "")
+  @ApiModelProperty(example = "6557984", required = true, value = "")
   @NotNull
 
   public String getPhone() {
@@ -218,7 +218,7 @@ public class UserRegistrationRequest   {
     UserRegistrationRequest userRegistrationRequest = (UserRegistrationRequest) o;
     return Objects.equals(this.username, userRegistrationRequest.username) &&
         Objects.equals(this.name, userRegistrationRequest.name) &&
-        Objects.equals(this.lastname, userRegistrationRequest.lastname) &&
+        Objects.equals(this.lastnames, userRegistrationRequest.lastnames) &&
         Objects.equals(this.email, userRegistrationRequest.email) &&
         Objects.equals(this.password, userRegistrationRequest.password) &&
         Objects.equals(this.phone, userRegistrationRequest.phone) &&
@@ -227,7 +227,7 @@ public class UserRegistrationRequest   {
 
   @Override
   public int hashCode() {
-    return Objects.hash(username, name, lastname, email, password, phone, role);
+    return Objects.hash(username, name, /*lastnames,*/ email, password, phone, role);
   }
 
   @Override
@@ -237,7 +237,7 @@ public class UserRegistrationRequest   {
     
     sb.append("    username: ").append(toIndentedString(username)).append("\n");
     sb.append("    name: ").append(toIndentedString(name)).append("\n");
-    sb.append("    lastname: ").append(toIndentedString(lastname)).append("\n");
+    sb.append("    lastnames: ").append(toIndentedString(lastnames)).append("\n");
     sb.append("    email: ").append(toIndentedString(email)).append("\n");
     sb.append("    password: ").append(toIndentedString(password)).append("\n");
     sb.append("    phone: ").append(toIndentedString(phone)).append("\n");
