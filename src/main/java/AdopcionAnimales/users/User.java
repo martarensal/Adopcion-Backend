@@ -31,7 +31,7 @@ public class User implements UserDetails {
     private String email;
 
     private String password;
-    private Integer rol;
+    private String rol;
 
     @OneToMany(fetch = FetchType.LAZY, cascade = CascadeType.REMOVE, mappedBy = "user")
     private Set<Animal> animals;
@@ -42,7 +42,7 @@ public class User implements UserDetails {
     @OneToMany(fetch = FetchType.LAZY)
     private Set<Publication> publications;
 
-    public User(String username, String name, String lastnames, String phone, String email, String password, Integer rol){
+    public User(String username, String name, String lastnames, String phone, String email, String password, String rol){
         this.username = username;
         this.name = name;
         this.lastnames = lastnames;
@@ -92,11 +92,11 @@ public class User implements UserDetails {
         this.phone = phone;
     }
 
-    public Integer getRol() {
+    public String getRol() {
         return rol;
     }
 
-    public void setRol(Integer rol) {
+    public void setRol(String rol) {
         this.rol = rol;
     }
 
@@ -144,9 +144,9 @@ public class User implements UserDetails {
     public Collection<? extends GrantedAuthority> getAuthorities() {
         Collection<GrantedAuthority> roleList = new ArrayList<>();
         String assignedRole = null;
-        if (rol == 0)
+        if (rol == "ROLE_ADMIN")
             assignedRole = "ROLE_ADMIN";
-        else if (rol == 1)
+        else if (rol == "ROLE_USER")
             assignedRole = "ROLE_USER";
         roleList.add(new SimpleGrantedAuthority(assignedRole));
         return roleList;

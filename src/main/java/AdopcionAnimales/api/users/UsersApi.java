@@ -10,6 +10,7 @@ import AdopcionAnimales.api.publications.PublicationCreationRequest;
 import AdopcionAnimales.api.publications.PublicationResponse;
 import AdopcionAnimales.api.requests.RequestPaginatedResponse;
 import AdopcionAnimales.api.types.TypeResponse;
+import AdopcionAnimales.users.UniqueEmailException;
 import AdopcionAnimales.users.UniqueUsernameException;
 import io.swagger.annotations.*;
 import org.springframework.http.ResponseEntity;
@@ -186,7 +187,7 @@ public interface UsersApi {
     @RequestMapping(value = "/users/{username}/email",
         consumes = { "application/json" },
         method = RequestMethod.PUT)
-    ResponseEntity<Void> modifyUserEmail(@ApiParam(value = "",required=true) @PathVariable("username") String username,@ApiParam(value = "The new user's email"  )  @Valid @RequestBody UserEmailChangeRequest body);
+    ResponseEntity<Void> modifyUserEmail(@ApiParam(value = "",required=true) @PathVariable("username") String username,@ApiParam(value = "The new user's email"  )  @Valid @RequestBody UserEmailChangeRequest body) throws UniqueEmailException;
 
 
     @ApiOperation(value = "Modifies the user's lastnames", nickname = "modifyUserLastnames", notes = "The user username you want to modify", authorizations = {
@@ -213,7 +214,7 @@ public interface UsersApi {
     ResponseEntity<Void> modifyUserName(@ApiParam(value = "",required=true) @PathVariable("username") String username,@ApiParam(value = "The new user's name"  )  @Valid @RequestBody UserNameChangeRequest body);
 
 
-    @ApiOperation(value = "Modifies the user's email", nickname = "modifyUserPassword", notes = "The user username you want to modify", authorizations = {
+    @ApiOperation(value = "Modifies the user's password", nickname = "modifyUserPassword", notes = "The user username you want to modify", authorizations = {
         @Authorization(value = "ApiKeyAuth")    }, tags={  })
     @ApiResponses(value = { 
         @ApiResponse(code = 400, message = "bad input parameter"),
@@ -258,7 +259,7 @@ public interface UsersApi {
     @RequestMapping(value = "/users/{username}/username",
         consumes = { "application/json" },
         method = RequestMethod.PUT)
-    ResponseEntity<Void> modifyUserUsername(@ApiParam(value = "",required=true) @PathVariable("username") String username,@ApiParam(value = "The new user's username"  )  @Valid @RequestBody UserUsernameChangeRequest body);
+    ResponseEntity<Void> modifyUserUsername(@ApiParam(value = "",required=true) @PathVariable("username") String username,@ApiParam(value = "The new user's username"  )  @Valid @RequestBody UserUsernameChangeRequest body) throws UniqueUsernameException;
 
 
     @ApiOperation(value = "Obtains the request made by the user", nickname = "obtainRequest", notes = "", response = RequestPaginatedResponse.class, authorizations = {
