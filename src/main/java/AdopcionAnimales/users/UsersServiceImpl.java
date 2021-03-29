@@ -137,8 +137,6 @@ public class UsersServiceImpl implements UsersService {
     public UserPaginatedResponse searchUsersByUsername(String username, Integer page, Integer size) {
         Page<User> matchedUsers = userRepository.searchUserWithUsername(username, PageRequest.of(page, size));
 
-
-
         //Stream<UserResponse> userResponsesStream = matchedUsers.map(user -> userMapper.userToUserResponse(user));
         Page<UserResponse> userResponsesObject = matchedUsers.map(user -> userMapper.userToUserResponse(user));
         Stream<UserResponse> userResponsesStream = userResponsesObject.stream();

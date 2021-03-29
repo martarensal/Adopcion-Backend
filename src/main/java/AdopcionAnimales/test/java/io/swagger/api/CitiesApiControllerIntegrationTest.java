@@ -31,7 +31,8 @@ public class CitiesApiControllerIntegrationTest {
 
     @Test
     public void deleteCityTest() throws Exception {
-        String idCity = "idCity_example";
+        Long idCity = 3876l;
+
         ResponseEntity<Void> responseEntity = api.deleteCity(idCity);
         assertEquals(HttpStatus.NOT_IMPLEMENTED, responseEntity.getStatusCode());
     }

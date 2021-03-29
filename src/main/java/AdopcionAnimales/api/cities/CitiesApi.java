@@ -5,6 +5,7 @@
  */
 package AdopcionAnimales.api.cities;
 
+import AdopcionAnimales.api.users.UserPhoneChangeRequest;
 import io.swagger.annotations.*;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.PathVariable;
@@ -39,7 +40,7 @@ public interface CitiesApi {
         @ApiResponse(code = 401, message = "The requested page needs a username and a password") })
     @RequestMapping(value = "/cities/{idCity}",
         method = RequestMethod.DELETE)
-    ResponseEntity<Void> deleteCity(@ApiParam(value = "By passing in the appropriate username, you can delete the user.",required=true) @PathVariable("idCity") String idCity);
+    ResponseEntity<Void> deleteCity(@ApiParam(value = "By passing in the appropriate idCity, you can delete the city.",required=true) @PathVariable("idCity") Long idCity);
 
 
     @ApiOperation(value = "Searches for a city", nickname = "searchCities", notes = "Searches for a city. This operation is permited for both user and admin", response = CityResponse.class, responseContainer = "List", authorizations = {
@@ -52,5 +53,27 @@ public interface CitiesApi {
         produces = { "application/json" }, 
         method = RequestMethod.GET)
     ResponseEntity<List<CityResponse>> searchCities();
+
+    @ApiOperation(value = "Modifies the city's name", nickname = "modifyCityName", notes = "The id of the city you want to modify", authorizations = {
+            @Authorization(value = "ApiKeyAuth")    }, tags={  })
+    @ApiResponses(value = {
+            @ApiResponse(code = 400, message = "bad input parameter"),
+            @ApiResponse(code = 200, message = "operation completed successfully"),
+            @ApiResponse(code = 401, message = "The requested page needs a username and a password") })
+    @RequestMapping(value = "/cities/{idCity}/name",
+            consumes = { "application/json" },
+            method = RequestMethod.PUT)
+    ResponseEntity<Void> modifyCityName(@ApiParam(value = "",required=true) @PathVariable("idCity") Long idCity,@ApiParam(value = "The new city's name"  )  @Valid @RequestBody CityNameChangeRequest body);
+
+    @ApiOperation(value = "Modifies the city's postal code", nickname = "modifyCityPostalCode", notes = "The id of the city you want to modify", authorizations = {
+            @Authorization(value = "ApiKeyAuth")    }, tags={  })
+    @ApiResponses(value = {
+            @ApiResponse(code = 400, message = "bad input parameter"),
+            @ApiResponse(code = 200, message = "operation completed successfully"),
+            @ApiResponse(code = 401, message = "The requested page needs a username and a password") })
+    @RequestMapping(value = "/cities/{idCity}/postalcode",
+            consumes = { "application/json" },
+            method = RequestMethod.PUT)
+    ResponseEntity<Void> modifyCityPostalCode(@ApiParam(value = "",required=true) @PathVariable("idCity") Long idCity,@ApiParam(value = "The new city's postal code"  )  @Valid @RequestBody CityPostalCodeChangeRequest body);
 
 }

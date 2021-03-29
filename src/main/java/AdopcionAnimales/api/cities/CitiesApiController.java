@@ -1,5 +1,6 @@
 package AdopcionAnimales.api.cities;
 
+import AdopcionAnimales.cities.CityService;
 import com.fasterxml.jackson.databind.ObjectMapper;
 import io.swagger.annotations.ApiParam;
 import org.slf4j.Logger;
@@ -24,25 +25,40 @@ public class CitiesApiController implements CitiesApi {
 
     private final HttpServletRequest request;
 
+    private CityService cityService;
+
     @org.springframework.beans.factory.annotation.Autowired
-    public CitiesApiController(ObjectMapper objectMapper, HttpServletRequest request) {
+    public CitiesApiController(ObjectMapper objectMapper, HttpServletRequest request, CityService cityService) {
         this.objectMapper = objectMapper;
         this.request = request;
+        this.cityService = cityService;
     }
 
     public ResponseEntity<Void> addCity(@ApiParam(value = "City to add"  )  @Valid @RequestBody CityCreationRequest body) {
-        String accept = request.getHeader("Accept");
-        return new ResponseEntity<Void>(HttpStatus.NOT_IMPLEMENTED);
+        cityService.addCity(body);
+        return new ResponseEntity<Void>(HttpStatus.OK);
     }
 
-    public ResponseEntity<Void> deleteCity(@ApiParam(value = "By passing in the appropriate username, you can delete the user.",required=true) @PathVariable("idCity") String idCity) {
-        String accept = request.getHeader("Accept");
-        return new ResponseEntity<Void>(HttpStatus.NOT_IMPLEMENTED);
+    public ResponseEntity<Void> deleteCity(@ApiParam(value = "By passing in the appropriate username, you can delete the user.",required=true) @PathVariable("idCity") Long idCity) {
+        cityService.deleteCity(idCity);
+        return new ResponseEntity<Void>(HttpStatus.OK);
     }
 
     public ResponseEntity<List<CityResponse>> searchCities() {
         String accept = request.getHeader("Accept");
         return new ResponseEntity<List<CityResponse>>(HttpStatus.NOT_IMPLEMENTED);
+    }
+
+    @Override
+    public ResponseEntity<Void> modifyCityName(Long idCity, @Valid CityNameChangeRequest body) {
+        cityService.modifyCityName(body, idCity);
+        return new ResponseEntity<Void>(HttpStatus.OK);
+    }
+
+    @Override
+    public ResponseEntity<Void> modifyCityPostalCode(Long idCity, @Valid CityPostalCodeChangeRequest body) {
+        cityService.modifyCityPostalCode(body, idCity);
+        return new ResponseEntity<Void>(HttpStatus.OK);
     }
 
 }

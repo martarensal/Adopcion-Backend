@@ -7,7 +7,6 @@ import org.springframework.stereotype.Repository;
 
 @Repository
 public interface AnimalsRepository extends CrudRepository<Animal, Long> {
-    @Query("select a from Animal a where a.id = :id")
-    public Animal findById(@Param("id") String id);
+    /*@Query("select a from Animal a where a.id = :id")
+    Animal findById(@Param("id") Long id);*/
 }
-
