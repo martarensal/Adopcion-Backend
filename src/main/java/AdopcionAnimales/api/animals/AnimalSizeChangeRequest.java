@@ -48,9 +48,9 @@ public class AnimalSizeChangeRequest   {
     }
   }
   @JsonProperty("newAnimalSize")
-  private NewAnimalSizeEnum newAnimalSize = null;
+  private String newAnimalSize = null;
 
-  public AnimalSizeChangeRequest newAnimalSize(NewAnimalSizeEnum newAnimalSize) {
+  public AnimalSizeChangeRequest newAnimalSize(String newAnimalSize) {
     this.newAnimalSize = newAnimalSize;
     return this;
   }
@@ -62,11 +62,11 @@ public class AnimalSizeChangeRequest   {
   @ApiModelProperty(example = "small", required = true, value = "")
   @NotNull
 
-  public NewAnimalSizeEnum getNewAnimalSize() {
+  public String getNewAnimalSize() {
     return newAnimalSize;
   }
 
-  public void setNewAnimalSize(NewAnimalSizeEnum newAnimalSize) {
+  public void setNewAnimalSize(String newAnimalSize) {
     this.newAnimalSize = newAnimalSize;
   }
 

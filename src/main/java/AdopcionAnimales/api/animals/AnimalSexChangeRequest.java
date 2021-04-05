@@ -46,9 +46,9 @@ public class AnimalSexChangeRequest   {
     }
   }
   @JsonProperty("newAnimalSex")
-  private NewAnimalSexEnum newAnimalSex = null;
+  private String newAnimalSex = null;
 
-  public AnimalSexChangeRequest newAnimalSex(NewAnimalSexEnum newAnimalSex) {
+  public AnimalSexChangeRequest newAnimalSex(String newAnimalSex) {
     this.newAnimalSex = newAnimalSex;
     return this;
   }
@@ -57,14 +57,14 @@ public class AnimalSexChangeRequest   {
    * Get newAnimalSex
    * @return newAnimalSex
   **/
-  @ApiModelProperty(example = "animal.png", required = true, value = "")
+  @ApiModelProperty(example = "MALE", required = true, value = "")
   @NotNull
 
-  public NewAnimalSexEnum getNewAnimalSex() {
+  public String getNewAnimalSex() {
     return newAnimalSex;
   }
 
-  public void setNewAnimalSex(NewAnimalSexEnum newAnimalSex) {
+  public void setNewAnimalSex(String newAnimalSex) {
     this.newAnimalSex = newAnimalSex;
   }
 

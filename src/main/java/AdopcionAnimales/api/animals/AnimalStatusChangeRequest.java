@@ -48,9 +48,9 @@ public class AnimalStatusChangeRequest   {
     }
   }
   @JsonProperty("newAnimalStatus")
-  private NewAnimalStatusEnum newAnimalStatus = null;
+  private String newAnimalStatus = null;
 
-  public AnimalStatusChangeRequest newAnimalStatus(NewAnimalStatusEnum newAnimalStatus) {
+  public AnimalStatusChangeRequest newAnimalStatus(String newAnimalStatus) {
     this.newAnimalStatus = newAnimalStatus;
     return this;
   }
@@ -62,11 +62,11 @@ public class AnimalStatusChangeRequest   {
   @ApiModelProperty(example = "Adopted", required = true, value = "")
   @NotNull
 
-  public NewAnimalStatusEnum getNewAnimalStatus() {
+  public String getNewAnimalStatus() {
     return newAnimalStatus;
   }
 
-  public void setNewAnimalStatus(NewAnimalStatusEnum newAnimalStatus) {
+  public void setNewAnimalStatus(String newAnimalStatus) {
     this.newAnimalStatus = newAnimalStatus;
   }
 

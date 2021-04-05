@@ -1,5 +1,6 @@
 package AdopcionAnimales.api.publications;
 
+import AdopcionAnimales.publications.PublicationService;
 import com.fasterxml.jackson.databind.ObjectMapper;
 import io.swagger.annotations.ApiParam;
 import org.slf4j.Logger;
@@ -23,11 +24,18 @@ public class PublicationsApiController implements PublicationsApi {
 
     private final HttpServletRequest request;
 
+    private PublicationService publicationService;
+
     @org.springframework.beans.factory.annotation.Autowired
-    public PublicationsApiController(ObjectMapper objectMapper, HttpServletRequest request) {
+    public PublicationsApiController(ObjectMapper objectMapper, HttpServletRequest request, PublicationService publicationService) {
         this.objectMapper = objectMapper;
         this.request = request;
+        this.publicationService = publicationService;
     }
+   /* public ResponseEntity<Void> addPublication(@ApiParam(value = "", required = true) @PathVariable("username") String username,@ApiParam(value = "Publication to add") @Valid @RequestBody PublicationCreationRequest body) {
+        publicationService.addPublication(body, username);
+        return new ResponseEntity<Void>(HttpStatus.OK);
+    }*/
 
     public ResponseEntity<Void> deletePublication(@ApiParam(value = "By passing in the appropriate publication ID, you can delete the request.",required=true) @PathVariable("idRequest") String idRequest) {
         String accept = request.getHeader("Accept");

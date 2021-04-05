@@ -5,6 +5,7 @@ import AdopcionAnimales.api.publications.PublicationCreationRequest;
 import AdopcionAnimales.api.publications.PublicationResponse;
 import AdopcionAnimales.api.requests.RequestPaginatedResponse;
 import AdopcionAnimales.api.types.TypeResponse;
+import AdopcionAnimales.publications.PublicationService;
 import AdopcionAnimales.users.UniqueEmailException;
 import AdopcionAnimales.users.UniqueUsernameException;
 import AdopcionAnimales.users.UserMapper;
@@ -40,21 +41,20 @@ public class UsersApiController implements UsersApi {
 
     private UsersService userService;
 
+    private PublicationService publicationService;
+
     @Autowired
-    public UsersApiController(ObjectMapper objectMapper, HttpServletRequest request, UsersService userService, UserMapper userMapper) {
+    public UsersApiController(ObjectMapper objectMapper, HttpServletRequest request, UsersService userService, UserMapper userMapper, PublicationService publicationService) {
         this.objectMapper = objectMapper;
         this.request = request;
         this.userService = userService;
         this.userMapper = userMapper;
-    }
+        this.publicationService = publicationService;
 
-    public ResponseEntity<Void> addAnimal(@ApiParam(value = "",required=true) @PathVariable("username") String username,@ApiParam(value = "Animal to add"  )  @Valid @RequestBody AnimalCreationRequest body) {
-        String accept = request.getHeader("Accept");
-        return new ResponseEntity<Void>(HttpStatus.NOT_IMPLEMENTED);
     }
 
     public ResponseEntity<Void> addPublication(@ApiParam(value = "",required=true) @PathVariable("username") String username,@ApiParam(value = "Publication to add"  )  @Valid @RequestBody PublicationCreationRequest body) {
-        String accept = request.getHeader("Accept");
+        publicationService.addPublication(body, username);
         return new ResponseEntity<Void>(HttpStatus.NOT_IMPLEMENTED);
     }
 
@@ -62,11 +62,6 @@ public class UsersApiController implements UsersApi {
             throws UniqueUsernameException {
         userService.registerUser(body);
         return new ResponseEntity<Void>(HttpStatus.OK);
-    }
-
-    public ResponseEntity<Void> deleteAnimal(@ApiParam(value = "",required=true) @PathVariable("username") String username,@ApiParam(value = "By passing in the appropriate animal code, you can delete the animal.",required=true) @PathVariable("idAnimal") String idAnimal) {
-        String accept = request.getHeader("Accept");
-        return new ResponseEntity<Void>(HttpStatus.NOT_IMPLEMENTED);
     }
 
     public ResponseEntity<Void> deleteUser(@ApiParam(value = "By passing in the appropriate username, you can delete the user.",required=true) @PathVariable("username") String username)throws IllegalArgumentException{
@@ -78,41 +73,6 @@ public class UsersApiController implements UsersApi {
             @ApiParam(value = "By passing in the appropriate user id, you can get the user.", required = true) @PathVariable("idUser") Long idUser)
             throws EntityNotFoundException {
         return new ResponseEntity<UserResponse>(userService.getUserById(idUser), HttpStatus.OK);
-    }
-
-    public ResponseEntity<Void> modifyAnimalAge(@ApiParam(value = "",required=true) @PathVariable("username") String username,@ApiParam(value = "By passing in the appropriate animal code, you can modify the animal.",required=true) @PathVariable("idAnimal") String idAnimal,@ApiParam(value = "The animal's new age"  )  @Valid @RequestBody AnimalAgeChangeRequest body) {
-        String accept = request.getHeader("Accept");
-        return new ResponseEntity<Void>(HttpStatus.NOT_IMPLEMENTED);
-    }
-
-    public ResponseEntity<Void> modifyAnimalColour(@ApiParam(value = "",required=true) @PathVariable("username") String username,@ApiParam(value = "By passing in the appropriate animal code, you can modify the animal.",required=true) @PathVariable("idAnimal") String idAnimal,@ApiParam(value = "The animal's new colour"  )  @Valid @RequestBody AnimalColourChangeRequest body) {
-        String accept = request.getHeader("Accept");
-        return new ResponseEntity<Void>(HttpStatus.NOT_IMPLEMENTED);
-    }
-
-    public ResponseEntity<Void> modifyAnimalImage(@ApiParam(value = "",required=true) @PathVariable("username") String username,@ApiParam(value = "By passing in the appropriate animal code, you can modify the animal.",required=true) @PathVariable("idAnimal") String idAnimal,@ApiParam(value = "The animal's new image"  )  @Valid @RequestBody AnimalImageChangeRequest body) {
-        String accept = request.getHeader("Accept");
-        return new ResponseEntity<Void>(HttpStatus.NOT_IMPLEMENTED);
-    }
-
-    public ResponseEntity<Void> modifyAnimalName(@ApiParam(value = "",required=true) @PathVariable("username") String username,@ApiParam(value = "By passing in the appropriate animal code, you can modify the animal.",required=true) @PathVariable("idAnimal") String idAnimal,@ApiParam(value = "The animal's new name"  )  @Valid @RequestBody AnimalNameChangeRequest body) {
-        String accept = request.getHeader("Accept");
-        return new ResponseEntity<Void>(HttpStatus.NOT_IMPLEMENTED);
-    }
-
-    public ResponseEntity<Void> modifyAnimalSex(@ApiParam(value = "",required=true) @PathVariable("username") String username,@ApiParam(value = "By passing in the appropriate animal code, you can modify the animal.",required=true) @PathVariable("idAnimal") String idAnimal,@ApiParam(value = "The animal's new sex"  )  @Valid @RequestBody AnimalSexChangeRequest body) {
-        String accept = request.getHeader("Accept");
-        return new ResponseEntity<Void>(HttpStatus.NOT_IMPLEMENTED);
-    }
-
-    public ResponseEntity<Void> modifyAnimalSize(@ApiParam(value = "",required=true) @PathVariable("username") String username,@ApiParam(value = "By passing in the appropriate animal code, you can modify the animal.",required=true) @PathVariable("idAnimal") String idAnimal,@ApiParam(value = "The animal's new size"  )  @Valid @RequestBody AnimalSizeChangeRequest body) {
-        String accept = request.getHeader("Accept");
-        return new ResponseEntity<Void>(HttpStatus.NOT_IMPLEMENTED);
-    }
-
-    public ResponseEntity<Void> modifyAnimalStatus(@ApiParam(value = "",required=true) @PathVariable("username") String username,@ApiParam(value = "By passing in the appropriate animal code, you can modify the animal.",required=true) @PathVariable("idAnimal") String idAnimal,@ApiParam(value = "The animal's new status"  )  @Valid @RequestBody AnimalStatusChangeRequest body) {
-        String accept = request.getHeader("Accept");
-        return new ResponseEntity<Void>(HttpStatus.NOT_IMPLEMENTED);
     }
 
     public ResponseEntity<Void> modifyUserEmail(@ApiParam(value = "",required=true) @PathVariable("username") String username,@ApiParam(value = "The new user's email"  )  @Valid @RequestBody UserEmailChangeRequest body) throws UniqueEmailException {
@@ -154,11 +114,6 @@ public class UsersApiController implements UsersApi {
     public ResponseEntity<RequestPaginatedResponse> obtainRequest(@ApiParam(value = "",required=true) @PathVariable("username") String username, @ApiParam(value = "the number of the page") @Valid @RequestParam(value = "page", required = false) Integer page, @ApiParam(value = "the number of element per page") @Valid @RequestParam(value = "size", required = false) Integer size) {
         String accept = request.getHeader("Accept");
         return new ResponseEntity<RequestPaginatedResponse>(HttpStatus.NOT_IMPLEMENTED);
-    }
-
-    public ResponseEntity<List<AnimalResponse>> searchAnimals(@ApiParam(value = "",required=true) @PathVariable("username") String username) {
-        String accept = request.getHeader("Accept");
-        return new ResponseEntity<List<AnimalResponse>>(HttpStatus.NOT_IMPLEMENTED);
     }
 
     public ResponseEntity<List<TypeResponse>> searchCity(@ApiParam(value = "",required=true) @PathVariable("username") String username, @ApiParam(value = "",required=true) @PathVariable("idAnimal") String idAnimal, @ApiParam(value = "",required=true) @PathVariable("idCity") String idCity) {

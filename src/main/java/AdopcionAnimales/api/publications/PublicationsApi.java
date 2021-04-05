@@ -18,6 +18,15 @@ import javax.validation.Valid;
 @Api(value = "publications", description = "the publications API")
 public interface PublicationsApi {
 
+    /*@ApiOperation(value = "Adds a publication", nickname = "addPublication", notes = "Adds a new publication to the system", authorizations = {
+            @Authorization(value = "ApiKeyAuth") }, tags = { "", })
+    @ApiResponses(value = { @ApiResponse(code = 201, message = "Trip created"),
+            @ApiResponse(code = 400, message = "invalid input, object invalid"),
+            @ApiResponse(code = 401, message = "The requested page needs a username and a password") })
+    @RequestMapping(value = "/publication", consumes = { "application/json" }, method = RequestMethod.POST)
+    ResponseEntity<Void> addPublication(@ApiParam(value = "By passing in the appropriate username, you can delete the request.",required=true) @PathVariable("username") String username,
+            @ApiParam(value = "Publication to add") @Valid @RequestBody PublicationCreationRequest body);*/
+
     @ApiOperation(value = "Deletes a publication", nickname = "deletePublication", notes = "", authorizations = {
         @Authorization(value = "ApiKeyAuth")    }, tags={  })
     @ApiResponses(value = { 
@@ -25,7 +34,7 @@ public interface PublicationsApi {
         @ApiResponse(code = 400, message = "bad input parameter"),
         @ApiResponse(code = 404, message = "reservation not found"),
         @ApiResponse(code = 401, message = "The requested page needs a username and a password") })
-    @RequestMapping(value = "/publications/{idRequest}",
+    @RequestMapping(value = "/publications/{idPublication}",
         method = RequestMethod.DELETE)
     ResponseEntity<Void> deletePublication(@ApiParam(value = "By passing in the appropriate publication ID, you can delete the request.",required=true) @PathVariable("idRequest") String idRequest);
 

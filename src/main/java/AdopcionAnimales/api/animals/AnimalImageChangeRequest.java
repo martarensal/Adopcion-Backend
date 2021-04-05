@@ -12,26 +12,26 @@ import java.util.Objects;
 @Validated
 @javax.annotation.Generated(value = "io.swagger.codegen.v3.generators.java.SpringCodegen", date = "2021-02-24T16:55:56.237+01:00[Europe/Paris]")
 public class AnimalImageChangeRequest   {
-  @JsonProperty("newAnimalModel")
-  private String newAnimalModel = null;
+  @JsonProperty("newAnimalImage")
+  private String newAnimalImage = null;
 
-  public AnimalImageChangeRequest newAnimalModel(String newAnimalModel) {
-    this.newAnimalModel = newAnimalModel;
+  public AnimalImageChangeRequest newAnimalImage(String newAnimalImage) {
+    this.newAnimalImage = newAnimalImage;
     return this;
   }
 
   /**
-   * Get newAnimalModel
-   * @return newAnimalModel
+   * Get newAnimalImage
+   * @return newAnimalImage
   **/
   @ApiModelProperty(example = "animal.png", value = "")
 
-  public String getNewAnimalModel() {
-    return newAnimalModel;
+  public String getNewAnimalImage() {
+    return newAnimalImage;
   }
 
-  public void setNewAnimalModel(String newAnimalModel) {
-    this.newAnimalModel = newAnimalModel;
+  public void setNewAnimalImage(String newAnimalImage) {
+    this.newAnimalImage = newAnimalImage;
   }
 
 
@@ -44,12 +44,12 @@ public class AnimalImageChangeRequest   {
       return false;
     }
     AnimalImageChangeRequest animalImageChangeRequest = (AnimalImageChangeRequest) o;
-    return Objects.equals(this.newAnimalModel, animalImageChangeRequest.newAnimalModel);
+    return Objects.equals(this.newAnimalImage, animalImageChangeRequest.newAnimalImage);
   }
 
   @Override
   public int hashCode() {
-    return Objects.hash(newAnimalModel);
+    return Objects.hash(newAnimalImage);
   }
 
   @Override
@@ -57,7 +57,7 @@ public class AnimalImageChangeRequest   {
     StringBuilder sb = new StringBuilder();
     sb.append("class AnimalImageChangeRequest {\n");
     
-    sb.append("    newAnimalModel: ").append(toIndentedString(newAnimalModel)).append("\n");
+    sb.append("    newAnimalImage: ").append(toIndentedString(newAnimalImage)).append("\n");
     sb.append("}");
     return sb.toString();
   }

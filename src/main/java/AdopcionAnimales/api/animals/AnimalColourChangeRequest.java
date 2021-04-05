@@ -6,7 +6,6 @@ import com.fasterxml.jackson.annotation.JsonValue;
 import io.swagger.annotations.ApiModelProperty;
 import org.springframework.validation.annotation.Validated;
 
-import javax.validation.constraints.NotNull;
 import java.util.Objects;
 
 /**
@@ -60,9 +59,9 @@ public class AnimalColourChangeRequest   {
     }
   }
   @JsonProperty("newAnimalColour")
-  private NewAnimalColourEnum newAnimalColour = null;
+  private String newAnimalColour = null;
 
-  public AnimalColourChangeRequest newAnimalColour(NewAnimalColourEnum newAnimalColour) {
+  public AnimalColourChangeRequest newAnimalColour(String newAnimalColour) {
     this.newAnimalColour = newAnimalColour;
     return this;
   }
@@ -72,13 +71,12 @@ public class AnimalColourChangeRequest   {
    * @return newAnimalColour
   **/
   @ApiModelProperty(example = "brown", required = true, value = "")
-  @NotNull
 
-  public NewAnimalColourEnum getNewAnimalColour() {
+  public String getNewAnimalColour() {
     return newAnimalColour;
   }
 
-  public void setNewAnimalColour(NewAnimalColourEnum newAnimalColour) {
+  public void setNewAnimalColour(String newAnimalColour) {
     this.newAnimalColour = newAnimalColour;
   }
 

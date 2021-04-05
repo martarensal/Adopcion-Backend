@@ -23,17 +23,6 @@ import java.util.List;
 @Api(value = "users", description = "the users API")
 public interface UsersApi {
 
-    @ApiOperation(value = "Adds an animal", nickname = "addAnimal", notes = "Adds a new animal to the user", authorizations = {
-        @Authorization(value = "ApiKeyAuth")    }, tags={  })
-    @ApiResponses(value = { 
-        @ApiResponse(code = 201, message = "Animal created"),
-        @ApiResponse(code = 400, message = "invalid input, object invalid"),
-        @ApiResponse(code = 401, message = "The requested page needs a username and a password") })
-    @RequestMapping(value = "/users/{username}/animals",
-        consumes = { "application/json" },
-        method = RequestMethod.POST)
-    ResponseEntity<Void> addAnimal(@ApiParam(value = "",required=true) @PathVariable("username") String username,@ApiParam(value = "Animal to add"  )  @Valid @RequestBody AnimalCreationRequest body);
-
 
     @ApiOperation(value = "Adds a publication", nickname = "addPublication", notes = "Adds a new animal to the user", authorizations = {
         @Authorization(value = "ApiKeyAuth")    }, tags={  })
@@ -56,19 +45,6 @@ public interface UsersApi {
         consumes = { "application/json" },
         method = RequestMethod.POST)
     ResponseEntity<Void> addUser(@ApiParam(value = "User to add"  )  @Valid @RequestBody UserRegistrationRequest body) throws UniqueUsernameException;
-
-
-    @ApiOperation(value = "Deletes an animal", nickname = "deleteAnimal", notes = "Deletes the animal linked to a user", authorizations = {
-        @Authorization(value = "ApiKeyAuth")    }, tags={  })
-    @ApiResponses(value = { 
-        @ApiResponse(code = 200, message = "animal deleted succesfully"),
-        @ApiResponse(code = 400, message = "bad input parameter"),
-        @ApiResponse(code = 404, message = "animal not found"),
-        @ApiResponse(code = 401, message = "The requested page needs a username and a password") })
-    @RequestMapping(value = "/users/{username}/animals/{idAnimal}",
-        method = RequestMethod.DELETE)
-    ResponseEntity<Void> deleteAnimal(@ApiParam(value = "",required=true) @PathVariable("username") String username,@ApiParam(value = "By passing in the appropriate animal code, you can delete the animal.",required=true) @PathVariable("idAnimal") String idAnimal);
-
 
     @ApiOperation(value = "Deletes a user", nickname = "deleteUser", notes = "", authorizations = {
         @Authorization(value = "ApiKeyAuth")    }, tags={  })
@@ -94,89 +70,6 @@ public interface UsersApi {
     ResponseEntity<UserResponse> getUser(@ApiParam(value = "By passing in the appropriate user id, you can get the user.",required=true) @PathVariable("idUser") Long userId
     );
 
-    @ApiOperation(value = "Modifies the animal's age", nickname = "modifyAnimalAge", notes = "", authorizations = {
-        @Authorization(value = "ApiKeyAuth")    }, tags={  })
-    @ApiResponses(value = { 
-        @ApiResponse(code = 400, message = "bad input parameter"),
-        @ApiResponse(code = 200, message = "operation completed successfully"),
-        @ApiResponse(code = 401, message = "The requested page needs a username and a password") })
-    @RequestMapping(value = "/users/{username}/animals/{idAnimal}/age",
-        consumes = { "application/json" },
-        method = RequestMethod.PUT)
-    ResponseEntity<Void> modifyAnimalAge(@ApiParam(value = "",required=true) @PathVariable("username") String username,@ApiParam(value = "By passing in the appropriate animal code, you can modify the animal.",required=true) @PathVariable("idAnimal") String idAnimal,@ApiParam(value = "The animal's new age"  )  @Valid @RequestBody AnimalAgeChangeRequest body);
-
-
-    @ApiOperation(value = "Modifies the animal's colour", nickname = "modifyAnimalColour", notes = "", authorizations = {
-        @Authorization(value = "ApiKeyAuth")    }, tags={  })
-    @ApiResponses(value = { 
-        @ApiResponse(code = 400, message = "bad input parameter"),
-        @ApiResponse(code = 200, message = "operation completed successfully"),
-        @ApiResponse(code = 401, message = "The requested page needs a username and a password") })
-    @RequestMapping(value = "/users/{username}/animals/{idAnimal}/colour",
-        consumes = { "application/json" },
-        method = RequestMethod.PUT)
-    ResponseEntity<Void> modifyAnimalColour(@ApiParam(value = "",required=true) @PathVariable("username") String username,@ApiParam(value = "By passing in the appropriate animal code, you can modify the animal.",required=true) @PathVariable("idAnimal") String idAnimal,@ApiParam(value = "The animal's new colour"  )  @Valid @RequestBody AnimalColourChangeRequest body);
-
-
-    @ApiOperation(value = "Modifies the animal's image", nickname = "modifyAnimalImage", notes = "", authorizations = {
-        @Authorization(value = "ApiKeyAuth")    }, tags={  })
-    @ApiResponses(value = { 
-        @ApiResponse(code = 400, message = "bad input parameter"),
-        @ApiResponse(code = 200, message = "operation completed successfully"),
-        @ApiResponse(code = 401, message = "The requested page needs a username and a password") })
-    @RequestMapping(value = "/users/{username}/animals/{idAnimal}/image",
-        consumes = { "application/json" },
-        method = RequestMethod.PUT)
-    ResponseEntity<Void> modifyAnimalImage(@ApiParam(value = "",required=true) @PathVariable("username") String username,@ApiParam(value = "By passing in the appropriate animal code, you can modify the animal.",required=true) @PathVariable("idAnimal") String idAnimal,@ApiParam(value = "The animal's new image"  )  @Valid @RequestBody AnimalImageChangeRequest body);
-
-
-    @ApiOperation(value = "Modifies the animal's name", nickname = "modifyAnimalName", notes = "", authorizations = {
-        @Authorization(value = "ApiKeyAuth")    }, tags={  })
-    @ApiResponses(value = { 
-        @ApiResponse(code = 400, message = "bad input parameter"),
-        @ApiResponse(code = 200, message = "operation completed successfully"),
-        @ApiResponse(code = 401, message = "The requested page needs a username and a password") })
-    @RequestMapping(value = "/users/{username}/animals/{idAnimal}/name",
-        consumes = { "application/json" },
-        method = RequestMethod.PUT)
-    ResponseEntity<Void> modifyAnimalName(@ApiParam(value = "",required=true) @PathVariable("username") String username,@ApiParam(value = "By passing in the appropriate animal code, you can modify the animal.",required=true) @PathVariable("idAnimal") String idAnimal,@ApiParam(value = "The animal's new name"  )  @Valid @RequestBody AnimalNameChangeRequest body);
-
-
-    @ApiOperation(value = "Modifies the animal's sex", nickname = "modifyAnimalSex", notes = "", authorizations = {
-        @Authorization(value = "ApiKeyAuth")    }, tags={  })
-    @ApiResponses(value = { 
-        @ApiResponse(code = 400, message = "bad input parameter"),
-        @ApiResponse(code = 200, message = "operation completed successfully"),
-        @ApiResponse(code = 401, message = "The requested page needs a username and a password") })
-    @RequestMapping(value = "/users/{username}/animals/{idAnimal}/sex",
-        consumes = { "application/json" },
-        method = RequestMethod.PUT)
-    ResponseEntity<Void> modifyAnimalSex(@ApiParam(value = "",required=true) @PathVariable("username") String username,@ApiParam(value = "By passing in the appropriate animal code, you can modify the animal.",required=true) @PathVariable("idAnimal") String idAnimal,@ApiParam(value = "The animal's new sex"  )  @Valid @RequestBody AnimalSexChangeRequest body);
-
-
-    @ApiOperation(value = "Modifies the animal's size", nickname = "modifyAnimalSize", notes = "", authorizations = {
-        @Authorization(value = "ApiKeyAuth")    }, tags={  })
-    @ApiResponses(value = { 
-        @ApiResponse(code = 400, message = "bad input parameter"),
-        @ApiResponse(code = 200, message = "operation completed successfully"),
-        @ApiResponse(code = 401, message = "The requested page needs a username and a password") })
-    @RequestMapping(value = "/users/{username}/animals/{idAnimal}/size",
-        consumes = { "application/json" },
-        method = RequestMethod.PUT)
-    ResponseEntity<Void> modifyAnimalSize(@ApiParam(value = "",required=true) @PathVariable("username") String username,@ApiParam(value = "By passing in the appropriate animal code, you can modify the animal.",required=true) @PathVariable("idAnimal") String idAnimal,@ApiParam(value = "The animal's new size"  )  @Valid @RequestBody AnimalSizeChangeRequest body);
-
-
-    @ApiOperation(value = "Modifies the animal's status", nickname = "modifyAnimalStatus", notes = "", authorizations = {
-        @Authorization(value = "ApiKeyAuth")    }, tags={  })
-    @ApiResponses(value = { 
-        @ApiResponse(code = 400, message = "bad input parameter"),
-        @ApiResponse(code = 200, message = "operation completed successfully"),
-        @ApiResponse(code = 401, message = "The requested page needs a username and a password") })
-    @RequestMapping(value = "/users/{username}/animals/{idAnimal}/status",
-        consumes = { "application/json" },
-        method = RequestMethod.PUT)
-    ResponseEntity<Void> modifyAnimalStatus(@ApiParam(value = "",required=true) @PathVariable("username") String username,@ApiParam(value = "By passing in the appropriate animal code, you can modify the animal.",required=true) @PathVariable("idAnimal") String idAnimal,@ApiParam(value = "The animal's new status"  )  @Valid @RequestBody AnimalStatusChangeRequest body);
-
 
     @ApiOperation(value = "Modifies the user's email", nickname = "modifyUserEmail", notes = "The user username you want to modify", authorizations = {
         @Authorization(value = "ApiKeyAuth")    }, tags={  })
@@ -188,7 +81,6 @@ public interface UsersApi {
         consumes = { "application/json" },
         method = RequestMethod.PUT)
     ResponseEntity<Void> modifyUserEmail(@ApiParam(value = "",required=true) @PathVariable("username") String username,@ApiParam(value = "The new user's email"  )  @Valid @RequestBody UserEmailChangeRequest body) throws UniqueEmailException;
-
 
     @ApiOperation(value = "Modifies the user's lastnames", nickname = "modifyUserLastnames", notes = "The user username you want to modify", authorizations = {
         @Authorization(value = "ApiKeyAuth")    }, tags={  })
@@ -272,19 +164,6 @@ public interface UsersApi {
         produces = { "application/json" }, 
         method = RequestMethod.GET)
     ResponseEntity<RequestPaginatedResponse> obtainRequest(@ApiParam(value = "",required=true) @PathVariable("username") String username, @ApiParam(value = "the number of the page") @Valid @RequestParam(value = "page", required = false) Integer page, @ApiParam(value = "the number of element per page") @Valid @RequestParam(value = "size", required = false) Integer size);
-
-
-    @ApiOperation(value = "Searches for an animal", nickname = "searchAnimals", notes = "Searches for an animal.", response = AnimalResponse.class, responseContainer = "List", authorizations = {
-        @Authorization(value = "ApiKeyAuth")    }, tags={  })
-    @ApiResponses(value = { 
-        @ApiResponse(code = 200, message = "The search was successfull", response = AnimalResponse.class, responseContainer = "List"),
-        @ApiResponse(code = 403, message = "Access denied"),
-        @ApiResponse(code = 500, message = "Internal server error") })
-    @RequestMapping(value = "/users/{username}/animals",
-        produces = { "application/json" }, 
-        method = RequestMethod.GET)
-    ResponseEntity<List<AnimalResponse>> searchAnimals(@ApiParam(value = "",required=true) @PathVariable("username") String username);
-
 
     @ApiOperation(value = "Searches for a city", nickname = "searchCity", notes = "Searches for a city. This operation is permited for both user and admin", response = TypeResponse.class, responseContainer = "List", authorizations = {
         @Authorization(value = "ApiKeyAuth")    }, tags={  })

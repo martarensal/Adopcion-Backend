@@ -27,7 +27,7 @@ public class AnimalsApiControllerIntegrationTest {
         String username = "username_example";
         Integer page = 56;
         Integer size = 56;
-        ResponseEntity<List<AnimalPaginatedResponse>> responseEntity = api.searchAnimal(username, page, size);
+        ResponseEntity<List<AnimalPaginatedResponse>> responseEntity = api.searchAnimals(page, size);
         assertEquals(HttpStatus.NOT_IMPLEMENTED, responseEntity.getStatusCode());
     }
 

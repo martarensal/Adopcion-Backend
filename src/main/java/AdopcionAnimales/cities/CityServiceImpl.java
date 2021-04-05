@@ -42,17 +42,16 @@ public class CityServiceImpl implements CityService{
         cityRepository.delete(city);
     }
 
+    @Override
+    public CityResponse getCity(Long idCity) {
+        return null;
+    }
+
     private City findCity(Long idCity) {
         City city = cityRepository.findByCityId(idCity);
         if(city == null)
             throw new EntityNotFoundException("No se ha encontrado la ciudad " + idCity);
         return city;
-    }
-
-    @Override
-    @Transactional
-    public CityResponse getCities() {
-        return null;
     }
 
     @Override
