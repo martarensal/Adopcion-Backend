@@ -1,18 +1,20 @@
 package AdopcionAnimales.publications;
 
+import AdopcionAnimales.animals.Animal;
+import AdopcionAnimales.api.animals.AnimalPaginatedResponse;
 import AdopcionAnimales.api.publications.PublicationCreationRequest;
 import AdopcionAnimales.api.publications.PublicationDateChangeRequest;
-import AdopcionAnimales.api.publications.PublicationResponse;
 import org.springframework.stereotype.Service;
 
-import javax.persistence.EntityNotFoundException;
 
 @Service
 public interface PublicationService {
-    void addPublication(PublicationCreationRequest publicationCreationRequest, String username);
-    PublicationResponse getPublicationByUsername(String username) throws EntityNotFoundException;
-    void deletePublication(Long idPublication) throws IllegalArgumentException;
-    void modifyPublicationDate(PublicationDateChangeRequest publicationDateChangeRequest, String username, Long idPublication);
-    //PublicationPaginatedResponse searchPublications(String username, Integer page, Integer size);
+
+    void addPublication(PublicationCreationRequest publicationCreationRequest);
+    //PublicationPaginatedResponse getPublications(Integer page, Integer size);
+    //PublicationPaginatedResponse getPublicationsFromUser(String username, Integer page, Integer size);
+    void deletePublication(Long idAnimal);
+    void modifyPublicationDate(PublicationDateChangeRequest publicationDateChangeRequest, Long idPublication);
+    Publication findPublicationById(Long id);
 
 }

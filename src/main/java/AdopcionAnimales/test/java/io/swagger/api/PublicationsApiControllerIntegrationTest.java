@@ -21,14 +21,14 @@ public class PublicationsApiControllerIntegrationTest {
 
     @Test
     public void deletePublicationTest() throws Exception {
-        String idRequest = "idRequest_example";
+        Long idRequest = 1l;
         ResponseEntity<Void> responseEntity = api.deletePublication(idRequest);
         assertEquals(HttpStatus.NOT_IMPLEMENTED, responseEntity.getStatusCode());
     }
 
     @Test
     public void modifyPublicationDateTest() throws Exception {
-        String idPublication = "idPublication_example";
+        Long idPublication = 1l;
         PublicationDateChangeRequest body = new PublicationDateChangeRequest();
         ResponseEntity<Void> responseEntity = api.modifyPublicationDate(idPublication, body);
         assertEquals(HttpStatus.NOT_IMPLEMENTED, responseEntity.getStatusCode());

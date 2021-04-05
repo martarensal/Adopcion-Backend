@@ -1,5 +1,7 @@
 package AdopcionAnimales.publications;
 
+import AdopcionAnimales.animals.Animal;
+import AdopcionAnimales.api.animals.AnimalPaginatedResponse;
 import AdopcionAnimales.api.publications.PublicationCreationRequest;
 import AdopcionAnimales.api.publications.PublicationDateChangeRequest;
 import AdopcionAnimales.api.publications.PublicationResponse;
@@ -28,41 +30,24 @@ public class PublicationServiceImpl implements PublicationService{
 
     @Override
     @Transactional
-    public void addPublication(PublicationCreationRequest publicationCreationRequest, String username) {
-        Publication publication = getPublication(publicationCreationRequest);
-        User user = getUser(username);
-        publication.setUser(user);
-        user.getPublications().add(publicationRepository.save(publication));
-
-        publicationRepository.save(publication);
-        usersRepository.save(user);
+    public void addPublication(PublicationCreationRequest publicationCreationRequest) {
+        Publication newPublication = publicationMapper.publicationCreationRequestToPublication(publicationCreationRequest);
+        publicationRepository.save(newPublication);
     }
 
     @Override
-    public PublicationResponse getPublicationByUsername(String username) throws EntityNotFoundException {
-        return null;
-    }
-
-    @Override
+    @Transactional
     public void deletePublication(Long idPublication) throws IllegalArgumentException {
-        Publication publication = publicationRepository.findById(idPublication).orElse(null);
-        if (publication == null)
-            throw new IllegalArgumentException("La publicacion con id " + idPublication + " no ha sido encontrado");
-
+        Publication publication = findPublicationById(idPublication);
         publicationRepository.delete(publication);
     }
 
     @Override
-    public void modifyPublicationDate(PublicationDateChangeRequest publicationDateChangeRequest, String username, Long idPublication) {
-        Publication publication = publicationRepository.findById(idPublication).orElse(null);
+    public void modifyPublicationDate(PublicationDateChangeRequest publicationDateChangeRequest, Long idPublication) {
+        Publication publication = findPublicationById(idPublication);
         publication.setPublicationDate(publicationDateChangeRequest.getNewPublicationDate());
 
         publicationRepository.save(publication);
-    }
-
-    private Publication getPublication(PublicationCreationRequest publicationCreationRequest) {
-        Publication publication = publicationMapper.publicationCreationRequestToPublication(publicationCreationRequest);
-        return publication;
     }
 
     private User getUser(String username) {
@@ -70,5 +55,11 @@ public class PublicationServiceImpl implements PublicationService{
         if (user == null)
             throw new EntityNotFoundException("Usuario no encontrado");
         return user;
+    }
+
+    @Override
+    @Transactional
+    public Publication findPublicationById(Long id) {
+        return publicationRepository.findById(id).orElse(null);
     }
 }

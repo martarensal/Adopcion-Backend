@@ -116,13 +116,6 @@ public class AnimalServiceImpl implements AnimalService{
         }
     }
 
-    private User findUser(String username) {
-        User user = userRepository.findUserByUsernameWithAnimals(username);
-        if(user == null)
-            throw new EntityNotFoundException("Usuario no encontrado");
-        return user;
-    }
-
     @Override
     @Transactional
     public Animal findAnimalById(Long id) {

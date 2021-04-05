@@ -49,13 +49,6 @@ public class UsersApiController implements UsersApi {
         this.request = request;
         this.userService = userService;
         this.userMapper = userMapper;
-        this.publicationService = publicationService;
-
-    }
-
-    public ResponseEntity<Void> addPublication(@ApiParam(value = "",required=true) @PathVariable("username") String username,@ApiParam(value = "Publication to add"  )  @Valid @RequestBody PublicationCreationRequest body) {
-        publicationService.addPublication(body, username);
-        return new ResponseEntity<Void>(HttpStatus.NOT_IMPLEMENTED);
     }
 
     public ResponseEntity<Void> addUser(@ApiParam(value = "User to add") @Valid @RequestBody UserRegistrationRequest body)
@@ -119,11 +112,6 @@ public class UsersApiController implements UsersApi {
     public ResponseEntity<List<TypeResponse>> searchCity(@ApiParam(value = "",required=true) @PathVariable("username") String username, @ApiParam(value = "",required=true) @PathVariable("idAnimal") String idAnimal, @ApiParam(value = "",required=true) @PathVariable("idCity") String idCity) {
         String accept = request.getHeader("Accept");
         return new ResponseEntity<List<TypeResponse>>(HttpStatus.NOT_IMPLEMENTED);
-    }
-
-    public ResponseEntity<List<PublicationResponse>> searchPublication(@ApiParam(value = "",required=true) @PathVariable("username") String username) {
-        String accept = request.getHeader("Accept");
-        return new ResponseEntity<List<PublicationResponse>>(HttpStatus.NOT_IMPLEMENTED);
     }
 
     public ResponseEntity<List<TypeResponse>> searchType(@ApiParam(value = "",required=true) @PathVariable("username") String username, @ApiParam(value = "",required=true) @PathVariable("idAnimal") String idAnimal, @ApiParam(value = "",required=true) @PathVariable("idType") String idType) {

@@ -13,6 +13,7 @@ import org.springframework.web.bind.annotation.RequestBody;
 
 import javax.servlet.http.HttpServletRequest;
 import javax.validation.Valid;
+import java.util.List;
 
 @javax.annotation.Generated(value = "io.swagger.codegen.v3.generators.java.SpringCodegen", date = "2021-02-24T16:55:56.237+01:00[Europe/Paris]")
 @Controller
@@ -32,19 +33,25 @@ public class PublicationsApiController implements PublicationsApi {
         this.request = request;
         this.publicationService = publicationService;
     }
-   /* public ResponseEntity<Void> addPublication(@ApiParam(value = "", required = true) @PathVariable("username") String username,@ApiParam(value = "Publication to add") @Valid @RequestBody PublicationCreationRequest body) {
-        publicationService.addPublication(body, username);
-        return new ResponseEntity<Void>(HttpStatus.OK);
-    }*/
 
-    public ResponseEntity<Void> deletePublication(@ApiParam(value = "By passing in the appropriate publication ID, you can delete the request.",required=true) @PathVariable("idRequest") String idRequest) {
-        String accept = request.getHeader("Accept");
-        return new ResponseEntity<Void>(HttpStatus.NOT_IMPLEMENTED);
+    public ResponseEntity<Void> addPublication(@ApiParam(value = "Publication to add") @Valid @RequestBody PublicationCreationRequest body) {
+        publicationService.addPublication(body);
+        return new ResponseEntity<Void>(HttpStatus.OK);
     }
 
-    public ResponseEntity<Void> modifyPublicationDate(@ApiParam(value = "",required=true) @PathVariable("idPublication") String idPublication,@ApiParam(value = "The trip's new departure date and time"  )  @Valid @RequestBody PublicationDateChangeRequest body) {
+    public ResponseEntity<List<PublicationResponse>> searchPublication() {
         String accept = request.getHeader("Accept");
-        return new ResponseEntity<Void>(HttpStatus.NOT_IMPLEMENTED);
+        return new ResponseEntity<List<PublicationResponse>>(HttpStatus.NOT_IMPLEMENTED);
+    }
+
+    public ResponseEntity<Void> deletePublication(@ApiParam(value = "By passing in the appropriate publication ID, you can delete the request.",required=true) @PathVariable("idPublication") Long idPublication) {
+        publicationService.deletePublication(idPublication);
+        return new ResponseEntity<Void>(HttpStatus.OK);
+    }
+
+    public ResponseEntity<Void> modifyPublicationDate(@ApiParam(value = "",required=true) @PathVariable("idPublication") Long idPublication,@ApiParam(value = "The new publication date and time"  )  @Valid @RequestBody PublicationDateChangeRequest body) {
+        publicationService.modifyPublicationDate(body, idPublication);
+        return new ResponseEntity<Void>(HttpStatus.OK);
     }
 
 }

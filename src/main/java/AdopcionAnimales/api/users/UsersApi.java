@@ -23,19 +23,6 @@ import java.util.List;
 @Api(value = "users", description = "the users API")
 public interface UsersApi {
 
-
-    @ApiOperation(value = "Adds a publication", nickname = "addPublication", notes = "Adds a new animal to the user", authorizations = {
-        @Authorization(value = "ApiKeyAuth")    }, tags={  })
-    @ApiResponses(value = { 
-        @ApiResponse(code = 201, message = "Publication created"),
-        @ApiResponse(code = 400, message = "invalid input, object invalid"),
-        @ApiResponse(code = 401, message = "The requested page needs a username and a password") })
-    @RequestMapping(value = "/users/{username}/publications",
-        consumes = { "application/json" },
-        method = RequestMethod.POST)
-    ResponseEntity<Void> addPublication(@ApiParam(value = "",required=true) @PathVariable("username") String username,@ApiParam(value = "Publication to add"  )  @Valid @RequestBody PublicationCreationRequest body);
-
-
     @ApiOperation(value = "Registers a user", nickname = "addUser", notes = "Adds a user to the system", tags={  })
     @ApiResponses(value = { 
         @ApiResponse(code = 201, message = "user created"),
@@ -175,19 +162,6 @@ public interface UsersApi {
         produces = { "application/json" }, 
         method = RequestMethod.GET)
     ResponseEntity<List<TypeResponse>> searchCity(@ApiParam(value = "",required=true) @PathVariable("username") String username, @ApiParam(value = "",required=true) @PathVariable("idAnimal") String idAnimal, @ApiParam(value = "",required=true) @PathVariable("idCity") String idCity);
-
-
-    @ApiOperation(value = "Searches for a publication", nickname = "searchPublication", notes = "Searches for a publication.", response = PublicationResponse.class, responseContainer = "List", authorizations = {
-        @Authorization(value = "ApiKeyAuth")    }, tags={  })
-    @ApiResponses(value = { 
-        @ApiResponse(code = 200, message = "The search was successfull", response = PublicationResponse.class, responseContainer = "List"),
-        @ApiResponse(code = 403, message = "Access denied"),
-        @ApiResponse(code = 500, message = "Internal server error") })
-    @RequestMapping(value = "/users/{username}/publications",
-        produces = { "application/json" }, 
-        method = RequestMethod.GET)
-    ResponseEntity<List<PublicationResponse>> searchPublication(@ApiParam(value = "",required=true) @PathVariable("username") String username);
-
 
     @ApiOperation(value = "Searches for a type", nickname = "searchType", notes = "Searches for a type. This operation is permited for both user and admin", response = TypeResponse.class, responseContainer = "List", authorizations = {
         @Authorization(value = "ApiKeyAuth")    }, tags={  })
