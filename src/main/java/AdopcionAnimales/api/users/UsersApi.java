@@ -140,18 +140,6 @@ public interface UsersApi {
         method = RequestMethod.PUT)
     ResponseEntity<Void> modifyUserUsername(@ApiParam(value = "",required=true) @PathVariable("username") String username,@ApiParam(value = "The new user's username"  )  @Valid @RequestBody UserUsernameChangeRequest body) throws UniqueUsernameException;
 
-
-    @ApiOperation(value = "Obtains the request made by the user", nickname = "obtainRequest", notes = "", response = RequestPaginatedResponse.class, authorizations = {
-        @Authorization(value = "ApiKeyAuth")    }, tags={  })
-    @ApiResponses(value = { 
-        @ApiResponse(code = 200, message = "The search was successfull", response = RequestPaginatedResponse.class),
-        @ApiResponse(code = 401, message = "The requested page needs a username and a password"),
-        @ApiResponse(code = 500, message = "Internal server error") })
-    @RequestMapping(value = "/users/{username}/requests",
-        produces = { "application/json" }, 
-        method = RequestMethod.GET)
-    ResponseEntity<RequestPaginatedResponse> obtainRequest(@ApiParam(value = "",required=true) @PathVariable("username") String username, @ApiParam(value = "the number of the page") @Valid @RequestParam(value = "page", required = false) Integer page, @ApiParam(value = "the number of element per page") @Valid @RequestParam(value = "size", required = false) Integer size);
-
     @ApiOperation(value = "Searches for a city", nickname = "searchCity", notes = "Searches for a city. This operation is permited for both user and admin", response = TypeResponse.class, responseContainer = "List", authorizations = {
         @Authorization(value = "ApiKeyAuth")    }, tags={  })
     @ApiResponses(value = { 

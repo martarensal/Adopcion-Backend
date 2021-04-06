@@ -3,8 +3,6 @@ package AdopcionAnimales.animals;
 import AdopcionAnimales.api.animals.*;
 import org.springframework.stereotype.Service;
 
-import java.util.Set;
-
 @Service
 public interface AnimalService {
     void addAnimal(AnimalCreationRequest animalCreationRequest);

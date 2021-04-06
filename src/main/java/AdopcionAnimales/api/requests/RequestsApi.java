@@ -5,6 +5,7 @@
  */
 package AdopcionAnimales.api.requests;
 
+import AdopcionAnimales.api.publications.PublicationDateChangeRequest;
 import io.swagger.annotations.*;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
@@ -36,8 +37,19 @@ public interface RequestsApi {
         @ApiResponse(code = 401, message = "The requested page needs a username and a password") })
     @RequestMapping(value = "/requests/{idRequest}",
         method = RequestMethod.DELETE)
-    ResponseEntity<Void> deleteRequest(@ApiParam(value = "By passing in the appropriate request ID, you can delete the request.",required=true) @PathVariable("idRequest") String idRequest);
+    ResponseEntity<Void> deleteRequest(@ApiParam(value = "By passing in the appropriate request ID, you can delete the request.",required=true) @PathVariable("idRequest") Long idRequest);
 
+    /*@ApiOperation(value = "Obtains the request made by the user", nickname = "obtainRequest", notes = "", response = RequestPaginatedResponse.class, authorizations = {
+            @Authorization(value = "ApiKeyAuth")    }, tags={  })
+    @ApiResponses(value = {
+            @ApiResponse(code = 200, message = "The search was successfull", response = RequestPaginatedResponse.class),
+            @ApiResponse(code = 401, message = "The requested page needs a username and a password"),
+            @ApiResponse(code = 500, message = "Internal server error") })
+    @RequestMapping(value = "/requests",
+            produces = { "application/json" },
+            method = RequestMethod.GET)
+    ResponseEntity<RequestPaginatedResponse> obtainRequest(@ApiParam(value = "the number of the page") @Valid @RequestParam(value = "page", required = false) Integer page, @ApiParam(value = "the number of element per page") @Valid @RequestParam(value = "size", required = false) Integer size);
+*/
 
     @ApiOperation(value = "Obtains all the requests", nickname = "obtainRequests", notes = "", response = RequestPaginatedResponse.class, authorizations = {
         @Authorization(value = "ApiKeyAuth")    }, tags={  })
@@ -49,5 +61,49 @@ public interface RequestsApi {
         produces = { "application/json" },
         method = RequestMethod.GET)
     ResponseEntity<RequestPaginatedResponse> obtainRequests(@ApiParam(value = "the number of the page") @Valid @RequestParam(value = "page", required = false) Integer page, @ApiParam(value = "the number of element per page") @Valid @RequestParam(value = "size", required = false) Integer size);
+
+    @ApiOperation(value = "Modifies the request's date and time", nickname = "modifyRequestStartDate", notes = "The request ID for the request you want to modify", authorizations = {
+            @Authorization(value = "ApiKeyAuth")    }, tags={  })
+    @ApiResponses(value = {
+            @ApiResponse(code = 400, message = "bad input parameter"),
+            @ApiResponse(code = 200, message = "operation completed successfully"),
+            @ApiResponse(code = 401, message = "The requested page needs a username and a password") })
+    @RequestMapping(value = "/requests/{idRequest}/requestStartDate",
+            consumes = { "application/json" },
+            method = RequestMethod.PUT)
+    ResponseEntity<Void> modifyRequestStartDate(@ApiParam(value = "",required=true) @PathVariable("idRequest") Long idRquest,@ApiParam(value = "The request's new date and time"  )  @Valid @RequestBody RequestStartDateChangeRequest body);
+
+    @ApiOperation(value = "Modifies the request's date and time", nickname = "modifyRequestEndDate", notes = "The request ID for the request you want to modify", authorizations = {
+            @Authorization(value = "ApiKeyAuth")    }, tags={  })
+    @ApiResponses(value = {
+            @ApiResponse(code = 400, message = "bad input parameter"),
+            @ApiResponse(code = 200, message = "operation completed successfully"),
+            @ApiResponse(code = 401, message = "The requested page needs a username and a password") })
+    @RequestMapping(value = "/requests/{idRequest}/requestEndDate",
+            consumes = { "application/json" },
+            method = RequestMethod.PUT)
+    ResponseEntity<Void> modifyRequestEndDate(@ApiParam(value = "",required=true) @PathVariable("idRequest") Long idRquest,@ApiParam(value = "The request's new date and time"  )  @Valid @RequestBody RequestEndDateChangeRequest body);
+
+    @ApiOperation(value = "Modifies the request's status", nickname = "modifyRequestStatus", notes = "The request ID for the request you want to modify", authorizations = {
+            @Authorization(value = "ApiKeyAuth")    }, tags={  })
+    @ApiResponses(value = {
+            @ApiResponse(code = 400, message = "bad input parameter"),
+            @ApiResponse(code = 200, message = "operation completed successfully"),
+            @ApiResponse(code = 401, message = "The requested page needs a username and a password") })
+    @RequestMapping(value = "/requests/{idRequest}/requestStatus",
+            consumes = { "application/json" },
+            method = RequestMethod.PUT)
+    ResponseEntity<Void> modifyRequestStatus(@ApiParam(value = "",required=true) @PathVariable("idRequest") Long idRquest,@ApiParam(value = "The request's new status"  )  @Valid @RequestBody RequestStatusChangeRequest body);
+
+    @ApiOperation(value = "Modifies the request's type", nickname = "modifyRequestType", notes = "The request ID for the request you want to modify", authorizations = {
+            @Authorization(value = "ApiKeyAuth")    }, tags={  })
+    @ApiResponses(value = {
+            @ApiResponse(code = 400, message = "bad input parameter"),
+            @ApiResponse(code = 200, message = "operation completed successfully"),
+            @ApiResponse(code = 401, message = "The requested page needs a username and a password") })
+    @RequestMapping(value = "/requests/{idRequest}/requestType",
+            consumes = { "application/json" },
+            method = RequestMethod.PUT)
+    ResponseEntity<Void> modifyRequestType(@ApiParam(value = "",required=true) @PathVariable("idRequest") Long idRquest,@ApiParam(value = "The request's new type"  )  @Valid @RequestBody RequestTypeChangeRequest body);
 
 }

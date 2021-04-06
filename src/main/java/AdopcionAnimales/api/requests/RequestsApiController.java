@@ -1,5 +1,7 @@
 package AdopcionAnimales.api.requests;
 
+import AdopcionAnimales.api.publications.PublicationDateChangeRequest;
+import AdopcionAnimales.requests.RequestService;
 import com.fasterxml.jackson.databind.ObjectMapper;
 import io.swagger.annotations.ApiParam;
 import org.slf4j.Logger;
@@ -24,25 +26,52 @@ public class RequestsApiController implements RequestsApi {
 
     private final HttpServletRequest request;
 
+    private RequestService requestService;
+
     @org.springframework.beans.factory.annotation.Autowired
-    public RequestsApiController(ObjectMapper objectMapper, HttpServletRequest request) {
+    public RequestsApiController(ObjectMapper objectMapper, HttpServletRequest request, RequestService requestService) {
         this.objectMapper = objectMapper;
         this.request = request;
+        this.requestService = requestService;
     }
 
     public ResponseEntity<Void> addRequest(@ApiParam(value = "Reservation to add"  )  @Valid @RequestBody RequestCreationRequest body) {
-        String accept = request.getHeader("Accept");
-        return new ResponseEntity<Void>(HttpStatus.NOT_IMPLEMENTED);
+        requestService.addRequest(body);
+        return new ResponseEntity<Void>(HttpStatus.OK);
     }
 
-    public ResponseEntity<Void> deleteRequest(@ApiParam(value = "By passing in the appropriate request ID, you can delete the request.",required=true) @PathVariable("idRequest") String idRequest) {
-        String accept = request.getHeader("Accept");
-        return new ResponseEntity<Void>(HttpStatus.NOT_IMPLEMENTED);
+    public ResponseEntity<Void> deleteRequest(@ApiParam(value = "By passing in the appropriate request ID, you can delete the request.",required=true) @PathVariable("idRequest") Long idRequest) {
+        requestService.deleteRequest(idRequest);
+        return new ResponseEntity<Void>(HttpStatus.OK);
     }
+
+   /* public ResponseEntity<RequestPaginatedResponse> obtainRequest(@ApiParam(value = "the number of the page") @Valid @RequestParam(value = "page", required = false) Integer page, @ApiParam(value = "the number of element per page") @Valid @RequestParam(value = "size", required = false) Integer size) {
+        String accept = request.getHeader("Accept");
+        return new ResponseEntity<RequestPaginatedResponse>(HttpStatus.NOT_IMPLEMENTED);
+    }*/
 
     public ResponseEntity<RequestPaginatedResponse> obtainRequests(@ApiParam(value = "the number of the page") @Valid @RequestParam(value = "page", required = false) Integer page, @ApiParam(value = "the number of element per page") @Valid @RequestParam(value = "size", required = false) Integer size) {
         String accept = request.getHeader("Accept");
         return new ResponseEntity<RequestPaginatedResponse>(HttpStatus.NOT_IMPLEMENTED);
     }
 
+    public ResponseEntity<Void> modifyRequestStartDate(@ApiParam(value = "",required=true) @PathVariable("idRequest") Long idRequest,@ApiParam(value = "The new request date and time"  )  @Valid @RequestBody RequestStartDateChangeRequest body) {
+        requestService.modifyRequestStartDate(body, idRequest);
+        return new ResponseEntity<Void>(HttpStatus.OK);
+    }
+
+    public ResponseEntity<Void> modifyRequestEndDate(@ApiParam(value = "",required=true) @PathVariable("idRequest") Long idRequest,@ApiParam(value = "The new request date and time"  )  @Valid @RequestBody RequestEndDateChangeRequest body) {
+        requestService.modifyRequestEndDate(body, idRequest);
+        return new ResponseEntity<Void>(HttpStatus.OK);
+    }
+
+    public ResponseEntity<Void> modifyRequestStatus(@ApiParam(value = "",required=true) @PathVariable("idRequest") Long idRequest,@ApiParam(value = "The new request status"  )  @Valid @RequestBody RequestStatusChangeRequest body) {
+        requestService.modifyRequestStatus(body, idRequest);
+        return new ResponseEntity<Void>(HttpStatus.OK);
+    }
+
+    public ResponseEntity<Void> modifyRequestType(@ApiParam(value = "",required=true) @PathVariable("idRequest") Long idRequest,@ApiParam(value = "The new request type"  )  @Valid @RequestBody RequestTypeChangeRequest body) {
+        requestService.modifyRequestType(body, idRequest);
+        return new ResponseEntity<Void>(HttpStatus.OK);
+    }
 }

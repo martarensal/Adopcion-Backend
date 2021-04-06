@@ -1,14 +1,11 @@
 package AdopcionAnimales.animals;
 
 import AdopcionAnimales.api.animals.*;
-import AdopcionAnimales.users.User;
 import AdopcionAnimales.users.UsersRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
-import javax.persistence.EntityNotFoundException;
 import javax.transaction.Transactional;
-import java.util.Set;
 
 @Service
 public class AnimalServiceImpl implements AnimalService{
