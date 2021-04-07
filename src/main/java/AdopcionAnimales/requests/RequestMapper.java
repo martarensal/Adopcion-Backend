@@ -11,5 +11,4 @@ import org.mapstruct.Mapper;
 public interface RequestMapper {
     RequestResponse requestToRequestResponse(Request request);
     Request requestCreationRequestToRequest(RequestCreationRequest requestCreationRequest);
-
 }

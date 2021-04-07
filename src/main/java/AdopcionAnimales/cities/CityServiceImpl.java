@@ -1,9 +1,6 @@
 package AdopcionAnimales.cities;
 
-import AdopcionAnimales.api.cities.CityCreationRequest;
-import AdopcionAnimales.api.cities.CityNameChangeRequest;
-import AdopcionAnimales.api.cities.CityPostalCodeChangeRequest;
-import AdopcionAnimales.api.cities.CityResponse;
+import AdopcionAnimales.api.cities.*;
 import AdopcionAnimales.users.User;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -43,6 +40,7 @@ public class CityServiceImpl implements CityService{
     }
 
     @Override
+    @Transactional
     public CityResponse getCity(Long idCity) {
         return null;
     }
@@ -55,6 +53,7 @@ public class CityServiceImpl implements CityService{
     }
 
     @Override
+    @Transactional
     public void modifyCityName(CityNameChangeRequest cityNameChangeRequest, Long idCity) {
         City city = findCity(idCity);
 
@@ -63,10 +62,20 @@ public class CityServiceImpl implements CityService{
     }
 
     @Override
+    @Transactional
     public void modifyCityPostalCode(CityPostalCodeChangeRequest cityPostalCodeChangeRequest, Long idCity) {
         City city = findCity(idCity);
 
         city.setPostalCode(cityPostalCodeChangeRequest.getNewCityPostalCode());
+        cityRepository.save(city);
+    }
+
+    @Override
+    @Transactional
+    public void modifyCityCountry(CityCountryChangeRequest cityCountryChangeRequest, Long idCity) {
+        City city = findCity(idCity);
+
+        city.setCountry(cityCountryChangeRequest.getNewCityCountry());
         cityRepository.save(city);
     }
 }

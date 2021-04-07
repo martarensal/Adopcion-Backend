@@ -61,4 +61,10 @@ public class CitiesApiController implements CitiesApi {
         return new ResponseEntity<Void>(HttpStatus.OK);
     }
 
+    @Override
+    public ResponseEntity<Void> modifyCityCountry(Long idCity, @Valid CityCountryChangeRequest body) {
+        cityService.modifyCityCountry(body, idCity);
+        return new ResponseEntity<Void>(HttpStatus.OK);
+    }
+
 }

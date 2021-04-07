@@ -25,7 +25,7 @@ public interface RequestsApi {
     @RequestMapping(value = "/requests",
         consumes = { "application/json" },
         method = RequestMethod.POST)
-    ResponseEntity<Void> addRequest(@ApiParam(value = "Reservation to add"  )  @Valid @RequestBody RequestCreationRequest body);
+    ResponseEntity<Void> addRequest(@ApiParam(value = "Request to add"  )  @Valid @RequestBody RequestCreationRequest body);
 
 
     @ApiOperation(value = "Deletes a request", nickname = "deleteRequest", notes = "", authorizations = {

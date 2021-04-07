@@ -1,9 +1,6 @@
 package AdopcionAnimales.cities;
 
-import AdopcionAnimales.api.cities.CityCreationRequest;
-import AdopcionAnimales.api.cities.CityNameChangeRequest;
-import AdopcionAnimales.api.cities.CityPostalCodeChangeRequest;
-import AdopcionAnimales.api.cities.CityResponse;
+import AdopcionAnimales.api.cities.*;
 import AdopcionAnimales.api.users.UserNameChangeRequest;
 import org.springframework.stereotype.Service;
 
@@ -16,4 +13,6 @@ public interface CityService {
     CityResponse getCity(Long idCity);
     void modifyCityName(CityNameChangeRequest cityNameChangeRequest, Long idCity);
     void modifyCityPostalCode(CityPostalCodeChangeRequest cityPostalCodeChangeRequest, Long idCity);
+    void modifyCityCountry(CityCountryChangeRequest cityCountryChangeRequest, Long idCity);
+
 }

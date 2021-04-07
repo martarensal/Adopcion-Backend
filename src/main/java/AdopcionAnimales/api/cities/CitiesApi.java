@@ -65,6 +65,18 @@ public interface CitiesApi {
             method = RequestMethod.PUT)
     ResponseEntity<Void> modifyCityName(@ApiParam(value = "",required=true) @PathVariable("idCity") Long idCity,@ApiParam(value = "The new city's name"  )  @Valid @RequestBody CityNameChangeRequest body);
 
+    @ApiOperation(value = "Modifies the city's country", nickname = "modifyCityCountry", notes = "The id of the city you want to modify", authorizations = {
+            @Authorization(value = "ApiKeyAuth")    }, tags={  })
+    @ApiResponses(value = {
+            @ApiResponse(code = 400, message = "bad input parameter"),
+            @ApiResponse(code = 200, message = "operation completed successfully"),
+            @ApiResponse(code = 401, message = "The requested page needs a username and a password") })
+    @RequestMapping(value = "/cities/{idCity}/country",
+            consumes = { "application/json" },
+            method = RequestMethod.PUT)
+    ResponseEntity<Void> modifyCityCountry(@ApiParam(value = "",required=true) @PathVariable("idCity") Long idCity,@ApiParam(value = "The new city's country"  )  @Valid @RequestBody CityCountryChangeRequest body);
+
+
     @ApiOperation(value = "Modifies the city's postal code", nickname = "modifyCityPostalCode", notes = "The id of the city you want to modify", authorizations = {
             @Authorization(value = "ApiKeyAuth")    }, tags={  })
     @ApiResponses(value = {

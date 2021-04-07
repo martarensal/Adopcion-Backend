@@ -11,6 +11,8 @@ public class Type {
     @Id
     private Long id;
 
+    private String name;
+
     @OneToMany(mappedBy = "type")
     private Set<Animal> animals;
 
@@ -21,6 +23,14 @@ public class Type {
 
     public Long getId() {
         return id;
+    }
+
+    public void setName(String name) {
+        this.name = name;
+    }
+
+    public String getName() {
+        return name;
     }
 
     public Set<Animal> getAnimals() {

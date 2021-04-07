@@ -21,9 +21,9 @@ public class RequestServiceImpl implements RequestService{
     @Transactional
     public void addRequest(RequestCreationRequest requestCreationRequest) {
         Request newRequest = requestMapper.requestCreationRequestToRequest(requestCreationRequest);
-        if(newRequest.getStatus() == "Adoption"){
+        /*if(newRequest.getStatus() == "Adoption"){
             newRequest.setEndDate(null);
-        }
+        }*/
         requestRepository.save(newRequest);
     }
 
