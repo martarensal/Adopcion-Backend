@@ -5,6 +5,7 @@
  */
 package AdopcionAnimales.api.authentication;
 
+import AdopcionAnimales.authentication.UnsuccessfulLoginException;
 import io.swagger.annotations.*;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.RequestBody;
@@ -13,8 +14,7 @@ import org.springframework.web.bind.annotation.RequestMethod;
 
 import javax.validation.Valid;
 
-@javax.annotation.Generated(value = "io.swagger.codegen.v3.generators.java.SpringCodegen", date = "2021-02-24T16:55:56.237+01:00[Europe/Paris]")
-@Api(value = "authentication", description = "the authentication API")
+@Api(value = "authentication")
 public interface AuthenticationApi {
 
     @ApiOperation(value = "Authenticates a user into the system", nickname = "userLogin", notes = "Logs in a user into the system", response = LoginResponse.class, tags={  })
@@ -27,6 +27,6 @@ public interface AuthenticationApi {
         produces = { "application/json" }, 
         consumes = { "application/json" },
         method = RequestMethod.POST)
-    ResponseEntity<LoginResponse> userLogin(@ApiParam(value = "The user's username and password"  )  @Valid @RequestBody LoginRequest body);
+    ResponseEntity<LoginResponse> userLogin(@ApiParam(value = "The user's username and password"  )  @Valid @RequestBody LoginRequest body) throws UnsuccessfulLoginException;
 
 }

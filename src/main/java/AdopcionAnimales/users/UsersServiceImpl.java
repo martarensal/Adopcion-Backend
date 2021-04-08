@@ -36,7 +36,9 @@ public class UsersServiceImpl implements UsersService {
     @Transactional
     public void registerUser(UserRegistrationRequest registrationRequest) throws UniqueUsernameException {
         User newUser = userMapper.userRegistrationRequestToUser(registrationRequest);
+        newUser.setPassword(passwordEncoder.encode(registrationRequest.getPassword()));
         newUser.setRol("ROLE_USER");
+
         try {
             userRepository.save(newUser);
         } catch (DataIntegrityViolationException exception) {

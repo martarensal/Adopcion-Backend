@@ -10,7 +10,6 @@ import java.util.Objects;
  * LoginResponse
  */
 @Validated
-@javax.annotation.Generated(value = "io.swagger.codegen.v3.generators.java.SpringCodegen", date = "2021-02-24T16:55:56.237+01:00[Europe/Paris]")
 public class LoginResponse   {
   @JsonProperty("apiKey")
   private String apiKey = null;
