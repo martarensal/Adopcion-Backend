@@ -104,18 +104,8 @@ public class UsersApiController implements UsersApi {
         return new ResponseEntity<Void>(HttpStatus.OK);
     }
 
-    public ResponseEntity<List<TypeResponse>> searchCity(@ApiParam(value = "",required=true) @PathVariable("username") String username, @ApiParam(value = "",required=true) @PathVariable("idAnimal") String idAnimal, @ApiParam(value = "",required=true) @PathVariable("idCity") String idCity) {
-        String accept = request.getHeader("Accept");
-        return new ResponseEntity<List<TypeResponse>>(HttpStatus.NOT_IMPLEMENTED);
-    }
-
-    public ResponseEntity<List<TypeResponse>> searchType(@ApiParam(value = "",required=true) @PathVariable("username") String username, @ApiParam(value = "",required=true) @PathVariable("idAnimal") String idAnimal, @ApiParam(value = "",required=true) @PathVariable("idType") String idType) {
-        String accept = request.getHeader("Accept");
-        return new ResponseEntity<List<TypeResponse>>(HttpStatus.NOT_IMPLEMENTED);
-    }
-
     public ResponseEntity<UserPaginatedResponse> searchUser(@ApiParam(value = "the username to be searched")
-                                                                  @Valid @RequestParam(value = "username", required = false) String username,
+                                                                  @Valid @RequestParam(value = "username", required = true) String username,
                                                                   @ApiParam(value = "the number of the page")
                                                                   @Valid @RequestParam(value = "page", required = false, defaultValue = "0") Integer page,
                                                                   @ApiParam(value = "the number of element per page")

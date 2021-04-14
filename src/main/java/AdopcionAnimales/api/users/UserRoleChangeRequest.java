@@ -6,7 +6,6 @@ import com.fasterxml.jackson.annotation.JsonValue;
 import io.swagger.annotations.ApiModelProperty;
 import org.springframework.validation.annotation.Validated;
 
-import javax.validation.constraints.NotNull;
 import java.util.Objects;
 
 /**
@@ -46,9 +45,9 @@ public class UserRoleChangeRequest   {
     }
   }
   @JsonProperty("newRole")
-  private NewRoleEnum newRole = null;
+  private String newRole = null;
 
-  public UserRoleChangeRequest newRole(NewRoleEnum newRole) {
+  public UserRoleChangeRequest newRole(String newRole) {
     this.newRole = newRole;
     return this;
   }
@@ -58,13 +57,12 @@ public class UserRoleChangeRequest   {
    * @return newRole
   **/
   @ApiModelProperty(example = "admin", required = true, value = "")
-  @NotNull
 
-  public NewRoleEnum getNewRole() {
+  public String getNewRole() {
     return newRole;
   }
 
-  public void setNewRole(NewRoleEnum newRole) {
+  public void setNewRole(String newRole) {
     this.newRole = newRole;
   }
 

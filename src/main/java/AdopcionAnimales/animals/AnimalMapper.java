@@ -8,6 +8,6 @@ import java.util.Set;
 
 @Mapper(componentModel = "spring")
 public interface AnimalMapper {
-    Set<AnimalResponse> animalToAnimalResponse (Set<Animal> animals);
+    Set<AnimalResponse> animalsToAnimalsResponse(Set<Animal> animals);
     Animal animalCreationRequestToAnimal(AnimalCreationRequest animalCreationRequest);
 }

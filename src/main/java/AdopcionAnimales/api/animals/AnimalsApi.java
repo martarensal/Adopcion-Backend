@@ -119,7 +119,7 @@ public interface AnimalsApi {
             method = RequestMethod.PUT)
     ResponseEntity<Void> modifyAnimalStatus(@ApiParam(value = "By passing in the appropriate animal code, you can modify the animal.",required=true) @PathVariable("idAnimal") Long idAnimal,@ApiParam(value = "The animal's new status"  )  @Valid @RequestBody AnimalStatusChangeRequest body);
 
-    @ApiOperation(value = "Searches for an animal", nickname = "searchAnimal", notes = "Searches for an animal.", response = AnimalResponse.class, responseContainer = "List", authorizations = {
+    /*@ApiOperation(value = "Searches for an animal", nickname = "searchAnimal", notes = "Searches for an animal.", response = AnimalResponse.class, responseContainer = "List", authorizations = {
             @Authorization(value = "ApiKeyAuth")    }, tags={  })
     @ApiResponses(value = {
             @ApiResponse(code = 200, message = "The search was successfull", response = AnimalResponse.class, responseContainer = "List"),
@@ -129,8 +129,8 @@ public interface AnimalsApi {
             produces = { "application/json" },
             method = RequestMethod.GET)
     ResponseEntity<List<AnimalPaginatedResponse>> searchAnimal(@ApiParam(value = "",required=true) @PathVariable("username") String username);
-
-    @ApiOperation(value = "Searches for animals", nickname = "searchAnimals", notes = "Searches for an animal. This operation is permited for both user and admin", response = AnimalPaginatedResponse.class, responseContainer = "List", authorizations = {
+*/
+    /*@ApiOperation(value = "Searches the animales for a user", nickname = "getAnimalsFromUser", notes = "Searches for an animal added by a user.", response = AnimalPaginatedResponse.class, responseContainer = "List", authorizations = {
         @Authorization(value = "ApiKeyAuth")    }, tags={  })
     @ApiResponses(value = { 
         @ApiResponse(code = 200, message = "The search was successfull", response = AnimalPaginatedResponse.class, responseContainer = "List"),
@@ -139,6 +139,20 @@ public interface AnimalsApi {
     @RequestMapping(value = "/animals",
         produces = { "application/json" }, 
         method = RequestMethod.GET)
-    ResponseEntity<List<AnimalPaginatedResponse>> searchAnimals(@ApiParam(value = "the number of the page") @Valid @RequestParam(value = "page", required = false) Integer page, @ApiParam(value = "the number of element per page") @Valid @RequestParam(value = "size", required = false) Integer size);
+    ResponseEntity<AnimalPaginatedResponse> getAnimalsFromUser(
+            @ApiParam(value = "", required = true) @PathVariable("username") String username,
+            @ApiParam(value = "the number of the page") @Valid @RequestParam(value = "page", required = false, defaultValue = "0") Integer page,
+            @ApiParam(value = "the number of element per page") @Valid @RequestParam(value = "size", required = false, defaultValue = "25") Integer size);*/
 
+    @ApiOperation(value = "Get animals from user", nickname = "searchAnimal", notes = "Get animals from user", response = AnimalResponse.class, responseContainer = "List", authorizations = {
+            @Authorization(value = "ApiKeyAuth")    }, tags={ "", })
+    @ApiResponses(value = {
+            @ApiResponse(code = 200, message = "The search was successfull", response = AnimalResponse.class, responseContainer = "List"),
+            @ApiResponse(code = 403, message = "Access denied"),
+            @ApiResponse(code = 500, message = "Internal server error") })
+    @RequestMapping(value = "/users/{username}/animals",
+            produces = { "application/json" },
+            method = RequestMethod.GET)
+    ResponseEntity<List<AnimalResponse>> searchAnimal(@ApiParam(value = "",required=true) @PathVariable("username") String username
+    );
 }

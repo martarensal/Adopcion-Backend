@@ -24,11 +24,11 @@ public class AnimalsApiControllerIntegrationTest {
 
     @Test
     public void searchAnimalTest() throws Exception {
-        String username = "username_example";
+        /*String username = "username_example";
         Integer page = 56;
         Integer size = 56;
-        ResponseEntity<List<AnimalPaginatedResponse>> responseEntity = api.searchAnimals(page, size);
-        assertEquals(HttpStatus.NOT_IMPLEMENTED, responseEntity.getStatusCode());
+        ResponseEntity<AnimalPaginatedResponse> responseEntity = api.getAnimalsFromUser(username, page, size);
+        assertEquals(HttpStatus.NOT_IMPLEMENTED, responseEntity.getStatusCode());*/
     }
 
 }

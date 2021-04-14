@@ -59,4 +59,9 @@ public class TypesApiController implements TypesApi {
         typeService.modifyTypeName(body, idType);
         return new ResponseEntity<Void>(HttpStatus.OK);
     }
+
+    public ResponseEntity<TypeResponse> searchType(@ApiParam(value = "",required=true) @PathVariable("username") String username, @ApiParam(value = "",required=true) @PathVariable("idAnimal") String idAnimal, @ApiParam(value = "",required=true) @PathVariable("idType") String idType) {
+        String accept = request.getHeader("Accept");
+        return new ResponseEntity<TypeResponse>(HttpStatus.NOT_IMPLEMENTED);
+    }
 }

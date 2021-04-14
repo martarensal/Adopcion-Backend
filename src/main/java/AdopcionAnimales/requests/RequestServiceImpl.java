@@ -1,29 +1,34 @@
 package AdopcionAnimales.requests;
 
-import AdopcionAnimales.animals.Animal;
 import AdopcionAnimales.api.requests.*;
-import AdopcionAnimales.publications.Publication;
+import AdopcionAnimales.users.User;
+import AdopcionAnimales.users.UsersRepository;
+import AdopcionAnimales.utils.SecurityUtils;
 import org.springframework.stereotype.Service;
 
+import javax.persistence.EntityNotFoundException;
 import javax.transaction.Transactional;
 
 @Service
 public class RequestServiceImpl implements RequestService{
     private RequestMapper requestMapper;
     private RequestRepository requestRepository;
+    private UsersRepository usersRepository;
 
-    public RequestServiceImpl(RequestMapper requestMapper, RequestRepository requestRepository) {
+    public RequestServiceImpl(RequestMapper requestMapper, RequestRepository requestRepository, UsersRepository usersRepository) {
         this.requestMapper = requestMapper;
         this.requestRepository = requestRepository;
+        this.usersRepository = usersRepository;
     }
 
     @Override
     @Transactional
     public void addRequest(RequestCreationRequest requestCreationRequest) {
         Request newRequest = requestMapper.requestCreationRequestToRequest(requestCreationRequest);
-        /*if(newRequest.getStatus() == "Adoption"){
-            newRequest.setEndDate(null);
-        }*/
+        User user = getUser();
+        user.getRequests().add(requestRepository.save(newRequest));
+
+        usersRepository.save(user);
         requestRepository.save(newRequest);
     }
 
@@ -43,6 +48,10 @@ public class RequestServiceImpl implements RequestService{
     @Transactional
     public void deleteRequest(Long idRequest) {
         Request request = findRequestById(idRequest);
+        User user = getUser();
+        user.getRequests().remove(request);
+
+        usersRepository.save(user);
         requestRepository.delete(request);
     }
 
@@ -88,5 +97,12 @@ public class RequestServiceImpl implements RequestService{
     @Transactional
     public Request findRequestById(Long id) {
         return requestRepository.findById(id).orElse(null);
+    }
+
+    private User getUser() {
+        User user = usersRepository.findUserByUsername(SecurityUtils.currentUserUsername());
+        if (user == null)
+            throw new EntityNotFoundException("Usuario no encontrado");
+        return user;
     }
 }

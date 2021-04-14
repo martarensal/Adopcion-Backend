@@ -19,7 +19,6 @@ import java.util.stream.Stream;
 
 @Service
 public class UsersServiceImpl implements UsersService {
-    private static final int ROLE_USER = 1;
     private UsersRepository userRepository;
     private PasswordEncoder passwordEncoder;
     private UserMapper userMapper;
@@ -44,7 +43,6 @@ public class UsersServiceImpl implements UsersService {
         } catch (DataIntegrityViolationException exception) {
             throw new UniqueUsernameException("Username or email already exists");
         }
-
     }
 
     @Override
@@ -79,7 +77,7 @@ public class UsersServiceImpl implements UsersService {
     public void modifyUserRole(UserRoleChangeRequest userRoleChangeRequest, String username) {
         User user = findUserByUsername(username);
 
-        //user.setRol(userRoleChangeRequest.getNewRole());
+        user.setRol(userRoleChangeRequest.getNewRole());
         userRepository.save(user);
     }
 
@@ -139,10 +137,8 @@ public class UsersServiceImpl implements UsersService {
     public UserPaginatedResponse searchUsersByUsername(String username, Integer page, Integer size) {
         Page<User> matchedUsers = userRepository.searchUserWithUsername(username, PageRequest.of(page, size));
 
-        //Stream<UserResponse> userResponsesStream = matchedUsers.map(user -> userMapper.userToUserResponse(user));
-        Page<UserResponse> userResponsesObject = matchedUsers.map(user -> userMapper.userToUserResponse(user));
-        Stream<UserResponse> userResponsesStream = userResponsesObject.stream();
-        List<UserResponse> userResponses = userResponsesStream.collect(Collectors.toList());
+        List<UserResponse> userResponses = matchedUsers.map(user -> userMapper.userToUserResponse(user)).stream()
+                .collect(Collectors.toList());
         PaginationInfo paginationInfo = new PaginationInfo();
         paginationInfo.setTotalElements(matchedUsers.getNumberOfElements());
         paginationInfo.setTotalPages(matchedUsers.getTotalPages());

@@ -1,5 +1,6 @@
 package AdopcionAnimales.api.cities;
 
+import AdopcionAnimales.api.types.TypeResponse;
 import AdopcionAnimales.cities.CityService;
 import com.fasterxml.jackson.databind.ObjectMapper;
 import io.swagger.annotations.ApiParam;
@@ -67,4 +68,8 @@ public class CitiesApiController implements CitiesApi {
         return new ResponseEntity<Void>(HttpStatus.OK);
     }
 
+    public ResponseEntity<CityResponse> searchCity(@ApiParam(value = "",required=true) @PathVariable("idAnimal") String idAnimal, @ApiParam(value = "",required=true) @PathVariable("idCity") String idCity) {
+        String accept = request.getHeader("Accept");
+        return new ResponseEntity<CityResponse>(HttpStatus.NOT_IMPLEMENTED);
+    }
 }

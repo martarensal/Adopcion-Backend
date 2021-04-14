@@ -140,28 +140,6 @@ public interface UsersApi {
         method = RequestMethod.PUT)
     ResponseEntity<Void> modifyUserUsername(@ApiParam(value = "",required=true) @PathVariable("username") String username,@ApiParam(value = "The new user's username"  )  @Valid @RequestBody UserUsernameChangeRequest body) throws UniqueUsernameException;
 
-    @ApiOperation(value = "Searches for a city", nickname = "searchCity", notes = "Searches for a city. This operation is permited for both user and admin", response = TypeResponse.class, responseContainer = "List", authorizations = {
-        @Authorization(value = "ApiKeyAuth")    }, tags={  })
-    @ApiResponses(value = { 
-        @ApiResponse(code = 200, message = "The search was successfull", response = TypeResponse.class, responseContainer = "List"),
-        @ApiResponse(code = 401, message = "The requested page needs a username and a password"),
-        @ApiResponse(code = 500, message = "Internal server error") })
-    @RequestMapping(value = "/users/{username}/animals/{idAnimal}/cities/{idCity}",
-        produces = { "application/json" }, 
-        method = RequestMethod.GET)
-    ResponseEntity<List<TypeResponse>> searchCity(@ApiParam(value = "",required=true) @PathVariable("username") String username, @ApiParam(value = "",required=true) @PathVariable("idAnimal") String idAnimal, @ApiParam(value = "",required=true) @PathVariable("idCity") String idCity);
-
-    @ApiOperation(value = "Searches for a type", nickname = "searchType", notes = "Searches for a type. This operation is permited for both user and admin", response = TypeResponse.class, responseContainer = "List", authorizations = {
-        @Authorization(value = "ApiKeyAuth")    }, tags={  })
-    @ApiResponses(value = { 
-        @ApiResponse(code = 200, message = "The search was successfull", response = TypeResponse.class, responseContainer = "List"),
-        @ApiResponse(code = 401, message = "The requested page needs a username and a password"),
-        @ApiResponse(code = 500, message = "Internal server error") })
-    @RequestMapping(value = "/users/{username}/animals/{idAnimal}/types/{idType}",
-        produces = { "application/json" }, 
-        method = RequestMethod.GET)
-    ResponseEntity<List<TypeResponse>> searchType(@ApiParam(value = "",required=true) @PathVariable("username") String username, @ApiParam(value = "",required=true) @PathVariable("idAnimal") String idAnimal, @ApiParam(value = "",required=true) @PathVariable("idType") String idType);
-
     @ApiOperation(value = "Searches for a user", nickname = "searchUser", notes = "Searches for a user. This operation is permited for both user and admin", response = UserPaginatedResponse.class, responseContainer = "List", authorizations = {
             @Authorization(value = "ApiKeyAuth")    }, tags={ })
     @ApiResponses(value = {

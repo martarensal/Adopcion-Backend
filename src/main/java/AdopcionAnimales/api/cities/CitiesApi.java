@@ -5,6 +5,7 @@
  */
 package AdopcionAnimales.api.cities;
 
+import AdopcionAnimales.api.types.TypeResponse;
 import AdopcionAnimales.api.users.UserPhoneChangeRequest;
 import io.swagger.annotations.*;
 import org.springframework.http.ResponseEntity;
@@ -20,7 +21,8 @@ import java.util.List;
 @Api(value = "cities", description = "the cities API")
 public interface CitiesApi {
 
-    @ApiOperation(value = "Registers a city", nickname = "addCity", notes = "Adds a city to the system", tags={  })
+    @ApiOperation(value = "Registers a city", nickname = "addCity", notes = "Adds a city to the system",authorizations = {
+            @Authorization(value = "ApiKeyAuth")    }, tags={  })
     @ApiResponses(value = { 
         @ApiResponse(code = 201, message = "city created"),
         @ApiResponse(code = 400, message = "invalid input, object invalid"),
@@ -87,5 +89,16 @@ public interface CitiesApi {
             consumes = { "application/json" },
             method = RequestMethod.PUT)
     ResponseEntity<Void> modifyCityPostalCode(@ApiParam(value = "",required=true) @PathVariable("idCity") Long idCity,@ApiParam(value = "The new city's postal code"  )  @Valid @RequestBody CityPostalCodeChangeRequest body);
+
+    @ApiOperation(value = "Searches for a city", nickname = "searchCity", notes = "Searches for a city. This operation is permited for both user and admin", response = TypeResponse.class, responseContainer = "List", authorizations = {
+            @Authorization(value = "ApiKeyAuth")    }, tags={  })
+    @ApiResponses(value = {
+            @ApiResponse(code = 200, message = "The search was successfull", response = TypeResponse.class, responseContainer = "List"),
+            @ApiResponse(code = 401, message = "The requested page needs a username and a password"),
+            @ApiResponse(code = 500, message = "Internal server error") })
+    @RequestMapping(value = "/cities/{idCity}",
+            produces = { "application/json" },
+            method = RequestMethod.GET)
+    ResponseEntity<CityResponse> searchCity(@ApiParam(value = "",required=true) @PathVariable("idAnimal") String idAnimal, @ApiParam(value = "",required=true) @PathVariable("idCity") String idCity);
 
 }

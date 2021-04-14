@@ -16,6 +16,7 @@ import org.springframework.web.bind.annotation.RequestParam;
 import javax.servlet.http.HttpServletRequest;
 import javax.validation.Valid;
 import java.util.List;
+import java.util.stream.Collectors;
 
 @javax.annotation.Generated(value = "io.swagger.codegen.v3.generators.java.SpringCodegen", date = "2021-02-24T16:55:56.237+01:00[Europe/Paris]")
 @Controller
@@ -79,14 +80,23 @@ public class AnimalsApiController implements AnimalsApi {
         return new ResponseEntity<Void>(HttpStatus.OK);
     }
 
-    public ResponseEntity<List<AnimalPaginatedResponse>> searchAnimal(@ApiParam(value = "",required=true) @PathVariable("username") String username) {
+    /*public ResponseEntity<List<AnimalPaginatedResponse>> searchAnimal(@ApiParam(value = "",required=true) @PathVariable("username") String username) {
         String accept = request.getHeader("Accept");
         return new ResponseEntity<List<AnimalPaginatedResponse>>(HttpStatus.NOT_IMPLEMENTED);
-    }
+    }*/
+    /*public ResponseEntity<List<AnimalPaginatedResponse>> searchAnimals(@ApiParam(value = "the number of the page") @Valid @RequestParam(value = "page", required = false) Integer page, @ApiParam(value = "the number of element per page") @Valid @RequestParam(value = "size", required = false) Integer size) {
+        String accept = request.getHeader("Accept");
+        return new ResponseEntity<List<AnimalPaginatedResponse>>(HttpStatus.NOT_IMPLEMENTED);
+    }*/
 
-    public ResponseEntity<List<AnimalPaginatedResponse>> searchAnimals(@ApiParam(value = "the number of the page") @Valid @RequestParam(value = "page", required = false) Integer page, @ApiParam(value = "the number of element per page") @Valid @RequestParam(value = "size", required = false) Integer size) {
-        String accept = request.getHeader("Accept");
-        return new ResponseEntity<List<AnimalPaginatedResponse>>(HttpStatus.NOT_IMPLEMENTED);
+   /* public ResponseEntity<AnimalPaginatedResponse> getAnimalsFromUser(String username, @Valid Integer page,
+                                                                            @Valid Integer size) {
+        return new ResponseEntity<AnimalPaginatedResponse>(animalService.getAnimalsFromUser(username, page, size), HttpStatus.OK);
+    }*/
+
+    public ResponseEntity<List<AnimalResponse>> searchAnimal(
+            @ApiParam(value = "", required = true) @PathVariable("username") String username) {
+        return new ResponseEntity<List<AnimalResponse>>(animalService.geAnimalsFromUser(username).stream().collect(Collectors.toList()), HttpStatus.OK);
     }
 
 }

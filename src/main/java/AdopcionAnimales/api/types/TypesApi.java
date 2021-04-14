@@ -19,7 +19,8 @@ import java.util.List;
 @javax.annotation.Generated(value = "io.swagger.codegen.v3.generators.java.SpringCodegen", date = "2021-02-24T16:55:56.237+01:00[Europe/Paris]")
 @Api(value = "types", description = "the types API")
 public interface TypesApi {
-    @ApiOperation(value = "Registers a type of animal", nickname = "addType", notes = "Adds a type to the system", tags={  })
+    @ApiOperation(value = "Registers a type of animal", nickname = "addType", notes = "Adds a type to the system", authorizations = {
+            @Authorization(value = "ApiKeyAuth")    }, tags={  })
     @ApiResponses(value = {
             @ApiResponse(code = 201, message = "type created"),
             @ApiResponse(code = 400, message = "invalid input, object invalid"),
@@ -63,5 +64,17 @@ public interface TypesApi {
     @RequestMapping(value = "/types/{idType}",
         method = RequestMethod.DELETE)
     ResponseEntity<Void> deleteType(@ApiParam(value = "By passing in the appropriate username, you can delete the user.",required=true) @PathVariable("idType") Long idType);
+
+
+    @ApiOperation(value = "Searches for a type", nickname = "searchType", notes = "Searches for a type. This operation is permited for both user and admin", response = TypeResponse.class, responseContainer = "List", authorizations = {
+            @Authorization(value = "ApiKeyAuth")    }, tags={  })
+    @ApiResponses(value = {
+            @ApiResponse(code = 200, message = "The search was successfull", response = TypeResponse.class, responseContainer = "List"),
+            @ApiResponse(code = 401, message = "The requested page needs a username and a password"),
+            @ApiResponse(code = 500, message = "Internal server error") })
+    @RequestMapping(value = "/types/{idType}",
+            produces = { "application/json" },
+            method = RequestMethod.GET)
+    ResponseEntity<TypeResponse> searchType(@ApiParam(value = "",required=true) @PathVariable("username") String username, @ApiParam(value = "",required=true) @PathVariable("idAnimal") String idAnimal, @ApiParam(value = "",required=true) @PathVariable("idType") String idType);
 
 }

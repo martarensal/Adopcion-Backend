@@ -1,7 +1,11 @@
 package AdopcionAnimales.cities;
 
+import AdopcionAnimales.animals.Animal;
+import AdopcionAnimales.animals.AnimalsRepository;
 import AdopcionAnimales.api.cities.*;
 import AdopcionAnimales.users.User;
+import AdopcionAnimales.users.UsersRepository;
+import AdopcionAnimales.utils.SecurityUtils;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
@@ -14,11 +18,13 @@ public class CityServiceImpl implements CityService{
 
     private CityRepository cityRepository;
     private CityMapper cityMapper;
+    private AnimalsRepository animalsRepository;
 
     @Autowired
-    public CityServiceImpl(CityRepository cityRepository, CityMapper cityMapper){
+    public CityServiceImpl(CityRepository cityRepository, CityMapper cityMapper, AnimalsRepository animalsRepository){
         this.cityMapper = cityMapper;
         this.cityRepository = cityRepository;
+        this.animalsRepository = animalsRepository;
     }
 
     @Override

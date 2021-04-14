@@ -1,13 +1,17 @@
 package AdopcionAnimales.animals;
 
 import AdopcionAnimales.api.animals.*;
+import AdopcionAnimales.users.User;
 import org.springframework.stereotype.Service;
+
+import java.util.Set;
 
 @Service
 public interface AnimalService {
     void addAnimal(AnimalCreationRequest animalCreationRequest);
     AnimalPaginatedResponse getAnimals(Integer page, Integer size);
-    AnimalPaginatedResponse getAnimalsFromUser(String username, Integer page, Integer size);
+    Set<AnimalResponse> geAnimalsFromUser(String username);
+        //AnimalPaginatedResponse getAnimalsFromUser(String username, Integer page, Integer size);
     void deleteAnimal(Long idAnimal);
     void modifyAnimalAge(AnimalAgeChangeRequest animalAgeChangeRequest, Long idAnimal);
     void modifyAnimalColour(AnimalColourChangeRequest animalColourChangeRequest, Long idAnimal);
@@ -17,4 +21,5 @@ public interface AnimalService {
     void modifyAnimalSize(AnimalSizeChangeRequest animalSizeChangeRequest, Long idAnimal);
     void modifyAnimalStatus(AnimalStatusChangeRequest animalStatusChangeRequest, Long idAnimal);
     Animal findAnimalById(Long id);
+
 }

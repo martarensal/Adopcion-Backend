@@ -7,6 +7,7 @@ import AdopcionAnimales.api.publications.PublicationDateChangeRequest;
 import AdopcionAnimales.api.publications.PublicationResponse;
 import AdopcionAnimales.users.User;
 import AdopcionAnimales.users.UsersRepository;
+import AdopcionAnimales.utils.SecurityUtils;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
@@ -32,6 +33,10 @@ public class PublicationServiceImpl implements PublicationService{
     @Transactional
     public void addPublication(PublicationCreationRequest publicationCreationRequest) {
         Publication newPublication = publicationMapper.publicationCreationRequestToPublication(publicationCreationRequest);
+        User user = getUser();
+        user.getPublications().add(publicationRepository.save(newPublication));
+
+        usersRepository.save(user);
         publicationRepository.save(newPublication);
     }
 
@@ -39,6 +44,11 @@ public class PublicationServiceImpl implements PublicationService{
     @Transactional
     public void deletePublication(Long idPublication) throws IllegalArgumentException {
         Publication publication = findPublicationById(idPublication);
+
+        User user = getUser();
+        user.getPublications().remove(publication);
+
+        usersRepository.save(user);
         publicationRepository.delete(publication);
     }
 
@@ -50,8 +60,8 @@ public class PublicationServiceImpl implements PublicationService{
         publicationRepository.save(publication);
     }
 
-    private User getUser(String username) {
-        User user = usersRepository.findUserByUsername(username);
+    private User getUser() {
+        User user = usersRepository.findUserByUsername(SecurityUtils.currentUserUsername());
         if (user == null)
             throw new EntityNotFoundException("Usuario no encontrado");
         return user;
