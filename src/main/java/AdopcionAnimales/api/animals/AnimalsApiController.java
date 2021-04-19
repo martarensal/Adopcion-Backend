@@ -89,14 +89,14 @@ public class AnimalsApiController implements AnimalsApi {
         return new ResponseEntity<List<AnimalPaginatedResponse>>(HttpStatus.NOT_IMPLEMENTED);
     }*/
 
-   /* public ResponseEntity<AnimalPaginatedResponse> getAnimalsFromUser(String username, @Valid Integer page,
+    public ResponseEntity<AnimalPaginatedResponse> getAnimalsFromUser(String username, @Valid Integer page,
                                                                             @Valid Integer size) {
         return new ResponseEntity<AnimalPaginatedResponse>(animalService.getAnimalsFromUser(username, page, size), HttpStatus.OK);
-    }*/
+    }
 
-    public ResponseEntity<List<AnimalResponse>> searchAnimal(
+    /*public ResponseEntity<List<AnimalResponse>> searchAnimal(
             @ApiParam(value = "", required = true) @PathVariable("username") String username) {
         return new ResponseEntity<List<AnimalResponse>>(animalService.geAnimalsFromUser(username).stream().collect(Collectors.toList()), HttpStatus.OK);
-    }
+    }*/
 
 }

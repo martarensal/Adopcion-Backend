@@ -99,7 +99,6 @@ public class UsersServiceImpl implements UsersService {
         userRepository.save(user);
 
     }
-
     @Override
     @Transactional
     public void modifyUserPassword(UserPasswordChangeRequest userPasswordChangeRequest, String username) {

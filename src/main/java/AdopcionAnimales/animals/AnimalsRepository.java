@@ -13,7 +13,7 @@ import java.util.Optional;
 @Repository
 public interface AnimalsRepository extends CrudRepository<Animal, Long> {
 
-    @Query("select a from Animal a where a.user.username LIKE :username")
+    @Query("select a from Animal a where a.user.username = :username")
     Page<Animal> getAnimalsFromUsers(@Param("username") String name, Pageable page);
 
 }

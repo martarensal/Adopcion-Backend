@@ -10,8 +10,8 @@ import java.util.Set;
 public interface AnimalService {
     void addAnimal(AnimalCreationRequest animalCreationRequest);
     AnimalPaginatedResponse getAnimals(Integer page, Integer size);
-    Set<AnimalResponse> geAnimalsFromUser(String username);
-        //AnimalPaginatedResponse getAnimalsFromUser(String username, Integer page, Integer size);
+    //Set<AnimalResponse> geAnimalsFromUser(String username);
+    AnimalPaginatedResponse getAnimalsFromUser(String username, Integer page, Integer size);
     void deleteAnimal(Long idAnimal);
     void modifyAnimalAge(AnimalAgeChangeRequest animalAgeChangeRequest, Long idAnimal);
     void modifyAnimalColour(AnimalColourChangeRequest animalColourChangeRequest, Long idAnimal);

@@ -7,6 +7,7 @@ import AdopcionAnimales.cities.CityRepository;
 import AdopcionAnimales.users.User;
 import AdopcionAnimales.users.UsersRepository;
 import AdopcionAnimales.utils.SecurityUtils;
+import com.google.common.base.Enums;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.PageRequest;
@@ -15,7 +16,9 @@ import org.springframework.stereotype.Service;
 
 import javax.persistence.EntityNotFoundException;
 import javax.transaction.Transactional;
+import java.awt.*;
 import java.util.List;
+import java.util.Locale;
 import java.util.Set;
 import java.util.stream.Collectors;
 
@@ -54,12 +57,13 @@ public class AnimalServiceImpl implements AnimalService{
       return null;
     }
 
-    /*@Override
+    @Override
     public AnimalPaginatedResponse getAnimalsFromUser(String username, Integer page, Integer size) {
 
         Page<Animal> matchedAnimals = animalsRepository.getAnimalsFromUsers(username, PageRequest.of(page, size));
-        List<AnimalResponse> animalResponses = matchedAnimals.map(animal -> animalMapper.animalToAnimalResponse(animal)).stream()
-                .collect(Collectors.toList());
+        Set<Animal> animals = matchedAnimals.stream().collect(Collectors.toSet());
+
+        Set<AnimalResponse> animalResponses = animalMapper.animalsToAnimalsResponse(animals);
 
         PaginationInfo paginationInfo = new PaginationInfo();
         paginationInfo.setTotalElements(matchedAnimals.getNumberOfElements());
@@ -70,9 +74,9 @@ public class AnimalServiceImpl implements AnimalService{
         paginatedResponse.setPaginationInfo(paginationInfo);
 
         return paginatedResponse;
-    }*/
+    }
 
-    @Override
+    /*@Override
     @Transactional
     public Set<AnimalResponse> geAnimalsFromUser(String username) {
         User user = findUser(username);
@@ -80,7 +84,7 @@ public class AnimalServiceImpl implements AnimalService{
 
         return animalMapper.animalsToAnimalsResponse(animals);
 
-    }
+    }*/
 
 
     @Override
@@ -108,9 +112,16 @@ public class AnimalServiceImpl implements AnimalService{
     @Transactional
     public void modifyAnimalColour(AnimalColourChangeRequest animalColourChangeRequest, Long idAnimal){
         Animal animal = findAnimalById(idAnimal);
+        String animalUpperCase = animalColourChangeRequest.getNewAnimalColour().toUpperCase();
+
         if(animal != null) {
-            animal.setColour(animalColourChangeRequest.getNewAnimalColour());
-            animalsRepository.save(animal);
+            for(AnimalColourChangeRequest.NewAnimalColourEnum newAnimalColourEnum : AnimalColourChangeRequest.NewAnimalColourEnum.values())
+            {
+                if(newAnimalColourEnum.name().toUpperCase().equals(animalUpperCase)){
+                    animal.setColour(animalUpperCase);
+                    animalsRepository.save(animal);
+                }
+            }
         }
     }
     @Override
@@ -135,18 +146,34 @@ public class AnimalServiceImpl implements AnimalService{
     @Transactional
     public void modifyAnimalSex(AnimalSexChangeRequest animalSexChangeRequest, Long idAnimal){
         Animal animal = findAnimalById(idAnimal);
+
+        String animalUpperCase = animalSexChangeRequest.getNewAnimalSex().toUpperCase();
+
         if(animal != null) {
-            animal.setSex(animalSexChangeRequest.getNewAnimalSex());
-            animalsRepository.save(animal);
+            for(AnimalSexChangeRequest.NewAnimalSexEnum newAnimalSexEnum : AnimalSexChangeRequest.NewAnimalSexEnum.values())
+            {
+                if(newAnimalSexEnum.name().toUpperCase().equals(animalUpperCase)){
+                    animal.setSex(animalUpperCase);
+                    animalsRepository.save(animal);
+                }
+            }
         }
     }
     @Override
     @Transactional
     public void modifyAnimalSize(AnimalSizeChangeRequest animalSizeChangeRequest, Long idAnimal){
         Animal animal = findAnimalById(idAnimal);
+
+        String animalUpperCase = animalSizeChangeRequest.getNewAnimalSize().toUpperCase();
+
         if(animal != null) {
-            animal.setSize(animalSizeChangeRequest.getNewAnimalSize());
-            animalsRepository.save(animal);
+            for(AnimalSizeChangeRequest.NewAnimalSizeEnum newAnimalSizeEnum : AnimalSizeChangeRequest.NewAnimalSizeEnum.values())
+            {
+                if(newAnimalSizeEnum.name().toUpperCase().equals(animalUpperCase)){
+                    animal.setSize(animalUpperCase);
+                    animalsRepository.save(animal);
+                }
+            }
         }
     }
 
@@ -154,17 +181,24 @@ public class AnimalServiceImpl implements AnimalService{
     @Transactional
     public void modifyAnimalStatus(AnimalStatusChangeRequest animalStatusChangeRequest, Long idAnimal) {
         Animal animal = findAnimalById(idAnimal);
+        String animalUpperCase = animalStatusChangeRequest.getNewAnimalStatus().toUpperCase();
+
         if(animal != null) {
-            animal.setStatus(animalStatusChangeRequest.getNewAnimalStatus());
-            animalsRepository.save(animal);
+            for(AnimalStatusChangeRequest.NewAnimalStatusEnum newAnimalStatusEnum : AnimalStatusChangeRequest.NewAnimalStatusEnum.values())
+            {
+                if(newAnimalStatusEnum.name().toUpperCase().equals(animalUpperCase)){
+                    animal.setStatus(animalUpperCase);
+                    animalsRepository.save(animal);
+                }
+            }
         }
+
     }
 
     @Override
     @Transactional
     public Animal findAnimalById(Long id) {
         return animalsRepository.findById(id).orElse(null);
-
     }
 
     private User getUser() {

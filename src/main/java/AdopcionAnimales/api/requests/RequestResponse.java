@@ -21,9 +21,9 @@ public class RequestResponse   {
    * Gets or Sets type
    */
   public enum TypeEnum {
-    ADOPCION("adopcion"),
+    ADOPTION("adoption"),
     
-    ACOGIDA("acogida");
+    SHELTER("shelter");
 
     private String value;
 
@@ -60,11 +60,11 @@ public class RequestResponse   {
    * Gets or Sets status
    */
   public enum StatusEnum {
-    ENVIADA("enviada"),
+    SENT("sent"),
     
-    ACEPTADA("aceptada"),
+    ACCEPTED("accepted"),
     
-    RECHAZADA("rechazada");
+    REJECTED("rejected");
 
     private String value;
 

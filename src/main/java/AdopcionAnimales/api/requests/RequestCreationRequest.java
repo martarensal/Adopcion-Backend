@@ -127,9 +127,9 @@ public class RequestCreationRequest   {
    * Gets or Sets type
    */
   public enum TypeEnum {
-    ACOGIDA("acogida"),
+    SHELTER("shelter"),
     
-    ADOPCION("adopcion");
+    ADOPTION("adoption");
 
     private String value;
 

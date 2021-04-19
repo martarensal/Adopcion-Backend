@@ -36,10 +36,10 @@ public class User implements UserDetails {
     @OneToMany(fetch = FetchType.LAZY, cascade = CascadeType.REMOVE, mappedBy = "user")
     private Set<Animal> animals;
 
-    @OneToMany(fetch = FetchType.LAZY)
+    @OneToMany(fetch = FetchType.LAZY, cascade = CascadeType.REMOVE, mappedBy = "user")
     private Set<Request> requests;
 
-    @OneToMany(fetch = FetchType.LAZY)
+    @OneToMany(fetch = FetchType.LAZY,cascade = CascadeType.REMOVE,  mappedBy = "user")
     private Set<Publication> publications;
 
     public User(String username, String name, String lastnames, String phone, String email, String password, String rol){

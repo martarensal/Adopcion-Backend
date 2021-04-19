@@ -1,5 +1,6 @@
 package AdopcionAnimales.api.requests;
 
+import AdopcionAnimales.api.animals.AnimalPaginatedResponse;
 import AdopcionAnimales.api.publications.PublicationDateChangeRequest;
 import AdopcionAnimales.requests.RequestService;
 import com.fasterxml.jackson.databind.ObjectMapper;
@@ -45,10 +46,10 @@ public class RequestsApiController implements RequestsApi {
         return new ResponseEntity<Void>(HttpStatus.OK);
     }
 
-   /* public ResponseEntity<RequestPaginatedResponse> obtainRequest(@ApiParam(value = "the number of the page") @Valid @RequestParam(value = "page", required = false) Integer page, @ApiParam(value = "the number of element per page") @Valid @RequestParam(value = "size", required = false) Integer size) {
-        String accept = request.getHeader("Accept");
-        return new ResponseEntity<RequestPaginatedResponse>(HttpStatus.NOT_IMPLEMENTED);
-    }*/
+    public ResponseEntity<RequestPaginatedResponse> getRequestsFromUser(String username,@Valid Integer page,
+                                                                        @Valid Integer size) {
+        return new ResponseEntity<RequestPaginatedResponse>(requestService.getRequestsFromUser(username, page, size), HttpStatus.OK);
+    }
 
     public ResponseEntity<RequestPaginatedResponse> obtainRequests(@ApiParam(value = "the number of the page") @Valid @RequestParam(value = "page", required = false) Integer page, @ApiParam(value = "the number of element per page") @Valid @RequestParam(value = "size", required = false) Integer size) {
         String accept = request.getHeader("Accept");

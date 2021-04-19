@@ -55,4 +55,6 @@ public class PublicationsApiController implements PublicationsApi {
         return new ResponseEntity<Void>(HttpStatus.OK);
     }
 
+
+
 }

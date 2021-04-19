@@ -5,6 +5,7 @@
  */
 package AdopcionAnimales.api.requests;
 
+import AdopcionAnimales.api.animals.AnimalPaginatedResponse;
 import AdopcionAnimales.api.publications.PublicationDateChangeRequest;
 import io.swagger.annotations.*;
 import org.springframework.http.ResponseEntity;
@@ -39,17 +40,19 @@ public interface RequestsApi {
         method = RequestMethod.DELETE)
     ResponseEntity<Void> deleteRequest(@ApiParam(value = "By passing in the appropriate request ID, you can delete the request.",required=true) @PathVariable("idRequest") Long idRequest);
 
-    /*@ApiOperation(value = "Obtains the request made by the user", nickname = "obtainRequest", notes = "", response = RequestPaginatedResponse.class, authorizations = {
+    @ApiOperation(value = "Obtains the request made by the user", nickname = "getRequestsFromUser", notes = "Searches for a request added by a user.", response = RequestPaginatedResponse.class, responseContainer = "List", authorizations = {
             @Authorization(value = "ApiKeyAuth")    }, tags={  })
     @ApiResponses(value = {
             @ApiResponse(code = 200, message = "The search was successfull", response = RequestPaginatedResponse.class),
             @ApiResponse(code = 401, message = "The requested page needs a username and a password"),
             @ApiResponse(code = 500, message = "Internal server error") })
-    @RequestMapping(value = "/requests",
+    @RequestMapping(value = "user/{username}/requests",
             produces = { "application/json" },
             method = RequestMethod.GET)
-    ResponseEntity<RequestPaginatedResponse> obtainRequest(@ApiParam(value = "the number of the page") @Valid @RequestParam(value = "page", required = false) Integer page, @ApiParam(value = "the number of element per page") @Valid @RequestParam(value = "size", required = false) Integer size);
-*/
+    ResponseEntity<RequestPaginatedResponse> getRequestsFromUser(
+            @ApiParam(value = "", required = true) @PathVariable("username") String username,
+            @ApiParam(value = "the number of the page") @Valid @RequestParam(value = "page", required = false, defaultValue = "0") Integer page,
+            @ApiParam(value = "the number of element per page") @Valid @RequestParam(value = "size", required = false, defaultValue = "25") Integer size);
 
     @ApiOperation(value = "Obtains all the requests", nickname = "obtainRequests", notes = "", response = RequestPaginatedResponse.class, authorizations = {
         @Authorization(value = "ApiKeyAuth")    }, tags={  })

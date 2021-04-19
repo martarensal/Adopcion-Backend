@@ -7,8 +7,8 @@ import org.springframework.validation.annotation.Validated;
 
 import javax.validation.Valid;
 import javax.validation.constraints.NotNull;
-import java.util.ArrayList;
-import java.util.List;
+import java.util.HashSet;
+import java.util.Set;
 import java.util.Objects;
 
 /**
@@ -19,12 +19,12 @@ import java.util.Objects;
 public class AnimalPaginatedResponse   {
   @JsonProperty("pages")
   @Valid
-  private List<AnimalResponse> pages = new ArrayList<AnimalResponse>();
+  private Set<AnimalResponse> pages = new HashSet<AnimalResponse>();
 
   @JsonProperty("paginationInfo")
   private PaginationInfo paginationInfo = null;
 
-  public AnimalPaginatedResponse pages(List<AnimalResponse> pages) {
+  public AnimalPaginatedResponse pages(Set<AnimalResponse> pages) {
     this.pages = pages;
     return this;
   }
@@ -41,11 +41,11 @@ public class AnimalPaginatedResponse   {
   @ApiModelProperty(required = true, value = "")
   @NotNull
   @Valid
-  public List<AnimalResponse> getPages() {
+  public Set<AnimalResponse> getPages() {
     return pages;
   }
 
-  public void setPages(List<AnimalResponse> pages) {
+  public void setPages(Set<AnimalResponse> pages) {
     this.pages = pages;
   }
 

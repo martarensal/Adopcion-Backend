@@ -4,6 +4,7 @@ import AdopcionAnimales.api.animals.AnimalCreationRequest;
 import AdopcionAnimales.api.animals.AnimalResponse;
 import org.mapstruct.Mapper;
 
+import java.util.List;
 import java.util.Set;
 
 @Mapper(componentModel = "spring")
