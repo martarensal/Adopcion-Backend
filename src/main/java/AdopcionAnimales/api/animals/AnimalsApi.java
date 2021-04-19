@@ -144,15 +144,18 @@ public interface AnimalsApi {
             @ApiParam(value = "the number of the page") @Valid @RequestParam(value = "page", required = false, defaultValue = "0") Integer page,
             @ApiParam(value = "the number of element per page") @Valid @RequestParam(value = "size", required = false, defaultValue = "25") Integer size);
 
-    /*@ApiOperation(value = "Get animals from user", nickname = "searchAnimal", notes = "Get animals from user", response = AnimalResponse.class, responseContainer = "List", authorizations = {
-            @Authorization(value = "ApiKeyAuth")    }, tags={ "", })
+
+    @ApiOperation(value = "List all animals", nickname = "getAnimals", notes = "List all animals", response = AnimalPaginatedResponse.class, responseContainer = "List", authorizations = {
+            @Authorization(value = "ApiKeyAuth")    }, tags={  })
     @ApiResponses(value = {
-            @ApiResponse(code = 200, message = "The search was successfull", response = AnimalResponse.class, responseContainer = "List"),
-            @ApiResponse(code = 403, message = "Access denied"),
+            @ApiResponse(code = 200, message = "The search was successfull", response = AnimalPaginatedResponse.class, responseContainer = "List"),
+            @ApiResponse(code = 401, message = "The requested page needs a username and a password"),
             @ApiResponse(code = 500, message = "Internal server error") })
-    @RequestMapping(value = "/users/{username}/animals",
+    @RequestMapping(value = "/animals",
             produces = { "application/json" },
             method = RequestMethod.GET)
-    ResponseEntity<List<AnimalResponse>> searchAnimal(@ApiParam(value = "",required=true) @PathVariable("username") String username
-    );*/
+    ResponseEntity<AnimalPaginatedResponse> getAnimals(
+            @ApiParam(value = "the number of the page") @Valid @RequestParam(value = "page", required = false, defaultValue = "0") Integer page,
+            @ApiParam(value = "the number of element per page") @Valid @RequestParam(value = "size", required = false, defaultValue = "25") Integer size);
+
 }

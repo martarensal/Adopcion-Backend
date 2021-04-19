@@ -53,17 +53,21 @@ public class AnimalServiceImpl implements AnimalService{
 
     @Override
     public AnimalPaginatedResponse getAnimals(Integer page, Integer size) {
-
-      return null;
+        Page<Animal> matchedAnimals = animalsRepository.getAnimals(PageRequest.of(page, size));
+        return getAnimalPaginatedResponse(matchedAnimals);
     }
 
     @Override
     public AnimalPaginatedResponse getAnimalsFromUser(String username, Integer page, Integer size) {
 
         Page<Animal> matchedAnimals = animalsRepository.getAnimalsFromUsers(username, PageRequest.of(page, size));
-        Set<Animal> animals = matchedAnimals.stream().collect(Collectors.toSet());
+        return getAnimalPaginatedResponse(matchedAnimals);
+    }
 
-        Set<AnimalResponse> animalResponses = animalMapper.animalsToAnimalsResponse(animals);
+    private AnimalPaginatedResponse getAnimalPaginatedResponse(Page<Animal> matchedAnimals) {
+        List<Animal> animals = matchedAnimals.stream().collect(Collectors.toList());
+
+        List<AnimalResponse> animalResponses = animalMapper.animalsToAnimalsResponse(animals);
 
         PaginationInfo paginationInfo = new PaginationInfo();
         paginationInfo.setTotalElements(matchedAnimals.getNumberOfElements());

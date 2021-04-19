@@ -1,6 +1,9 @@
 package AdopcionAnimales.users;
 
+import AdopcionAnimales.animals.Animal;
 import AdopcionAnimales.api.PaginationInfo;
+import AdopcionAnimales.api.animals.AnimalPaginatedResponse;
+import AdopcionAnimales.api.animals.AnimalResponse;
 import AdopcionAnimales.api.users.*;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.dao.DataIntegrityViolationException;
@@ -99,6 +102,7 @@ public class UsersServiceImpl implements UsersService {
         userRepository.save(user);
 
     }
+
     @Override
     @Transactional
     public void modifyUserPassword(UserPasswordChangeRequest userPasswordChangeRequest, String username) {
@@ -106,7 +110,6 @@ public class UsersServiceImpl implements UsersService {
 
         user.setPassword(userPasswordChangeRequest.getNewPassword());
         userRepository.save(user);
-
     }
 
     @Override
@@ -138,15 +141,7 @@ public class UsersServiceImpl implements UsersService {
 
         List<UserResponse> userResponses = matchedUsers.map(user -> userMapper.userToUserResponse(user)).stream()
                 .collect(Collectors.toList());
-        PaginationInfo paginationInfo = new PaginationInfo();
-        paginationInfo.setTotalElements(matchedUsers.getNumberOfElements());
-        paginationInfo.setTotalPages(matchedUsers.getTotalPages());
-
-        UserPaginatedResponse userPaginatedResponse = new UserPaginatedResponse();
-        userPaginatedResponse.setPages(userResponses);
-        userPaginatedResponse.setPaginationInfo(paginationInfo);
-
-        return userPaginatedResponse;
+        return getUserPaginatedResponse(matchedUsers, userResponses);
     }
 
     @Override
@@ -189,5 +184,32 @@ public class UsersServiceImpl implements UsersService {
             throw new EntityNotFoundException("Usuario no encontrado");
 
         return userMapper.userToUserResponse(user);
+    }
+
+
+    @Override
+    public UserPaginatedResponse getAllUsers(Integer page, Integer size) {
+        Page<User> matchedUsers = userRepository.findAllUsers(PageRequest.of(page, size));
+        return getUserPaginatedResponse(matchedUsers);
+    }
+
+    private UserPaginatedResponse getUserPaginatedResponse(Page<User> matchedUsers) {
+        List<User> users = matchedUsers.stream().collect(Collectors.toList());
+
+        List<UserResponse> userResponses = userMapper.userToUserResponse(users);
+
+        return getUserPaginatedResponse(matchedUsers, userResponses);
+    }
+
+    private UserPaginatedResponse getUserPaginatedResponse(Page<User> matchedUsers, List<UserResponse> userResponses) {
+        PaginationInfo paginationInfo = new PaginationInfo();
+        paginationInfo.setTotalElements(matchedUsers.getNumberOfElements());
+        paginationInfo.setTotalPages(matchedUsers.getTotalPages());
+
+        UserPaginatedResponse paginatedResponse = new UserPaginatedResponse();
+        paginatedResponse.setPages(userResponses);
+        paginatedResponse.setPaginationInfo(paginationInfo);
+
+        return paginatedResponse;
     }
 }
