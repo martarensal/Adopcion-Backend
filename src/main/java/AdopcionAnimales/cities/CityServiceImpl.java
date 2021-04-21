@@ -1,11 +1,7 @@
 package AdopcionAnimales.cities;
 
-import AdopcionAnimales.animals.Animal;
 import AdopcionAnimales.animals.AnimalsRepository;
 import AdopcionAnimales.api.cities.*;
-import AdopcionAnimales.users.User;
-import AdopcionAnimales.users.UsersRepository;
-import AdopcionAnimales.utils.SecurityUtils;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
@@ -69,19 +65,19 @@ public class CityServiceImpl implements CityService{
 
     @Override
     @Transactional
-    public void modifyCityPostalCode(CityPostalCodeChangeRequest cityPostalCodeChangeRequest, Long idCity) {
+    public void modifyCityProvince(CityProvinceChangeRequest cityProvinceChangeRequest, Long idCity) {
         City city = findCity(idCity);
 
-        city.setPostalCode(cityPostalCodeChangeRequest.getNewCityPostalCode());
+        city.setProvince(cityProvinceChangeRequest.getNewCityProvince());
         cityRepository.save(city);
     }
 
     @Override
     @Transactional
-    public void modifyCityCountry(CityCountryChangeRequest cityCountryChangeRequest, Long idCity) {
+    public void modifyCityAutonomousCommunity(CityAutonomousCommunityChangeRequest cityAutonomousCommunityChangeRequest, Long idCity) {
         City city = findCity(idCity);
 
-        city.setCountry(cityCountryChangeRequest.getNewCityCountry());
+        city.setAutonomousCommunity(cityAutonomousCommunityChangeRequest.getNewCityAutonomousCommunity());
         cityRepository.save(city);
     }
 }

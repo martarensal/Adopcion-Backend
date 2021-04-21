@@ -2,7 +2,7 @@ package AdopcionAnimales.publications;
 
 import AdopcionAnimales.animals.Animal;
 import AdopcionAnimales.api.PaginationInfo;
-import AdopcionAnimales.api.animals.AnimalPaginatedResponse;
+
 import AdopcionAnimales.api.publications.PublicationCreationRequest;
 import AdopcionAnimales.api.publications.PublicationDateChangeRequest;
 import AdopcionAnimales.api.publications.PublicationPaginatedResponse;
@@ -38,12 +38,14 @@ public class PublicationServiceImpl implements PublicationService{
     @Override
     @Transactional
     public void addPublication(PublicationCreationRequest publicationCreationRequest) {
+
         Publication newPublication = publicationMapper.publicationCreationRequestToPublication(publicationCreationRequest);
         User user = getUser();
+
         user.getPublications().add(publicationRepository.save(newPublication));
 
-        usersRepository.save(user);
         publicationRepository.save(newPublication);
+        usersRepository.save(user);
     }
 
     @Override
@@ -80,21 +82,31 @@ public class PublicationServiceImpl implements PublicationService{
     }
 
     @Override
-    @Transactional
-    public PublicationPaginatedResponse obtainUserPublications(String username, Integer page, Integer size) {
-        Page<Publication> matchedPublication = publicationRepository.searchUserPublication(
-                usersRepository.findUserByUsernameWithPublications(username).getIdUser(), PageRequest.of(page, size));
-        List<PublicationResponse> publicationResponses = matchedPublication.map(publication -> publicationMapper.publicationToPublicationResponse(publication)).stream()
-                .collect(Collectors.toList());
+    public PublicationPaginatedResponse getPublications(Integer page, Integer size) {
+        Page<Publication> matchedPublications = publicationRepository.getPublications(PageRequest.of(page, size));
+        return getPublicationPaginatedResponse(matchedPublications);
+    }
+
+    @Override
+    public PublicationPaginatedResponse getPublicationsFromUser(String username, Integer page, Integer size) {
+        Page<Publication> matchedPublications = publicationRepository.getPublicationsFromUser(username, PageRequest.of(page, size));
+        return getPublicationPaginatedResponse(matchedPublications);
+    }
+
+    private PublicationPaginatedResponse getPublicationPaginatedResponse(Page<Publication> matchedPublications) {
+        List<Publication> publications = matchedPublications.stream().collect(Collectors.toList());
+
+        List<PublicationResponse> publicationResponses = publicationMapper.publicationToPublicationResponse(publications);
 
         PaginationInfo paginationInfo = new PaginationInfo();
-        paginationInfo.setTotalElements(matchedPublication.getNumberOfElements());
-        paginationInfo.setTotalPages(matchedPublication.getTotalPages());
+        paginationInfo.setTotalElements(matchedPublications.getNumberOfElements());
+        paginationInfo.setTotalPages(matchedPublications.getTotalPages());
 
-        PublicationPaginatedResponse publicationPaginatedResponse = new PublicationPaginatedResponse();
-        publicationPaginatedResponse.setPages(publicationResponses);
-        publicationPaginatedResponse.setPaginationInfo(paginationInfo);
+        PublicationPaginatedResponse paginatedResponse = new PublicationPaginatedResponse();
+        paginatedResponse.setPages(publicationResponses);
+        paginatedResponse.setPaginationInfo(paginationInfo);
 
-        return publicationPaginatedResponse;
+        return paginatedResponse;
     }
+
 }

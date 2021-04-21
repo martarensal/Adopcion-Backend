@@ -1,6 +1,5 @@
 package AdopcionAnimales.api.types;
 
-import AdopcionAnimales.api.cities.CityCountryChangeRequest;
 import AdopcionAnimales.types.TypeService;
 import com.fasterxml.jackson.databind.ObjectMapper;
 import io.swagger.annotations.ApiParam;
@@ -15,7 +14,6 @@ import org.springframework.web.bind.annotation.RequestBody;
 
 import javax.servlet.http.HttpServletRequest;
 import javax.validation.Valid;
-import java.util.List;
 
 @javax.annotation.Generated(value = "io.swagger.codegen.v3.generators.java.SpringCodegen", date = "2021-02-24T16:55:56.237+01:00[Europe/Paris]")
 @Controller
@@ -49,19 +47,15 @@ public class TypesApiController implements TypesApi {
     }
 
     @Override
-    public ResponseEntity<List<TypeResponse>> searchTypes() {
-        String accept = request.getHeader("Accept");
-        return new ResponseEntity<List<TypeResponse>>(HttpStatus.NOT_IMPLEMENTED);
-    }
-
-    @Override
     public ResponseEntity<Void> modifyTypeName(Long idType, @Valid TypeNameChangeRequest body) {
         typeService.modifyTypeName(body, idType);
         return new ResponseEntity<Void>(HttpStatus.OK);
     }
 
-    public ResponseEntity<TypeResponse> searchType(@ApiParam(value = "",required=true) @PathVariable("username") String username, @ApiParam(value = "",required=true) @PathVariable("idAnimal") String idAnimal, @ApiParam(value = "",required=true) @PathVariable("idType") String idType) {
-        String accept = request.getHeader("Accept");
-        return new ResponseEntity<TypeResponse>(HttpStatus.NOT_IMPLEMENTED);
+    @Override
+    public ResponseEntity<TypePaginatedResponse> getTypes(@Valid Integer page,
+                                                              @Valid Integer size) {
+        return new ResponseEntity<TypePaginatedResponse>(typeService.getTypes(page, size), HttpStatus.OK);
     }
+
 }

@@ -5,13 +5,12 @@
  */
 package AdopcionAnimales.api.types;
 
+import AdopcionAnimales.api.animals.AnimalPaginatedResponse;
 import AdopcionAnimales.api.cities.CityNameChangeRequest;
+import AdopcionAnimales.api.users.UserPaginatedResponse;
 import io.swagger.annotations.*;
 import org.springframework.http.ResponseEntity;
-import org.springframework.web.bind.annotation.PathVariable;
-import org.springframework.web.bind.annotation.RequestBody;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RequestMethod;
+import org.springframework.web.bind.annotation.*;
 
 import javax.validation.Valid;
 import java.util.List;
@@ -29,18 +28,6 @@ public interface TypesApi {
             consumes = { "application/json" },
             method = RequestMethod.POST)
     ResponseEntity<Void> addType(@ApiParam(value = "Type to add"  )  @Valid @RequestBody TypeCreationRequest body);
-
-
-    @ApiOperation(value = "Searches for a type", nickname = "searchTypes", notes = "Searches for a type. This operation is permited for both user and admin", response = TypeResponse.class, responseContainer = "List", authorizations = {
-            @Authorization(value = "ApiKeyAuth")    }, tags={  })
-    @ApiResponses(value = {
-            @ApiResponse(code = 200, message = "The search was successfull", response = TypeResponse.class, responseContainer = "List"),
-            @ApiResponse(code = 401, message = "The requested page needs a username and a password"),
-            @ApiResponse(code = 500, message = "Internal server error") })
-    @RequestMapping(value = "/type",
-            produces = { "application/json" },
-            method = RequestMethod.GET)
-    ResponseEntity<List<TypeResponse>> searchTypes();
 
     @ApiOperation(value = "Modifies the type's name", nickname = "modifyTypeName", notes = "The id of the type you want to modify", authorizations = {
             @Authorization(value = "ApiKeyAuth")    }, tags={  })
@@ -65,16 +52,17 @@ public interface TypesApi {
         method = RequestMethod.DELETE)
     ResponseEntity<Void> deleteType(@ApiParam(value = "By passing in the appropriate username, you can delete the user.",required=true) @PathVariable("idType") Long idType);
 
-
-    @ApiOperation(value = "Searches for a type", nickname = "searchType", notes = "Searches for a type. This operation is permited for both user and admin", response = TypeResponse.class, responseContainer = "List", authorizations = {
+    @ApiOperation(value = "List all types", nickname = "getAllTypes", notes = "This operation is permited for both user and admin", response = TypeResponse.class, responseContainer = "List", authorizations = {
             @Authorization(value = "ApiKeyAuth")    }, tags={  })
     @ApiResponses(value = {
             @ApiResponse(code = 200, message = "The search was successfull", response = TypeResponse.class, responseContainer = "List"),
             @ApiResponse(code = 401, message = "The requested page needs a username and a password"),
             @ApiResponse(code = 500, message = "Internal server error") })
-    @RequestMapping(value = "/types/{idType}",
+    @RequestMapping(value = "/type",
             produces = { "application/json" },
             method = RequestMethod.GET)
-    ResponseEntity<TypeResponse> searchType(@ApiParam(value = "",required=true) @PathVariable("username") String username, @ApiParam(value = "",required=true) @PathVariable("idAnimal") String idAnimal, @ApiParam(value = "",required=true) @PathVariable("idType") String idType);
+    ResponseEntity<TypePaginatedResponse> getTypes(
+            @ApiParam(value = "the number of the page") @Valid @RequestParam(value = "page", required = false, defaultValue = "0") Integer page,
+            @ApiParam(value = "the number of element per page") @Valid @RequestParam(value = "size", required = false, defaultValue = "25") Integer size);
 
 }

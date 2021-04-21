@@ -12,28 +12,28 @@ import java.util.Objects;
  */
 @Validated
 @javax.annotation.Generated(value = "io.swagger.codegen.v3.generators.java.SpringCodegen", date = "2021-02-24T16:55:56.237+01:00[Europe/Paris]")
-public class CityCountryChangeRequest   {
-    @JsonProperty("newCityCountry")
-    private String newCityCountry = null;
+public class CityAutonomousCommunityChangeRequest {
+    @JsonProperty("newCityAutonomousCommunity")
+    private String newCityAutonomousCommunity = null;
 
-    public AdopcionAnimales.api.cities.CityCountryChangeRequest newCityCountry(String newCityCountry) {
-        this.newCityCountry = newCityCountry;
+    public CityAutonomousCommunityChangeRequest newCityAutonomousCommunity(String newCityAutonomousCommunity) {
+        this.newCityAutonomousCommunity = newCityAutonomousCommunity;
         return this;
     }
 
     /**
-     * Get newCityCountry
-     * @return newCityCountry
+     * Get newCityAutonomousCommunity
+     * @return newCityAutonomousCommunity
      **/
     @ApiModelProperty(example = "España", required = true, value = "")
     @NotNull
 
-    public String getNewCityCountry() {
-        return newCityCountry;
+    public String getNewCityAutonomousCommunity() {
+        return newCityAutonomousCommunity;
     }
 
-    public void setNewCityCountry(String newCityCountry) {
-        this.newCityCountry = newCityCountry;
+    public void setNewCityAutonomousCommunity(String newCityAutonomousCommunity) {
+        this.newCityAutonomousCommunity = newCityAutonomousCommunity;
     }
 
 
@@ -45,13 +45,13 @@ public class CityCountryChangeRequest   {
         if (o == null || getClass() != o.getClass()) {
             return false;
         }
-        AdopcionAnimales.api.cities.CityCountryChangeRequest CityCountryChangeRequest = (AdopcionAnimales.api.cities.CityCountryChangeRequest) o;
-        return Objects.equals(this.newCityCountry, CityCountryChangeRequest.newCityCountry);
+        CityAutonomousCommunityChangeRequest CityCountryChangeRequest = (CityAutonomousCommunityChangeRequest) o;
+        return Objects.equals(this.newCityAutonomousCommunity, CityCountryChangeRequest.newCityAutonomousCommunity);
     }
 
     @Override
     public int hashCode() {
-        return Objects.hash(newCityCountry);
+        return Objects.hash(newCityAutonomousCommunity);
     }
 
     @Override
@@ -59,7 +59,7 @@ public class CityCountryChangeRequest   {
         StringBuilder sb = new StringBuilder();
         sb.append("class CityCountryChangeRequest {\n");
 
-        sb.append("    newCityCountry: ").append(toIndentedString(newCityCountry)).append("\n");
+        sb.append("    newCityCountry: ").append(toIndentedString(newCityAutonomousCommunity)).append("\n");
         sb.append("}");
         return sb.toString();
     }

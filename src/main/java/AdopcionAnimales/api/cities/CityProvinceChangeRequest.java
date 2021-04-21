@@ -12,29 +12,29 @@ import java.util.Objects;
 @Validated
 @javax.annotation.Generated(value = "io.swagger.codegen.v3.generators.java.SpringCodegen", date = "2021-02-24T16:55:56.237+01:00[Europe/Paris]")
 
-public class CityPostalCodeChangeRequest {
+public class CityProvinceChangeRequest {
 
-        @JsonProperty("newCityPostalCode")
-        private String newCityPostalCode = null;
+        @JsonProperty("newCityProvince")
+        private String newCityProvince = null;
 
-        public AdopcionAnimales.api.cities.CityPostalCodeChangeRequest newCityPostalCode(String newCityPostalCode) {
-            this.newCityPostalCode = newCityPostalCode;
+        public CityProvinceChangeRequest newCityProvince(String newCityProvince) {
+            this.newCityProvince = newCityProvince;
             return this;
         }
 
         /**
-         * Get newCityPostalCode
-         * @return newCityPostalCode
+         * Get newCityProvince
+         * @return newCityProvince
          **/
         @ApiModelProperty(example = "11555", required = true, value = "")
         @NotNull
 
-        public String getNewCityPostalCode() {
-            return newCityPostalCode;
+        public String getNewCityProvince() {
+            return newCityProvince;
         }
 
-        public void setNewCityPostalCode(String newCityPostalCode) {
-            this.newCityPostalCode = newCityPostalCode;
+        public void setNewCityProvince(String newCityProvince) {
+            this.newCityProvince = newCityProvince;
         }
 
 
@@ -46,13 +46,13 @@ public class CityPostalCodeChangeRequest {
             if (o == null || getClass() != o.getClass()) {
                 return false;
             }
-            AdopcionAnimales.api.cities.CityPostalCodeChangeRequest CityPostalCodeChangeRequest = (AdopcionAnimales.api.cities.CityPostalCodeChangeRequest) o;
-            return Objects.equals(this.newCityPostalCode, CityPostalCodeChangeRequest.newCityPostalCode);
+            CityProvinceChangeRequest CityPostalCodeChangeRequest = (CityProvinceChangeRequest) o;
+            return Objects.equals(this.newCityProvince, CityPostalCodeChangeRequest.newCityProvince);
         }
 
         @Override
         public int hashCode() {
-            return Objects.hash(newCityPostalCode);
+            return Objects.hash(newCityProvince);
         }
 
         @Override
@@ -60,7 +60,7 @@ public class CityPostalCodeChangeRequest {
             StringBuilder sb = new StringBuilder();
             sb.append("class CityPostalCodeChangeRequest {\n");
 
-            sb.append("    newCityPostalCode: ").append(toIndentedString(newCityPostalCode)).append("\n");
+            sb.append("    newCityProvince: ").append(toIndentedString(newCityProvince)).append("\n");
             sb.append("}");
             return sb.toString();
         }

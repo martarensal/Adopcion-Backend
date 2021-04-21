@@ -80,30 +80,14 @@ public class AnimalsApiController implements AnimalsApi {
         return new ResponseEntity<Void>(HttpStatus.OK);
     }
 
-    /*public ResponseEntity<List<AnimalPaginatedResponse>> searchAnimal(@ApiParam(value = "",required=true) @PathVariable("username") String username) {
-        String accept = request.getHeader("Accept");
-        return new ResponseEntity<List<AnimalPaginatedResponse>>(HttpStatus.NOT_IMPLEMENTED);
-    }*/
-    /*public ResponseEntity<List<AnimalPaginatedResponse>> searchAnimals(@ApiParam(value = "the number of the page") @Valid @RequestParam(value = "page", required = false) Integer page, @ApiParam(value = "the number of element per page") @Valid @RequestParam(value = "size", required = false) Integer size) {
-        String accept = request.getHeader("Accept");
-        return new ResponseEntity<List<AnimalPaginatedResponse>>(HttpStatus.NOT_IMPLEMENTED);
-    }*/
-
     public ResponseEntity<AnimalPaginatedResponse> getAnimalsFromUser(String username, @Valid Integer page,
                                                                             @Valid Integer size) {
         return new ResponseEntity<AnimalPaginatedResponse>(animalService.getAnimalsFromUser(username, page, size), HttpStatus.OK);
     }
 
-
     public ResponseEntity<AnimalPaginatedResponse> getAnimals(@Valid Integer page,
                                                                       @Valid Integer size) {
         return new ResponseEntity<AnimalPaginatedResponse>(animalService.getAnimals(page, size), HttpStatus.OK);
     }
-
-
-    /*public ResponseEntity<List<AnimalResponse>> searchAnimal(
-            @ApiParam(value = "", required = true) @PathVariable("username") String username) {
-        return new ResponseEntity<List<AnimalResponse>>(animalService.geAnimalsFromUser(username).stream().collect(Collectors.toList()), HttpStatus.OK);
-    }*/
 
 }

@@ -1,5 +1,6 @@
 package AdopcionAnimales.api.publications;
 
+import AdopcionAnimales.api.animals.AnimalPaginatedResponse;
 import AdopcionAnimales.publications.PublicationService;
 import com.fasterxml.jackson.databind.ObjectMapper;
 import io.swagger.annotations.ApiParam;
@@ -40,9 +41,14 @@ public class PublicationsApiController implements PublicationsApi {
         return new ResponseEntity<Void>(HttpStatus.OK);
     }
 
-    public ResponseEntity<List<PublicationResponse>> searchPublication() {
-        String accept = request.getHeader("Accept");
-        return new ResponseEntity<List<PublicationResponse>>(HttpStatus.NOT_IMPLEMENTED);
+    public ResponseEntity<PublicationPaginatedResponse> getPublicationsFromUser(String username, @Valid Integer page,
+                                                                      @Valid Integer size) {
+        return new ResponseEntity<PublicationPaginatedResponse>(publicationService.getPublicationsFromUser(username, page, size), HttpStatus.OK);
+    }
+
+    public ResponseEntity<PublicationPaginatedResponse> getPublications(@Valid Integer page,
+                                                              @Valid Integer size) {
+        return new ResponseEntity<PublicationPaginatedResponse>(publicationService.getPublications(page, size), HttpStatus.OK);
     }
 
     public ResponseEntity<Void> deletePublication(@ApiParam(value = "By passing in the appropriate publication ID, you can delete the request.",required=true) @PathVariable("idPublication") Long idPublication) {

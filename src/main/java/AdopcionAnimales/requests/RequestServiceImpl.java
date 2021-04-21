@@ -16,6 +16,7 @@ import org.springframework.stereotype.Service;
 
 import javax.persistence.EntityNotFoundException;
 import javax.transaction.Transactional;
+import java.util.List;
 import java.util.Set;
 import java.util.stream.Collectors;
 
@@ -49,16 +50,22 @@ public class RequestServiceImpl implements RequestService{
     @Override
     @Transactional
     public RequestPaginatedResponse getRequests(Integer page, Integer size) {
-        return null;
+        Page<Request> matechedRequests = requestRepository.getRequests(PageRequest.of(page, size));
+        return getRequestPaginatedResponse(matechedRequests);
+
     }
 
     @Override
     @Transactional
     public RequestPaginatedResponse getRequestsFromUser(String username, Integer page, Integer size) {
-        Page<Request> matchedRequest = requestRepository.getRequestsFromUsers(username, PageRequest.of(page, size));
-        Set<Request> requests = matchedRequest.stream().collect(Collectors.toSet());
+        Page<Request> matchedRequests = requestRepository.getRequestsFromUsers(username, PageRequest.of(page, size));
+        return getRequestPaginatedResponse(matchedRequests);
+    }
 
-        Set<RequestResponse> requestResponses = requestMapper.requestToRequestResponse(requests);
+    private RequestPaginatedResponse getRequestPaginatedResponse(Page<Request> matchedRequest) {
+        List<Request> requests = matchedRequest.stream().collect(Collectors.toList());
+
+        List<RequestResponse> requestResponses = requestMapper.requestToRequestResponse(requests);
 
         PaginationInfo paginationInfo = new PaginationInfo();
         paginationInfo.setTotalElements(matchedRequest.getNumberOfElements());

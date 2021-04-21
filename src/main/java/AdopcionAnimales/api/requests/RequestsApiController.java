@@ -51,10 +51,11 @@ public class RequestsApiController implements RequestsApi {
         return new ResponseEntity<RequestPaginatedResponse>(requestService.getRequestsFromUser(username, page, size), HttpStatus.OK);
     }
 
-    public ResponseEntity<RequestPaginatedResponse> obtainRequests(@ApiParam(value = "the number of the page") @Valid @RequestParam(value = "page", required = false) Integer page, @ApiParam(value = "the number of element per page") @Valid @RequestParam(value = "size", required = false) Integer size) {
-        String accept = request.getHeader("Accept");
-        return new ResponseEntity<RequestPaginatedResponse>(HttpStatus.NOT_IMPLEMENTED);
+    public ResponseEntity<RequestPaginatedResponse> getRequests(@Valid Integer page,
+                                                              @Valid Integer size) {
+        return new ResponseEntity<RequestPaginatedResponse>(requestService.getRequests(page, size), HttpStatus.OK);
     }
+
 
     public ResponseEntity<Void> modifyRequestStartDate(@ApiParam(value = "",required=true) @PathVariable("idRequest") Long idRequest,@ApiParam(value = "The new request date and time"  )  @Valid @RequestBody RequestStartDateChangeRequest body) {
         requestService.modifyRequestStartDate(body, idRequest);

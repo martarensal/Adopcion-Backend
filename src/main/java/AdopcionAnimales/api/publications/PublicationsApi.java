@@ -7,10 +7,7 @@ package AdopcionAnimales.api.publications;
 
 import io.swagger.annotations.*;
 import org.springframework.http.ResponseEntity;
-import org.springframework.web.bind.annotation.PathVariable;
-import org.springframework.web.bind.annotation.RequestBody;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RequestMethod;
+import org.springframework.web.bind.annotation.*;
 
 import javax.validation.Valid;
 import java.util.List;
@@ -30,7 +27,20 @@ public interface PublicationsApi {
             method = RequestMethod.POST)
     ResponseEntity<Void> addPublication(@ApiParam(value = "Publication to add"  )  @Valid @RequestBody PublicationCreationRequest body);
 
-    @ApiOperation(value = "Searches for a publication", nickname = "searchPublication", notes = "Searches for a publication.", response = PublicationResponse.class, responseContainer = "List", authorizations = {
+    @ApiOperation(value = "Searches for a publication made by an user", nickname = "getPublicationFromUSer", notes = "Searches for a publication made by an user.", response = PublicationResponse.class, responseContainer = "List", authorizations = {
+            @Authorization(value = "ApiKeyAuth")    }, tags={  })
+    @ApiResponses(value = {
+            @ApiResponse(code = 200, message = "The search was successfull", response = PublicationResponse.class, responseContainer = "List"),
+            @ApiResponse(code = 403, message = "Access denied"),
+            @ApiResponse(code = 500, message = "Internal server error") })
+    @RequestMapping(value = "user/{username}/publications",
+            produces = { "application/json" },
+            method = RequestMethod.GET)
+    ResponseEntity<PublicationPaginatedResponse> getPublicationsFromUser( @ApiParam(value = "", required = true) @PathVariable("username") String username,
+                                                                          @ApiParam(value = "the number of the page") @Valid @RequestParam(value = "page", required = false, defaultValue = "0") Integer page,
+                                                                          @ApiParam(value = "the number of element per page") @Valid @RequestParam(value = "size", required = false, defaultValue = "25") Integer size);
+
+    @ApiOperation(value = "List all publications", nickname = "searchPublication", notes = "Searches for a publication.", response = PublicationResponse.class, responseContainer = "List", authorizations = {
             @Authorization(value = "ApiKeyAuth")    }, tags={  })
     @ApiResponses(value = {
             @ApiResponse(code = 200, message = "The search was successfull", response = PublicationResponse.class, responseContainer = "List"),
@@ -39,7 +49,8 @@ public interface PublicationsApi {
     @RequestMapping(value = "/publications",
             produces = { "application/json" },
             method = RequestMethod.GET)
-    ResponseEntity<List<PublicationResponse>> searchPublication();
+    ResponseEntity<PublicationPaginatedResponse> getPublications( @ApiParam(value = "the number of the page") @Valid @RequestParam(value = "page", required = false, defaultValue = "0") Integer page,
+                                                                  @ApiParam(value = "the number of element per page") @Valid @RequestParam(value = "size", required = false, defaultValue = "25") Integer size);
 
     @ApiOperation(value = "Deletes a publication", nickname = "deletePublication", notes = "", authorizations = {
         @Authorization(value = "ApiKeyAuth")    }, tags={  })

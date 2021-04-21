@@ -10,6 +10,9 @@ import org.springframework.stereotype.Repository;
 
 @Repository
 public interface PublicationRepository extends CrudRepository<Publication, Long> {
-    @Query("select p from Publication p WHERE p.user.id = :user_id")
-    Page<Publication> searchUserPublication(@Param("user_id") Long userId, Pageable page);
+    @Query("select p from Publication p WHERE p.user.username = :username")
+    Page<Publication> getPublicationsFromUser(@Param("username") String username, Pageable page);
+
+    @Query("select p from Publication p")
+    Page<Publication> getPublications(Pageable page);
 }

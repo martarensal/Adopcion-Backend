@@ -2,6 +2,7 @@ package AdopcionAnimales.test.java.io.swagger.api;
 
 
 import AdopcionAnimales.api.types.TypeCreationRequest;
+import AdopcionAnimales.api.types.TypePaginatedResponse;
 import AdopcionAnimales.api.types.TypeResponse;
 import AdopcionAnimales.api.types.TypesApi;
 import org.junit.Test;
@@ -39,7 +40,9 @@ public class TypesApiControllerIntegrationTest {
 
     @Test
     public void searchTypesTest() throws Exception {
-        ResponseEntity<List<TypeResponse>> responseEntity = api.searchTypes();
+        Integer page = 56;
+        Integer size = 56;
+        ResponseEntity<TypePaginatedResponse> responseEntity = api.getTypes(page, size);
         assertEquals(HttpStatus.NOT_IMPLEMENTED, responseEntity.getStatusCode());
     }
 }

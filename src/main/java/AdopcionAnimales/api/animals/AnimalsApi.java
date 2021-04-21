@@ -119,17 +119,6 @@ public interface AnimalsApi {
             method = RequestMethod.PUT)
     ResponseEntity<Void> modifyAnimalStatus(@ApiParam(value = "By passing in the appropriate animal code, you can modify the animal.",required=true) @PathVariable("idAnimal") Long idAnimal,@ApiParam(value = "The animal's new status"  )  @Valid @RequestBody AnimalStatusChangeRequest body);
 
-    /*@ApiOperation(value = "Searches for an animal", nickname = "searchAnimal", notes = "Searches for an animal.", response = AnimalResponse.class, responseContainer = "List", authorizations = {
-            @Authorization(value = "ApiKeyAuth")    }, tags={  })
-    @ApiResponses(value = {
-            @ApiResponse(code = 200, message = "The search was successfull", response = AnimalResponse.class, responseContainer = "List"),
-            @ApiResponse(code = 403, message = "Access denied"),
-            @ApiResponse(code = 500, message = "Internal server error") })
-    @RequestMapping(value = "/users/{username}/animals",
-            produces = { "application/json" },
-            method = RequestMethod.GET)
-    ResponseEntity<List<AnimalPaginatedResponse>> searchAnimal(@ApiParam(value = "",required=true) @PathVariable("username") String username);
-*/
     @ApiOperation(value = "Searches the animals for a user", nickname = "getAnimalsFromUser", notes = "Searches for an animal added by a user.", response = AnimalPaginatedResponse.class, responseContainer = "List", authorizations = {
         @Authorization(value = "ApiKeyAuth")    }, tags={  })
     @ApiResponses(value = { 

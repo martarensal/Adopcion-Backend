@@ -38,7 +38,7 @@ public class RequestsApiControllerIntegrationTest {
     public void obtainRequestsTest() throws Exception {
         Integer page = 56;
         Integer size = 56;
-        ResponseEntity<RequestPaginatedResponse> responseEntity = api.obtainRequests(page, size);
+        ResponseEntity<RequestPaginatedResponse> responseEntity = api.getRequests(page, size);
         assertEquals(HttpStatus.NOT_IMPLEMENTED, responseEntity.getStatusCode());
     }
 

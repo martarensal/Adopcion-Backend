@@ -7,9 +7,11 @@ import AdopcionAnimales.api.publications.PublicationResponse;
 import AdopcionAnimales.cities.City;
 import org.mapstruct.Mapper;
 
+import java.util.List;
+
 @Mapper(componentModel = "spring")
 public interface PublicationMapper {
-    PublicationResponse publicationToPublicationResponse (Publication publication);
+    List<PublicationResponse> publicationToPublicationResponse (List<Publication> publication);
     Publication publicationCreationRequestToPublication(PublicationCreationRequest publicationCreationRequest);
 
 }

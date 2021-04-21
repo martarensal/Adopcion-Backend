@@ -1,7 +1,6 @@
 package AdopcionAnimales.cities;
 
 import AdopcionAnimales.api.cities.*;
-import AdopcionAnimales.api.users.UserNameChangeRequest;
 import org.springframework.stereotype.Service;
 
 import javax.validation.ConstraintViolationException;
@@ -12,7 +11,7 @@ public interface CityService {
     void deleteCity(Long idCity);
     CityResponse getCity(Long idCity);
     void modifyCityName(CityNameChangeRequest cityNameChangeRequest, Long idCity);
-    void modifyCityPostalCode(CityPostalCodeChangeRequest cityPostalCodeChangeRequest, Long idCity);
-    void modifyCityCountry(CityCountryChangeRequest cityCountryChangeRequest, Long idCity);
+    void modifyCityProvince(CityProvinceChangeRequest cityProvinceChangeRequest, Long idCity);
+    void modifyCityAutonomousCommunity(CityAutonomousCommunityChangeRequest cityAutonomousCommunityChangeRequest, Long idCity);
 
 }

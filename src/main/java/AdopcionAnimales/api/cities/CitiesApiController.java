@@ -57,14 +57,14 @@ public class CitiesApiController implements CitiesApi {
     }
 
     @Override
-    public ResponseEntity<Void> modifyCityPostalCode(Long idCity, @Valid CityPostalCodeChangeRequest body) {
-        cityService.modifyCityPostalCode(body, idCity);
+    public ResponseEntity<Void> modifyCityAutonomousCommunity(Long idCity, @Valid CityAutonomousCommunityChangeRequest body) {
+        cityService.modifyCityAutonomousCommunity(body, idCity);
         return new ResponseEntity<Void>(HttpStatus.OK);
     }
 
     @Override
-    public ResponseEntity<Void> modifyCityCountry(Long idCity, @Valid CityCountryChangeRequest body) {
-        cityService.modifyCityCountry(body, idCity);
+    public ResponseEntity<Void> modifyCityProvince(Long idCity, @Valid CityProvinceChangeRequest body) {
+        cityService.modifyCityProvince(body, idCity);
         return new ResponseEntity<Void>(HttpStatus.OK);
     }
 

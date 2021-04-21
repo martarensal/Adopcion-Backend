@@ -17,12 +17,12 @@ import java.util.*;
 public class RequestPaginatedResponse   {
   @JsonProperty("pages")
   @Valid
-  private Set<RequestResponse> pages = new HashSet<RequestResponse>();
+  private List<RequestResponse> pages = new ArrayList<RequestResponse>();
 
   @JsonProperty("paginationInfo")
   private PaginationInfo paginationInfo = null;
 
-  public RequestPaginatedResponse pages(Set<RequestResponse> pages) {
+  public RequestPaginatedResponse pages(List<RequestResponse> pages) {
     this.pages = pages;
     return this;
   }
@@ -39,11 +39,11 @@ public class RequestPaginatedResponse   {
   @ApiModelProperty(required = true, value = "")
   @NotNull
   @Valid
-  public Set<RequestResponse> getPages() {
+  public List<RequestResponse> getPages() {
     return pages;
   }
 
-  public void setPages(Set<RequestResponse> pages) {
+  public void setPages(List<RequestResponse> pages) {
     this.pages = pages;
   }
 

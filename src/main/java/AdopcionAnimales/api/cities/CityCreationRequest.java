@@ -16,11 +16,11 @@ public class CityCreationRequest   {
   @JsonProperty("name")
   private String name = null;
 
-  @JsonProperty("postalCode")
-  private String postalCode = null;
+  @JsonProperty("province")
+  private String province = null;
 
-  @JsonProperty("country")
-  private String country = null;
+  @JsonProperty("autonomousCommunity")
+  private String autonomousCommunity = null;
 
   public CityCreationRequest name(String name) {
     this.name = name;
@@ -42,44 +42,44 @@ public class CityCreationRequest   {
     this.name = name;
   }
 
-  public CityCreationRequest postalCode(String postalCode) {
-    this.postalCode = postalCode;
+  public CityCreationRequest province(String province) {
+    this.province = province;
     return this;
   }
 
   /**
-   * Get postalCode
-   * @return postalCode
+   * Get province
+   * @return province
   **/
   @ApiModelProperty(example = "115010", required = true, value = "")
   @NotNull
 
-  public String getPostalCode() {
-    return postalCode;
+  public String getProvince() {
+    return province;
   }
 
-  public void setPostalCode(String postalCode) {
-    this.postalCode = postalCode;
+  public void setProvince(String province) {
+    this.province = province;
   }
 
-  public CityCreationRequest country(String country) {
-    this.country = country;
+  public CityCreationRequest autonomousCommunity(String autonomousCommunity) {
+    this.autonomousCommunity = autonomousCommunity;
     return this;
   }
 
   /**
-   * Get country
-   * @return country
+   * Get autonomousCommunity
+   * @return autonomousCommunity
   **/
   @ApiModelProperty(example = "Spain", required = true, value = "")
   @NotNull
 
-  public String getCountry() {
-    return country;
+  public String getAutonomousCommunity() {
+    return autonomousCommunity;
   }
 
-  public void setCountry(String country) {
-    this.country = country;
+  public void setAutonomousCommunity(String autonomousCommunity) {
+    this.autonomousCommunity = autonomousCommunity;
   }
 
 
@@ -93,13 +93,13 @@ public class CityCreationRequest   {
     }
     CityCreationRequest cityCreationRequest = (CityCreationRequest) o;
     return Objects.equals(this.name, cityCreationRequest.name) &&
-        Objects.equals(this.postalCode, cityCreationRequest.postalCode) &&
-        Objects.equals(this.country, cityCreationRequest.country);
+        Objects.equals(this.province, cityCreationRequest.province) &&
+        Objects.equals(this.autonomousCommunity, cityCreationRequest.autonomousCommunity);
   }
 
   @Override
   public int hashCode() {
-    return Objects.hash(name, postalCode, country);
+    return Objects.hash(name, province, autonomousCommunity);
   }
 
   @Override
@@ -108,8 +108,8 @@ public class CityCreationRequest   {
     sb.append("class CityCreationRequest {\n");
     
     sb.append("    name: ").append(toIndentedString(name)).append("\n");
-    sb.append("    postalCode: ").append(toIndentedString(postalCode)).append("\n");
-    sb.append("    country: ").append(toIndentedString(country)).append("\n");
+    sb.append("    province: ").append(toIndentedString(province)).append("\n");
+    sb.append("    autonomousCommunity: ").append(toIndentedString(autonomousCommunity)).append("\n");
     sb.append("}");
     return sb.toString();
   }

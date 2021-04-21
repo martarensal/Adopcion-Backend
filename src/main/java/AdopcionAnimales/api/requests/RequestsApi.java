@@ -54,7 +54,7 @@ public interface RequestsApi {
             @ApiParam(value = "the number of the page") @Valid @RequestParam(value = "page", required = false, defaultValue = "0") Integer page,
             @ApiParam(value = "the number of element per page") @Valid @RequestParam(value = "size", required = false, defaultValue = "25") Integer size);
 
-    @ApiOperation(value = "Obtains all the requests", nickname = "obtainRequests", notes = "", response = RequestPaginatedResponse.class, authorizations = {
+    @ApiOperation(value = "List all requests", nickname = "getRequests", notes = "", response = RequestPaginatedResponse.class, authorizations = {
         @Authorization(value = "ApiKeyAuth")    }, tags={  })
     @ApiResponses(value = {
         @ApiResponse(code = 200, message = "The search was successfull", response = RequestPaginatedResponse.class),
@@ -63,7 +63,8 @@ public interface RequestsApi {
     @RequestMapping(value = "/requests",
         produces = { "application/json" },
         method = RequestMethod.GET)
-    ResponseEntity<RequestPaginatedResponse> obtainRequests(@ApiParam(value = "the number of the page") @Valid @RequestParam(value = "page", required = false) Integer page, @ApiParam(value = "the number of element per page") @Valid @RequestParam(value = "size", required = false) Integer size);
+    ResponseEntity<RequestPaginatedResponse> getRequests( @ApiParam(value = "the number of the page") @Valid @RequestParam(value = "page", required = false, defaultValue = "0") Integer page,
+                                                          @ApiParam(value = "the number of element per page") @Valid @RequestParam(value = "size", required = false, defaultValue = "25") Integer size);
 
     @ApiOperation(value = "Modifies the request's date and time", nickname = "modifyRequestStartDate", notes = "The request ID for the request you want to modify", authorizations = {
             @Authorization(value = "ApiKeyAuth")    }, tags={  })
