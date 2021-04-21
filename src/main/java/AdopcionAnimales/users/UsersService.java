@@ -21,4 +21,6 @@ public interface UsersService extends UserDetailsService {
     void modifyUserRole(UserRoleChangeRequest userRoleChangeRequest, String username);
     void modifyUserEmail(UserEmailChangeRequest userEmailChangeRequest, String username) throws UniqueEmailException;
     UserPaginatedResponse searchUsersByUsername(String username, Integer page, Integer size);
+    UserPaginatedResponse getAllUsers(Integer page, Integer size);
+
 }

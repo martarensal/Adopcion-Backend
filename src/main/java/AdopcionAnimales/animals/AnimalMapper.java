@@ -9,6 +9,6 @@ import java.util.Set;
 
 @Mapper(componentModel = "spring")
 public interface AnimalMapper {
-    Set<AnimalResponse> animalsToAnimalsResponse(Set<Animal> animals);
+    List<AnimalResponse> animalsToAnimalsResponse(List<Animal> animals);
     Animal animalCreationRequestToAnimal(AnimalCreationRequest animalCreationRequest);
 }

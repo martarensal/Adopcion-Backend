@@ -113,4 +113,11 @@ public class UsersApiController implements UsersApi {
         return new ResponseEntity <UserPaginatedResponse>(userService.searchUsersByUsername(username, page, size), HttpStatus.OK);
     }
 
+    public ResponseEntity<UserPaginatedResponse> getAllUsers(@ApiParam(value = "the number of the page")
+                                                            @Valid @RequestParam(value = "page", required = false, defaultValue = "0") Integer page,
+                                                            @ApiParam(value = "the number of element per page")
+                                                            @Valid @RequestParam(value = "size", required = false, defaultValue = "25") Integer size) {
+        return new ResponseEntity <UserPaginatedResponse>(userService.getAllUsers(page, size), HttpStatus.OK);
+    }
+
 }
