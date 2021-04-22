@@ -2,6 +2,7 @@ package AdopcionAnimales.api.utils;
 
 
 import AdopcionAnimales.authentication.UnsuccessfulLoginException;
+import AdopcionAnimales.users.UniqueEmailException;
 import AdopcionAnimales.users.UniqueUsernameException;
 import org.springframework.core.Ordered;
 import org.springframework.core.annotation.Order;
@@ -45,6 +46,13 @@ public class RestExceptionHandler extends ResponseEntityExceptionHandler {
         return buildResponseEntity(response);
     }
 
+    @ExceptionHandler(UniqueEmailException.class)
+    protected ResponseEntity<Object> handleUniqueEmailException(UniqueEmailException ex) {
+        ApiError response = new ApiError(HttpStatus.CONFLICT);
+        response.setMessage(ex.getMessage());
+        return buildResponseEntity(response);
+    }
+
     @ExceptionHandler(UnsuccessfulLoginException.class)
     protected ResponseEntity<Object> handleUnsuccessfulLoginException(UnsuccessfulLoginException ex) {
         ApiError response = new ApiError(HttpStatus.UNAUTHORIZED);
@@ -61,7 +69,6 @@ public class RestExceptionHandler extends ResponseEntityExceptionHandler {
         apiError.addValidationError(ex.getBindingResult().getGlobalErrors());
         return buildResponseEntity(apiError);
     }
-
 
     @ExceptionHandler(EntityNotFoundException.class)
     protected ResponseEntity<Object> handleEntityNotFound(

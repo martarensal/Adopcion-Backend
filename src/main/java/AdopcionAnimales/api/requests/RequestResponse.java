@@ -100,7 +100,7 @@ public class RequestResponse   {
    * Get type
    * @return type
   **/
-  @ApiModelProperty(example = "1", required = true, value = "")
+  @ApiModelProperty(example = "shelter", required = true, value = "")
   @NotNull
 
   public TypeEnum getType() {
@@ -162,7 +162,7 @@ public class RequestResponse   {
    * Get status
    * @return status
   **/
-  @ApiModelProperty(example = "enviada", required = true, value = "")
+  @ApiModelProperty(example = "sent", required = true, value = "")
   @NotNull
 
   public StatusEnum getStatus() {

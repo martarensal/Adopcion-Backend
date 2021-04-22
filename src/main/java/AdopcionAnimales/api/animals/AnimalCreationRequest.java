@@ -283,7 +283,7 @@ public class AnimalCreationRequest   {
    * Get status
    * @return status
   **/
-  @ApiModelProperty(example = "Adopted", required = true, value = "")
+  @ApiModelProperty(example = "homeless", required = true, value = "")
   @NotNull
 
   public StatusEnum getStatus() {

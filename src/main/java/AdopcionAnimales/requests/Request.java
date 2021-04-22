@@ -14,7 +14,7 @@ public class Request {
     @Id
     private Long id;
 
-    private String typeRequest;
+    private String type;
     private String status;
     private OffsetDateTime startDate;
     private OffsetDateTime endDate;
@@ -24,9 +24,9 @@ public class Request {
     @ManyToOne
     private Animal animal;
 
-    public Request(Long id, String typeRequest, String status, OffsetDateTime startDate, OffsetDateTime endDate, User user, Animal animal) {
+    public Request(Long id, String type, String status, OffsetDateTime startDate, OffsetDateTime endDate, User user, Animal animal) {
         this.id = id;
-        this.typeRequest = typeRequest;
+        this.type = type;
         this.status = status;
         this.startDate = startDate;
         this.endDate = endDate;
@@ -44,12 +44,12 @@ public class Request {
         this.id = id;
     }
 
-    public String getTypeRequest() {
-        return typeRequest;
+    public String getType() {
+        return type;
     }
 
-    public void setTypeRequest(String typeRequest) {
-        this.typeRequest = typeRequest;
+    public void setType(String type) {
+        this.type = type;
     }
 
     public String getStatus() {

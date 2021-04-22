@@ -36,10 +36,13 @@ public class RequestServiceImpl implements RequestService{
 
         newRequest.setUser(user);
 
+        System.out.println("primero"+ newRequest.getType());
+
         user.getRequests().add(requestRepository.save(newRequest));
 
         usersRepository.save(user);
         requestRepository.save(newRequest);
+
     }
 
     @Override
@@ -130,7 +133,7 @@ public class RequestServiceImpl implements RequestService{
             for(RequestTypeChangeRequest.NewRequestTypeEnum newRequestTypeEnum : RequestTypeChangeRequest.NewRequestTypeEnum.values())
             {
                 if(newRequestTypeEnum.name().toUpperCase().equals(requestUpperCase)){
-                    request.setTypeRequest(requestUpperCase);
+                    request.setType(requestUpperCase);
                     requestRepository.save(request);
                 }
             }

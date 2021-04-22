@@ -34,8 +34,8 @@ public class AnimalServiceImpl implements AnimalService{
     @Transactional
     public void addAnimal(AnimalCreationRequest animalCreationRequest){
         Animal newAnimal = animalMapper.animalCreationRequestToAnimal(animalCreationRequest);
-        User user = getUser();
         newAnimal.setStatus("HOMELESS");
+        User user = getUser();
 
         newAnimal.setUser(user);
         user.getAnimals().add(animalsRepository.save(newAnimal));
@@ -45,12 +45,14 @@ public class AnimalServiceImpl implements AnimalService{
     }
 
     @Override
+    @Transactional
     public AnimalPaginatedResponse getAnimals(Integer page, Integer size) {
         Page<Animal> matchedAnimals = animalsRepository.getAnimals(PageRequest.of(page, size));
         return getAnimalPaginatedResponse(matchedAnimals);
     }
 
     @Override
+    @Transactional
     public AnimalPaginatedResponse getAnimalsFromUser(String username, Integer page, Integer size) {
 
         Page<Animal> matchedAnimals = animalsRepository.getAnimalsFromUsers(username, PageRequest.of(page, size));
@@ -72,17 +74,6 @@ public class AnimalServiceImpl implements AnimalService{
 
         return paginatedResponse;
     }
-
-    /*@Override
-    @Transactional
-    public Set<AnimalResponse> geAnimalsFromUser(String username) {
-        User user = findUser(username);
-        Set<Animal> animals = user.getAnimals();
-
-        return animalMapper.animalsToAnimalsResponse(animals);
-
-    }*/
-
 
     @Override
     @Transactional
@@ -205,11 +196,11 @@ public class AnimalServiceImpl implements AnimalService{
         return user;
     }
 
-    private User findUser(String username) {
+    /*private User findUser(String username) {
         User user = usersRepository.findUserByUsernameWithAnimals(username);
         if(user == null)
             throw new EntityNotFoundException("Usuario no encontrado");
         return user;
-    }
+    }*/
 
 }

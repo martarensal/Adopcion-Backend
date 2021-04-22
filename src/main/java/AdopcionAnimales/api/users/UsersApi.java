@@ -44,20 +44,6 @@ public interface UsersApi {
         method = RequestMethod.DELETE)
     ResponseEntity<Void> deleteUser(@ApiParam(value = "By passing in the appropriate username, you can delete the user.",required=true) @PathVariable("username") String username);
 
-   /* @ApiOperation(value = "Finds a user", nickname = "getUser", notes = "", response = UserResponse.class, authorizations = {
-            @Authorization(value = "ApiKeyAuth")    }, tags={ })
-    @ApiResponses(value = {
-            @ApiResponse(code = 200, message = "search results matching criteria", response = UserResponse.class),
-            @ApiResponse(code = 400, message = "bad input parameter"),
-            @ApiResponse(code = 404, message = "user not found"),
-            @ApiResponse(code = 401, message = "The requested page needs a username and a password") })
-    @RequestMapping(value = "/users/{idUser}",
-            produces = { "application/json" },
-            method = RequestMethod.GET)
-    ResponseEntity<UserResponse> getUser(@ApiParam(value = "By passing in the appropriate user id, you can get the user.",required=true) @PathVariable("idUser") Long userId
-    );
-*/
-
     @ApiOperation(value = "Modifies the user's email", nickname = "modifyUserEmail", notes = "The user username you want to modify", authorizations = {
         @Authorization(value = "ApiKeyAuth")    }, tags={  })
     @ApiResponses(value = { 

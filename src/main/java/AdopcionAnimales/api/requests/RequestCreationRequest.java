@@ -109,8 +109,8 @@ public class RequestCreationRequest   {
   }
 
   /**
-   * Get type
-   * @return type
+   * Get status
+   * @return status
    **/
   @ApiModelProperty(example = "sent", required = true, value = "")
   @NotNull
@@ -165,7 +165,7 @@ public class RequestCreationRequest   {
    * Get type
    * @return type
   **/
-  @ApiModelProperty(example = "adopcion", required = true, value = "")
+  @ApiModelProperty(example = "shelter", required = true, value = "")
   @NotNull
 
   public TypeEnum getType() {

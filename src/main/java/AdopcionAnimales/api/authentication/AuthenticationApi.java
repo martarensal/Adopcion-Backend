@@ -20,7 +20,7 @@ public interface AuthenticationApi {
     @ApiOperation(value = "Authenticates a user into the system", nickname = "userLogin", notes = "Logs in a user into the system", response = LoginResponse.class, tags={  })
     @ApiResponses(value = {
         @ApiResponse(code = 200, message = "Logged in successfully", response = LoginResponse.class),
-        @ApiResponse(code = 400, message = "Invalid input, object invalid"),
+        //@ApiResponse(code = 400, message = "Invalid input, object invalid"),
         @ApiResponse(code = 401, message = "Unauthorized"),
         @ApiResponse(code = 409, message = "The request could not be completed because of a conflict") })
     @RequestMapping(value = "/authentication/login",
