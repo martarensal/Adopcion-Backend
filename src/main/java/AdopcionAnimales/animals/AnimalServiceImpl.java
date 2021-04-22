@@ -1,25 +1,18 @@
 package AdopcionAnimales.animals;
 
-import AdopcionAnimales.api.PaginationInfo;
+import AdopcionAnimales.api.utils.PaginationInfo;
 import AdopcionAnimales.api.animals.*;
-import AdopcionAnimales.cities.City;
-import AdopcionAnimales.cities.CityRepository;
 import AdopcionAnimales.users.User;
 import AdopcionAnimales.users.UsersRepository;
 import AdopcionAnimales.utils.SecurityUtils;
-import com.google.common.base.Enums;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.PageRequest;
-import org.springframework.stereotype.Repository;
 import org.springframework.stereotype.Service;
 
 import javax.persistence.EntityNotFoundException;
 import javax.transaction.Transactional;
-import java.awt.*;
 import java.util.List;
-import java.util.Locale;
-import java.util.Set;
 import java.util.stream.Collectors;
 
 @Service

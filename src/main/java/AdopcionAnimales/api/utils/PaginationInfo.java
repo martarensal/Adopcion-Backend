@@ -1,4 +1,4 @@
-package AdopcionAnimales.api;
+package AdopcionAnimales.api.utils;
 
 import com.fasterxml.jackson.annotation.JsonProperty;
 import io.swagger.annotations.ApiModelProperty;

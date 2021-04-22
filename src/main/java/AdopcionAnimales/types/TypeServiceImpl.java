@@ -1,15 +1,10 @@
 package AdopcionAnimales.types;
 
-import AdopcionAnimales.animals.Animal;
-import AdopcionAnimales.api.PaginationInfo;
-import AdopcionAnimales.api.animals.AnimalPaginatedResponse;
-import AdopcionAnimales.api.animals.AnimalResponse;
+import AdopcionAnimales.api.utils.PaginationInfo;
 import AdopcionAnimales.api.types.TypeCreationRequest;
 import AdopcionAnimales.api.types.TypeNameChangeRequest;
 import AdopcionAnimales.api.types.TypePaginatedResponse;
 import AdopcionAnimales.api.types.TypeResponse;
-import AdopcionAnimales.api.users.UserPaginatedResponse;
-import AdopcionAnimales.cities.City;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.PageRequest;

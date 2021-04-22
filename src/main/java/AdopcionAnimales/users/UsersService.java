@@ -11,7 +11,6 @@ public interface UsersService extends UserDetailsService {
     User findUserById(Long id);
     UserResponse getUserById(Long idUser) throws EntityNotFoundException;
     void registerUser(UserRegistrationRequest registrationRequest) throws UniqueUsernameException;
-    UserResponse getUserByUsername(String username) throws EntityNotFoundException;
     void deleteUser(String username) throws IllegalArgumentException;
     void modifyUserLastnames(UserLastnameChangeRequest userLastnameChangeRequest, String username);
     void modifyUserName(UserNameChangeRequest userNameChangeRequest, String username);
@@ -20,7 +19,7 @@ public interface UsersService extends UserDetailsService {
     void modifyUserPhone(UserPhoneChangeRequest userPhoneChangeRequest, String username);
     void modifyUserRole(UserRoleChangeRequest userRoleChangeRequest, String username);
     void modifyUserEmail(UserEmailChangeRequest userEmailChangeRequest, String username) throws UniqueEmailException;
-    UserPaginatedResponse searchUsersByUsername(String username, Integer page, Integer size);
+    UserPaginatedResponse searchUsersByUsername(String username, Integer page, Integer size)  throws EntityNotFoundException;
     UserPaginatedResponse getAllUsers(Integer page, Integer size);
 
 }

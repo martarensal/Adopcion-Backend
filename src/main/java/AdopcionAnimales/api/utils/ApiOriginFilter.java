@@ -1,4 +1,4 @@
-package AdopcionAnimales.api;
+package AdopcionAnimales.api.utils;
 
 import javax.servlet.*;
 import javax.servlet.http.HttpServletResponse;

@@ -1,10 +1,6 @@
 package AdopcionAnimales.requests;
 
-import AdopcionAnimales.animals.Animal;
-import AdopcionAnimales.api.PaginationInfo;
-import AdopcionAnimales.api.animals.AnimalPaginatedResponse;
-import AdopcionAnimales.api.animals.AnimalResponse;
-import AdopcionAnimales.api.animals.AnimalStatusChangeRequest;
+import AdopcionAnimales.api.utils.PaginationInfo;
 import AdopcionAnimales.api.requests.*;
 import AdopcionAnimales.users.User;
 import AdopcionAnimales.users.UsersRepository;
@@ -17,7 +13,6 @@ import org.springframework.stereotype.Service;
 import javax.persistence.EntityNotFoundException;
 import javax.transaction.Transactional;
 import java.util.List;
-import java.util.Set;
 import java.util.stream.Collectors;
 
 @Service

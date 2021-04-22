@@ -1,7 +1,6 @@
 package AdopcionAnimales.publications;
 
-import AdopcionAnimales.animals.Animal;
-import AdopcionAnimales.api.PaginationInfo;
+import AdopcionAnimales.api.utils.PaginationInfo;
 
 import AdopcionAnimales.api.publications.PublicationCreationRequest;
 import AdopcionAnimales.api.publications.PublicationDateChangeRequest;

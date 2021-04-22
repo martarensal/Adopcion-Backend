@@ -1,9 +1,6 @@
 package AdopcionAnimales.users;
 
-import AdopcionAnimales.animals.Animal;
-import AdopcionAnimales.api.PaginationInfo;
-import AdopcionAnimales.api.animals.AnimalPaginatedResponse;
-import AdopcionAnimales.api.animals.AnimalResponse;
+import AdopcionAnimales.api.utils.PaginationInfo;
 import AdopcionAnimales.api.users.*;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.dao.DataIntegrityViolationException;
@@ -18,10 +15,10 @@ import javax.persistence.EntityNotFoundException;
 import javax.transaction.Transactional;
 import java.util.List;
 import java.util.stream.Collectors;
-import java.util.stream.Stream;
 
 @Service
 public class UsersServiceImpl implements UsersService {
+
     private UsersRepository userRepository;
     private PasswordEncoder passwordEncoder;
     private UserMapper userMapper;
@@ -37,6 +34,7 @@ public class UsersServiceImpl implements UsersService {
     @Override
     @Transactional
     public void registerUser(UserRegistrationRequest registrationRequest) throws UniqueUsernameException {
+
         User newUser = userMapper.userRegistrationRequestToUser(registrationRequest);
         newUser.setPassword(passwordEncoder.encode(registrationRequest.getPassword()));
         newUser.setRol("ROLE_USER");
@@ -46,14 +44,6 @@ public class UsersServiceImpl implements UsersService {
         } catch (DataIntegrityViolationException exception) {
             throw new UniqueUsernameException("Username or email already exists");
         }
-    }
-
-    @Override
-    @Transactional
-    public UserResponse getUserByUsername(String username) throws EntityNotFoundException {
-        User user = findUserByUsername(username);
-
-        return userMapper.userToUserResponse(user);
     }
 
     @Override
@@ -100,7 +90,6 @@ public class UsersServiceImpl implements UsersService {
 
         user.setName(userNameChangeRequest.getNewName());
         userRepository.save(user);
-
     }
 
     @Override
@@ -124,7 +113,6 @@ public class UsersServiceImpl implements UsersService {
         } catch (DataIntegrityViolationException exception) {
             throw new UniqueUsernameException("Username already exists");
         }
-
     }
 
     private User findUserByUsername(String username) {
@@ -136,7 +124,7 @@ public class UsersServiceImpl implements UsersService {
 
     @Override
     @Transactional
-    public UserPaginatedResponse searchUsersByUsername(String username, Integer page, Integer size) {
+    public UserPaginatedResponse searchUsersByUsername(String username, Integer page, Integer size)  throws EntityNotFoundException {
         Page<User> matchedUsers = userRepository.searchUserWithUsername(username, PageRequest.of(page, size));
 
         List<UserResponse> userResponses = matchedUsers.map(user -> userMapper.userToUserResponse(user)).stream()
@@ -158,10 +146,9 @@ public class UsersServiceImpl implements UsersService {
     @Transactional
     public void modifyUserEmail(UserEmailChangeRequest userEmailChangeRequest, String username) throws UniqueEmailException {
         User user = findUserByUsername(username);
-
         user.setEmail(userEmailChangeRequest.getNewEmail());
-        try {
 
+        try {
             userRepository.save(user);
         } catch (DataIntegrityViolationException exception) {
             throw new UniqueEmailException("El email introducido ya existe");
@@ -173,7 +160,6 @@ public class UsersServiceImpl implements UsersService {
     @Transactional
     public User findUserById(Long id) {
         return userRepository.findById(id).orElse(null);
-
     }
 
     @Override
@@ -186,8 +172,8 @@ public class UsersServiceImpl implements UsersService {
         return userMapper.userToUserResponse(user);
     }
 
-
     @Override
+    @Transactional
     public UserPaginatedResponse getAllUsers(Integer page, Integer size) {
         Page<User> matchedUsers = userRepository.findAllUsers(PageRequest.of(page, size));
         return getUserPaginatedResponse(matchedUsers);

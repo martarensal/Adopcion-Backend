@@ -1,4 +1,4 @@
-package AdopcionAnimales.api;
+package AdopcionAnimales.api.utils;
 
 import javax.xml.bind.annotation.XmlTransient;
 
