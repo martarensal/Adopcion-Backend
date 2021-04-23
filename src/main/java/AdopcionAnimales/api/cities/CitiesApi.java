@@ -9,10 +9,7 @@ import AdopcionAnimales.api.types.TypeResponse;
 import AdopcionAnimales.api.users.UserPhoneChangeRequest;
 import io.swagger.annotations.*;
 import org.springframework.http.ResponseEntity;
-import org.springframework.web.bind.annotation.PathVariable;
-import org.springframework.web.bind.annotation.RequestBody;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RequestMethod;
+import org.springframework.web.bind.annotation.*;
 
 import javax.validation.Valid;
 import java.util.List;
@@ -44,8 +41,18 @@ public interface CitiesApi {
         method = RequestMethod.DELETE)
     ResponseEntity<Void> deleteCity(@ApiParam(value = "By passing in the appropriate idCity, you can delete the city.",required=true) @PathVariable("idCity") Long idCity);
 
+    /*@ApiOperation(value = "Searches for a city", nickname = "searchCity", notes = "Searches for a city. This operation is permited for both user and admin", response = TypeResponse.class, responseContainer = "List", authorizations = {
+            @Authorization(value = "ApiKeyAuth")    }, tags={  })
+    @ApiResponses(value = {
+            @ApiResponse(code = 200, message = "The search was successfull", response = TypeResponse.class, responseContainer = "List"),
+            @ApiResponse(code = 401, message = "The requested page needs a username and a password"),
+            @ApiResponse(code = 500, message = "Internal server error") })
+    @RequestMapping(value = "/cities/{idCity}",
+            produces = { "application/json" },
+            method = RequestMethod.GET)
+    ResponseEntity<CityResponse> searchCity(@ApiParam(value = "",required=true) @PathVariable("idAnimal") String idAnimal, @ApiParam(value = "",required=true) @PathVariable("idCity") String idCity);*/
 
-    @ApiOperation(value = "Searches for a city", nickname = "searchCities", notes = "Searches for a city. This operation is permited for both user and admin", response = CityResponse.class, responseContainer = "List", authorizations = {
+    @ApiOperation(value = "List all cities", nickname = "getCities", notes = "Searches for a city. This operation is permited for both user and admin", response = CityResponse.class, responseContainer = "List", authorizations = {
         @Authorization(value = "ApiKeyAuth")    }, tags={  })
     @ApiResponses(value = { 
         @ApiResponse(code = 200, message = "The search was successfull", response = CityResponse.class, responseContainer = "List"),
@@ -54,7 +61,21 @@ public interface CitiesApi {
     @RequestMapping(value = "/cities",
         produces = { "application/json" }, 
         method = RequestMethod.GET)
-    ResponseEntity<List<CityResponse>> searchCities();
+    ResponseEntity<CityPaginatedResponse> getCities(@ApiParam(value = "the number of the page") @Valid @RequestParam(value = "page", required = false, defaultValue = "0") Integer page,
+                                                    @ApiParam(value = "the number of element per page") @Valid @RequestParam(value = "size", required = false, defaultValue = "25") Integer size);
+
+    @ApiOperation(value = "List all cities from a province", nickname = "getCitiesFromProvinces", notes = "Searches for a city. This operation is permited for both user and admin", response = CityResponse.class, responseContainer = "List", authorizations = {
+            @Authorization(value = "ApiKeyAuth")    }, tags={  })
+    @ApiResponses(value = {
+            @ApiResponse(code = 200, message = "The search was successfull", response = CityResponse.class, responseContainer = "List"),
+            @ApiResponse(code = 401, message = "The requested page needs a username and a password"),
+            @ApiResponse(code = 500, message = "Internal server error") })
+    @RequestMapping(value = "/cities//{province}/names",
+            produces = { "application/json" },
+            method = RequestMethod.GET)
+    ResponseEntity<CityPaginatedResponse> getCitiesFromProvinces( @ApiParam(value = "", required = true) @PathVariable("province") String province,
+                                                                  @ApiParam(value = "the number of the page") @Valid @RequestParam(value = "page", required = false, defaultValue = "0") Integer page,
+                                                                  @ApiParam(value = "the number of element per page") @Valid @RequestParam(value = "size", required = false, defaultValue = "25") Integer size);
 
     @ApiOperation(value = "Modifies the city's name", nickname = "modifyCityName", notes = "The id of the city you want to modify", authorizations = {
             @Authorization(value = "ApiKeyAuth")    }, tags={  })
@@ -89,16 +110,5 @@ public interface CitiesApi {
             consumes = { "application/json" },
             method = RequestMethod.PUT)
     ResponseEntity<Void> modifyCityProvince(@ApiParam(value = "",required=true) @PathVariable("idCity") Long idCity,@ApiParam(value = "The new city's postal code"  )  @Valid @RequestBody CityProvinceChangeRequest body);
-
-    @ApiOperation(value = "Searches for a city", nickname = "searchCity", notes = "Searches for a city. This operation is permited for both user and admin", response = TypeResponse.class, responseContainer = "List", authorizations = {
-            @Authorization(value = "ApiKeyAuth")    }, tags={  })
-    @ApiResponses(value = {
-            @ApiResponse(code = 200, message = "The search was successfull", response = TypeResponse.class, responseContainer = "List"),
-            @ApiResponse(code = 401, message = "The requested page needs a username and a password"),
-            @ApiResponse(code = 500, message = "Internal server error") })
-    @RequestMapping(value = "/cities/{idCity}",
-            produces = { "application/json" },
-            method = RequestMethod.GET)
-    ResponseEntity<CityResponse> searchCity(@ApiParam(value = "",required=true) @PathVariable("idAnimal") String idAnimal, @ApiParam(value = "",required=true) @PathVariable("idCity") String idCity);
 
 }

@@ -2,6 +2,7 @@ package AdopcionAnimales.test.java.io.swagger.api;
 
 import AdopcionAnimales.api.cities.CitiesApi;
 import AdopcionAnimales.api.cities.CityCreationRequest;
+import AdopcionAnimales.api.cities.CityPaginatedResponse;
 import AdopcionAnimales.api.cities.CityResponse;
 import org.junit.Test;
 import org.junit.runner.RunWith;
@@ -39,7 +40,9 @@ public class CitiesApiControllerIntegrationTest {
 
     @Test
     public void searchCitiesTest() throws Exception {
-        ResponseEntity<List<CityResponse>> responseEntity = api.searchCities();
+        Integer page = 56;
+        Integer size = 56;
+        ResponseEntity<CityPaginatedResponse> responseEntity = api.getCities(page, size);
         assertEquals(HttpStatus.NOT_IMPLEMENTED, responseEntity.getStatusCode());
     }
 

@@ -4,8 +4,10 @@ import AdopcionAnimales.api.cities.CityCreationRequest;
 import AdopcionAnimales.api.cities.CityResponse;
 import org.mapstruct.Mapper;
 
+import java.util.List;
+
 @Mapper(componentModel = "spring")
 public interface CityMapper {
-    CityResponse cityToCityResponse(City city);
+    List<CityResponse> cityToCityResponse(List<City> city);
     City cityCreationRequestToCity(CityCreationRequest cityCreationRequest);
 }

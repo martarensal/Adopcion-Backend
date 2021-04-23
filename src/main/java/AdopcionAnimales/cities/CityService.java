@@ -9,7 +9,8 @@ import javax.validation.ConstraintViolationException;
 public interface CityService {
     void addCity(CityCreationRequest cityCreationRequest) throws ConstraintViolationException;;
     void deleteCity(Long idCity);
-    CityResponse getCity(Long idCity);
+    CityPaginatedResponse getCities( Integer page, Integer size);
+    CityPaginatedResponse getCitiesFromProvinces(String province, Integer page, Integer size);
     void modifyCityName(CityNameChangeRequest cityNameChangeRequest, Long idCity);
     void modifyCityProvince(CityProvinceChangeRequest cityProvinceChangeRequest, Long idCity);
     void modifyCityAutonomousCommunity(CityAutonomousCommunityChangeRequest cityAutonomousCommunityChangeRequest, Long idCity);

@@ -1,13 +1,21 @@
 package AdopcionAnimales.cities;
 
+import AdopcionAnimales.animals.Animal;
 import AdopcionAnimales.animals.AnimalsRepository;
+import AdopcionAnimales.api.animals.AnimalPaginatedResponse;
+import AdopcionAnimales.api.animals.AnimalResponse;
 import AdopcionAnimales.api.cities.*;
+import AdopcionAnimales.api.utils.PaginationInfo;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.data.domain.Page;
+import org.springframework.data.domain.PageRequest;
 import org.springframework.stereotype.Service;
 
 import javax.persistence.EntityNotFoundException;
 import javax.transaction.Transactional;
 import javax.validation.ConstraintViolationException;
+import java.util.List;
+import java.util.stream.Collectors;
 
 @Service
 public class CityServiceImpl implements CityService{
@@ -39,12 +47,6 @@ public class CityServiceImpl implements CityService{
     public void deleteCity(Long idCity) {
         City city = findCity(idCity);
         cityRepository.delete(city);
-    }
-
-    @Override
-    @Transactional
-    public CityResponse getCity(Long idCity) {
-        return null;
     }
 
     private City findCity(Long idCity) {
@@ -79,5 +81,37 @@ public class CityServiceImpl implements CityService{
 
         city.setAutonomousCommunity(cityAutonomousCommunityChangeRequest.getNewCityAutonomousCommunity());
         cityRepository.save(city);
+    }
+
+    @Override
+    @Transactional
+    public CityPaginatedResponse getCities( Integer page, Integer size) {
+
+        Page<City> matchedCities = cityRepository.getCities(PageRequest.of(page, size));
+        return getCityPaginatedResponse(matchedCities);
+    }
+
+    @Override
+    @Transactional
+    public CityPaginatedResponse getCitiesFromProvinces(String province, Integer page, Integer size) {
+
+        Page<City> matchedCities = cityRepository.getCitiesFromProvinces(province, PageRequest.of(page, size));
+        return getCityPaginatedResponse(matchedCities);
+    }
+
+    private CityPaginatedResponse getCityPaginatedResponse(Page<City> matchedCities) {
+        List<City> cities = matchedCities.stream().collect(Collectors.toList());
+
+        List<CityResponse> cityResponses = cityMapper.cityToCityResponse(cities);
+
+        PaginationInfo paginationInfo = new PaginationInfo();
+        paginationInfo.setTotalElements(matchedCities.getNumberOfElements());
+        paginationInfo.setTotalPages(matchedCities.getTotalPages());
+
+        CityPaginatedResponse paginatedResponse = new CityPaginatedResponse();
+        paginatedResponse.setPages(cityResponses);
+        paginatedResponse.setPaginationInfo(paginationInfo);
+
+        return paginatedResponse;
     }
 }

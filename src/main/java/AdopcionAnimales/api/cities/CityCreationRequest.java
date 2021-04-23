@@ -31,7 +31,7 @@ public class CityCreationRequest   {
    * Get name
    * @return name
   **/
-  @ApiModelProperty(example = "Cadiz", required = true, value = "")
+  @ApiModelProperty(example = "Jerez", required = true, value = "")
   @NotNull
 
   public String getName() {
@@ -51,7 +51,7 @@ public class CityCreationRequest   {
    * Get province
    * @return province
   **/
-  @ApiModelProperty(example = "115010", required = true, value = "")
+  @ApiModelProperty(example = "Cadiz", required = true, value = "")
   @NotNull
 
   public String getProvince() {
@@ -71,7 +71,7 @@ public class CityCreationRequest   {
    * Get autonomousCommunity
    * @return autonomousCommunity
   **/
-  @ApiModelProperty(example = "Spain", required = true, value = "")
+  @ApiModelProperty(example = "Andalucia", required = true, value = "")
   @NotNull
 
   public String getAutonomousCommunity() {
