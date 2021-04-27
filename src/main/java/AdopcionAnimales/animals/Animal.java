@@ -22,16 +22,6 @@ public class Animal {
     private String sex;
     private String status;
     private String image;
-    private Long idCity;
-
-    public Long getIdCity() {
-        return idCity;
-    }
-
-    public void setIdCity(Long idCity) {
-        this.idCity = idCity;
-    }
-
 
     @ManyToOne
     private User user;

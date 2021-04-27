@@ -12,6 +12,7 @@ import org.springframework.stereotype.Service;
 
 import javax.persistence.EntityNotFoundException;
 import javax.transaction.Transactional;
+import java.util.Arrays;
 import java.util.List;
 import java.util.stream.Collectors;
 
@@ -61,9 +62,24 @@ public class AnimalServiceImpl implements AnimalService{
 
     @Override
     @Transactional
-    public AnimalPaginatedResponse getAnimalsFromAnyFilter(Long idCity, int age, String colour, String animalSize,
+    public AnimalPaginatedResponse getAnimalsFromAnyFilter(Long idCity, Integer minAge, Integer maxAge, String colour, String animalSize,
                                                            String sex, Integer page, Integer size) {
-        Page<Animal> matchedAnimals = animalsRepository.findAnimalByAnyFilter(idCity, age, colour, animalSize, sex, PageRequest.of(page, size));
+        List<String> partsColour = null;
+        List<String> partsAnimalSize = null;
+        if(colour != null ){
+            if(colour.contains("|"))
+                partsColour = Arrays.asList(colour.split("|"));
+            else
+                partsColour = Arrays.asList(colour);
+        }
+        if(animalSize != null){
+            if(animalSize.contains("|"))
+                partsAnimalSize = Arrays.asList(animalSize.split("|"));
+            else
+                partsAnimalSize = Arrays.asList(animalSize);
+        }
+
+        Page<Animal> matchedAnimals = animalsRepository.findAnimalByAnyFilter(idCity, minAge, maxAge, partsColour, partsAnimalSize, sex, PageRequest.of(page, size));
         return getAnimalPaginatedResponse(matchedAnimals);
     }
 

@@ -158,11 +158,12 @@ public interface AnimalsApi {
             produces = { "application/json" },
             method = RequestMethod.GET)
     ResponseEntity<AnimalPaginatedResponse> getAnimalsFromAnyFilter(
-            @ApiParam(value = "", required = false) @RequestParam("idCity") Long idCity,
-            @ApiParam(value = "", required = false) @RequestParam("age") int age,
-            @ApiParam(value = "", required = false) @RequestParam("colour") String colour,
-            @ApiParam(value = "", required = false) @RequestParam("animalSize") String animalSize,
-            @ApiParam(value = "", required = false) @RequestParam("sex") String sex,
+            @ApiParam(value = "", required = false) @RequestParam(required = false) Long idCity,
+            @ApiParam(value = "", required = false) @RequestParam(required = false) Integer minAge,
+            @ApiParam(value = "", required = false) @RequestParam(required = false) Integer maxAge,
+            @ApiParam(value = "", required = false) @RequestParam(required = false) String colour,
+            @ApiParam(value = "", required = false) @RequestParam(required = false) String animalSize,
+            @ApiParam(value = "", required = false) @RequestParam(required = false) String sex,
             @ApiParam(value = "the number of the page") @Valid @RequestParam(value = "page", required = false, defaultValue = "0") Integer page,
             @ApiParam(value = "the number of element per page") @Valid @RequestParam(value = "size", required = false, defaultValue = "25") Integer size);
 

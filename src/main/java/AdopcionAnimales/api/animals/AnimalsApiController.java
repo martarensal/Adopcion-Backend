@@ -85,9 +85,9 @@ public class AnimalsApiController implements AnimalsApi {
         return new ResponseEntity<AnimalPaginatedResponse>(animalService.getAnimalsFromUser(username, page, size), HttpStatus.OK);
     }
 
-    public ResponseEntity<AnimalPaginatedResponse> getAnimalsFromAnyFilter(Long idCity, int age, String colour, String animalSize, String sex, @Valid Integer page,
+    public ResponseEntity<AnimalPaginatedResponse> getAnimalsFromAnyFilter(Long idCity, Integer minAge, Integer maxAge, String colour, String animalSize, String sex, @Valid Integer page,
                                                                       @Valid Integer size) {
-        return new ResponseEntity<AnimalPaginatedResponse>(animalService.getAnimalsFromAnyFilter(idCity, age, colour, animalSize, sex, page, size), HttpStatus.OK);
+        return new ResponseEntity<AnimalPaginatedResponse>(animalService.getAnimalsFromAnyFilter(idCity, minAge, maxAge, colour, animalSize, sex, page, size), HttpStatus.OK);
     }
 
     public ResponseEntity<AnimalPaginatedResponse> getAnimals(@Valid Integer page,

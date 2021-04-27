@@ -8,6 +8,8 @@ import org.springframework.data.repository.PagingAndSortingRepository;
 import org.springframework.data.repository.query.Param;
 import org.springframework.stereotype.Repository;
 
+import java.util.List;
+
 @Repository
 public interface AnimalsRepository extends CrudRepository<Animal, Long>{
 
@@ -18,8 +20,8 @@ public interface AnimalsRepository extends CrudRepository<Animal, Long>{
     Page<Animal> getAnimals(Pageable page);
 
     @Query("SELECT a FROM Animal a WHERE (:city_id is null or a.city = :city_id)" +
-            "and (:age is null or a.age = :age) and (:colour is null or a.colour = :colour) " +
-            "and (:size is null or a.size = :size) and (:sex is null or a.sex = :sex)")
-    Page<Animal> findAnimalByAnyFilter(@Param("city_id") Long idCity,@Param("age") int age, @Param("colour") String colour,
-                                       @Param("size") String size, @Param("sex") String sex, Pageable page);
+            "and (:minAge is null or a.age >= :minAge) and (:maxAge is null or a.age <= :maxAge) and (:colour is null or a.colour IN :colour) " +
+            "and (:size is null or a.size IN :size) and (:sex is null or a.sex = :sex)")
+    Page<Animal> findAnimalByAnyFilter(@Param("city_id") Long idCity, @Param("minAge") Integer minAge, @Param("maxAge") Integer maxAge, @Param("colour") List<String> colour,
+                                       @Param("size") List<String> size, @Param("sex") String sex, Pageable page);
 }
