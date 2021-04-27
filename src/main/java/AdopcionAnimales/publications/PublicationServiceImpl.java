@@ -1,5 +1,6 @@
 package AdopcionAnimales.publications;
 
+import AdopcionAnimales.animals.Animal;
 import AdopcionAnimales.api.utils.PaginationInfo;
 
 import AdopcionAnimales.api.publications.PublicationCreationRequest;
@@ -40,7 +41,7 @@ public class PublicationServiceImpl implements PublicationService{
 
         Publication newPublication = publicationMapper.publicationCreationRequestToPublication(publicationCreationRequest);
         User user = getUser();
-
+        newPublication.setUser(user);
         user.getPublications().add(publicationRepository.save(newPublication));
 
         publicationRepository.save(newPublication);

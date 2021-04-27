@@ -15,7 +15,7 @@ public interface CityRepository extends CrudRepository<City, Long> {
     @Query("select c from City c")
     Page<City> getCities(Pageable page);
 
-    @Query("select c.name from City c where c.province = :province")
+    @Query("select c from City c where c.province = :province")
     Page<City> getCitiesFromProvinces(@Param("province") String province, Pageable page);
 
 }

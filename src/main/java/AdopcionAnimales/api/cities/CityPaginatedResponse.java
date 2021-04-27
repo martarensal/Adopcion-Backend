@@ -1,7 +1,5 @@
 package AdopcionAnimales.api.cities;
 
-
-import AdopcionAnimales.api.cities.CityResponse;
 import AdopcionAnimales.api.utils.PaginationInfo;
 import com.fasterxml.jackson.annotation.JsonProperty;
 import io.swagger.annotations.ApiModelProperty;
@@ -9,16 +7,14 @@ import org.springframework.validation.annotation.Validated;
 
 import javax.validation.Valid;
 import javax.validation.constraints.NotNull;
-import java.util.ArrayList;
-import java.util.List;
-import java.util.Objects;
+import java.util.*;
 
 /**
  * CityPaginatedResponse
  */
 @Validated
 @javax.annotation.Generated(value = "io.swagger.codegen.v3.generators.java.SpringCodegen", date = "2021-02-24T16:55:56.237+01:00[Europe/Paris]")
-public class CityPaginatedResponse   {
+public class CityPaginatedResponse  {
     @JsonProperty("pages")
     @Valid
     private List<CityResponse> pages = new ArrayList<CityResponse>();
@@ -81,9 +77,9 @@ public class CityPaginatedResponse   {
         if (o == null || getClass() != o.getClass()) {
             return false;
         }
-        AdopcionAnimales.api.cities.CityPaginatedResponse CityPaginatedResponse = (AdopcionAnimales.api.cities.CityPaginatedResponse) o;
-        return Objects.equals(this.pages, CityPaginatedResponse.pages) &&
-                Objects.equals(this.paginationInfo, CityPaginatedResponse.paginationInfo);
+        AdopcionAnimales.api.cities.CityPaginatedResponse cityPaginatedResponse = (AdopcionAnimales.api.cities.CityPaginatedResponse) o;
+        return Objects.equals(this.pages, cityPaginatedResponse.pages) &&
+                Objects.equals(this.paginationInfo, cityPaginatedResponse.paginationInfo);
     }
 
     @Override

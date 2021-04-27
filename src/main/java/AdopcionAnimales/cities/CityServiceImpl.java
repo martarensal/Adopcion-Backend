@@ -102,7 +102,7 @@ public class CityServiceImpl implements CityService{
     private CityPaginatedResponse getCityPaginatedResponse(Page<City> matchedCities) {
         List<City> cities = matchedCities.stream().collect(Collectors.toList());
 
-        List<CityResponse> cityResponses = cityMapper.cityToCityResponse(cities);
+        List<CityResponse> cityResponses = cityMapper.citiesToCitiesResponse(cities);
 
         PaginationInfo paginationInfo = new PaginationInfo();
         paginationInfo.setTotalElements(matchedCities.getNumberOfElements());

@@ -8,6 +8,6 @@ import java.util.List;
 
 @Mapper(componentModel = "spring")
 public interface CityMapper {
-    List<CityResponse> cityToCityResponse(List<City> city);
+    List<CityResponse> citiesToCitiesResponse(List<City> cities);
     City cityCreationRequestToCity(CityCreationRequest cityCreationRequest);
 }

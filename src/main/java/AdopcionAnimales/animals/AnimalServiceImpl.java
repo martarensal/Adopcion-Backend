@@ -59,6 +59,14 @@ public class AnimalServiceImpl implements AnimalService{
         return getAnimalPaginatedResponse(matchedAnimals);
     }
 
+    @Override
+    @Transactional
+    public AnimalPaginatedResponse getAnimalsFromAnyFilter(Long idCity, int age, String colour, String animalSize,
+                                                           String sex, Integer page, Integer size) {
+        Page<Animal> matchedAnimals = animalsRepository.findAnimalByAnyFilter(idCity, age, colour, animalSize, sex, PageRequest.of(page, size));
+        return getAnimalPaginatedResponse(matchedAnimals);
+    }
+
     private AnimalPaginatedResponse getAnimalPaginatedResponse(Page<Animal> matchedAnimals) {
         List<Animal> animals = matchedAnimals.stream().collect(Collectors.toList());
 

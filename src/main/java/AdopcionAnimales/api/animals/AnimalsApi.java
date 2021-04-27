@@ -5,6 +5,8 @@
  */
 package AdopcionAnimales.api.animals;
 
+import AdopcionAnimales.api.cities.CityPaginatedResponse;
+import AdopcionAnimales.api.cities.CityResponse;
 import io.swagger.annotations.*;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
@@ -133,7 +135,6 @@ public interface AnimalsApi {
             @ApiParam(value = "the number of the page") @Valid @RequestParam(value = "page", required = false, defaultValue = "0") Integer page,
             @ApiParam(value = "the number of element per page") @Valid @RequestParam(value = "size", required = false, defaultValue = "25") Integer size);
 
-
     @ApiOperation(value = "List all animals", nickname = "getAnimals", notes = "List all animals", response = AnimalPaginatedResponse.class, responseContainer = "List", authorizations = {
             @Authorization(value = "ApiKeyAuth")    }, tags={  })
     @ApiResponses(value = {
@@ -144,6 +145,24 @@ public interface AnimalsApi {
             produces = { "application/json" },
             method = RequestMethod.GET)
     ResponseEntity<AnimalPaginatedResponse> getAnimals(
+            @ApiParam(value = "the number of the page") @Valid @RequestParam(value = "page", required = false, defaultValue = "0") Integer page,
+            @ApiParam(value = "the number of element per page") @Valid @RequestParam(value = "size", required = false, defaultValue = "25") Integer size);
+
+    @ApiOperation(value = "Searches the animals with a filter", nickname = "getAnimalsFromAnyFilter", notes = "", response = AnimalPaginatedResponse.class, responseContainer = "List", authorizations = {
+            @Authorization(value = "ApiKeyAuth")    }, tags={  })
+    @ApiResponses(value = {
+            @ApiResponse(code = 200, message = "The search was successfull", response = AnimalPaginatedResponse.class, responseContainer = "List"),
+            @ApiResponse(code = 401, message = "The requested page needs a username and a password"),
+            @ApiResponse(code = 500, message = "Internal server error") })
+    @RequestMapping(value = "/animals/filters",
+            produces = { "application/json" },
+            method = RequestMethod.GET)
+    ResponseEntity<AnimalPaginatedResponse> getAnimalsFromAnyFilter(
+            @ApiParam(value = "", required = false) @RequestParam("idCity") Long idCity,
+            @ApiParam(value = "", required = false) @RequestParam("age") int age,
+            @ApiParam(value = "", required = false) @RequestParam("colour") String colour,
+            @ApiParam(value = "", required = false) @RequestParam("animalSize") String animalSize,
+            @ApiParam(value = "", required = false) @RequestParam("sex") String sex,
             @ApiParam(value = "the number of the page") @Valid @RequestParam(value = "page", required = false, defaultValue = "0") Integer page,
             @ApiParam(value = "the number of element per page") @Valid @RequestParam(value = "size", required = false, defaultValue = "25") Integer size);
 

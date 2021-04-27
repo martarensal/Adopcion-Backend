@@ -17,4 +17,9 @@ public interface AnimalsRepository extends CrudRepository<Animal, Long>{
     @Query("select a from Animal a ")
     Page<Animal> getAnimals(Pageable page);
 
+    @Query("SELECT a FROM Animal a WHERE (:city_id is null or a.city = :city_id)" +
+            "and (:age is null or a.age = :age) and (:colour is null or a.colour = :colour) " +
+            "and (:size is null or a.size = :size) and (:sex is null or a.sex = :sex)")
+    Page<Animal> findAnimalByAnyFilter(@Param("city_id") Long idCity,@Param("age") int age, @Param("colour") String colour,
+                                       @Param("size") String size, @Param("sex") String sex, Pageable page);
 }

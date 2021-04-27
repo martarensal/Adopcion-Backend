@@ -27,10 +27,10 @@ public interface PublicationsApi {
             method = RequestMethod.POST)
     ResponseEntity<Void> addPublication(@ApiParam(value = "Publication to add"  )  @Valid @RequestBody PublicationCreationRequest body);
 
-    @ApiOperation(value = "Searches for a publication made by an user", nickname = "getPublicationFromUSer", notes = "Searches for a publication made by an user.", response = PublicationResponse.class, responseContainer = "List", authorizations = {
+    @ApiOperation(value = "Searches for a publication made by an user", nickname = "getPublicationFromUser", notes = "Searches for a publication made by an user.", response = PublicationPaginatedResponse.class, responseContainer = "List", authorizations = {
             @Authorization(value = "ApiKeyAuth")    }, tags={  })
     @ApiResponses(value = {
-            @ApiResponse(code = 200, message = "The search was successfull", response = PublicationResponse.class, responseContainer = "List"),
+            @ApiResponse(code = 200, message = "The search was successfull", response = PublicationPaginatedResponse.class, responseContainer = "List"),
             @ApiResponse(code = 403, message = "Access denied"),
             @ApiResponse(code = 500, message = "Internal server error") })
     @RequestMapping(value = "user/{username}/publications",

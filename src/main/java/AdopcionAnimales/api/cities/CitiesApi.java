@@ -64,18 +64,18 @@ public interface CitiesApi {
     ResponseEntity<CityPaginatedResponse> getCities(@ApiParam(value = "the number of the page") @Valid @RequestParam(value = "page", required = false, defaultValue = "0") Integer page,
                                                     @ApiParam(value = "the number of element per page") @Valid @RequestParam(value = "size", required = false, defaultValue = "25") Integer size);
 
-    @ApiOperation(value = "List all cities from a province", nickname = "getCitiesFromProvinces", notes = "Searches for a city. This operation is permited for both user and admin", response = CityResponse.class, responseContainer = "List", authorizations = {
+    @ApiOperation(value = "List all cities from a province", nickname = "getCitiesFromProvinces", notes = "Searches for a city. This operation is permited for both user and admin", response = CityPaginatedResponse.class, responseContainer = "List", authorizations = {
             @Authorization(value = "ApiKeyAuth")    }, tags={  })
     @ApiResponses(value = {
-            @ApiResponse(code = 200, message = "The search was successfull", response = CityResponse.class, responseContainer = "List"),
+            @ApiResponse(code = 200, message = "The search was successfull", response = CityPaginatedResponse.class, responseContainer = "List"),
             @ApiResponse(code = 401, message = "The requested page needs a username and a password"),
             @ApiResponse(code = 500, message = "Internal server error") })
-    @RequestMapping(value = "/cities//{province}/names",
+    @RequestMapping(value = "/cities/{province}/names",
             produces = { "application/json" },
             method = RequestMethod.GET)
-    ResponseEntity<CityPaginatedResponse> getCitiesFromProvinces( @ApiParam(value = "", required = true) @PathVariable("province") String province,
-                                                                  @ApiParam(value = "the number of the page") @Valid @RequestParam(value = "page", required = false, defaultValue = "0") Integer page,
-                                                                  @ApiParam(value = "the number of element per page") @Valid @RequestParam(value = "size", required = false, defaultValue = "25") Integer size);
+    ResponseEntity<CityPaginatedResponse> getCitiesFromProvinces(@ApiParam(value = "", required = true) @PathVariable("province") String province,
+                                                                 @ApiParam(value = "the number of the page") @Valid @RequestParam(value = "page", required = false, defaultValue = "0") Integer page,
+                                                                 @ApiParam(value = "the number of element per page") @Valid @RequestParam(value = "size", required = false, defaultValue = "25") Integer size);
 
     @ApiOperation(value = "Modifies the city's name", nickname = "modifyCityName", notes = "The id of the city you want to modify", authorizations = {
             @Authorization(value = "ApiKeyAuth")    }, tags={  })
