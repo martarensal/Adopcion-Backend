@@ -68,13 +68,13 @@ public class AnimalServiceImpl implements AnimalService{
         List<String> partsAnimalSize = null;
         if(colour != null ){
             if(colour.contains("|"))
-                partsColour = Arrays.asList(colour.split("|"));
+                partsColour = Arrays.asList(colour.split("\\|"));
             else
                 partsColour = Arrays.asList(colour);
         }
         if(animalSize != null){
             if(animalSize.contains("|"))
-                partsAnimalSize = Arrays.asList(animalSize.split("|"));
+                partsAnimalSize = Arrays.asList(animalSize.split("\\|"));
             else
                 partsAnimalSize = Arrays.asList(animalSize);
         }
