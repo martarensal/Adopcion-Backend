@@ -1,5 +1,7 @@
 package AdopcionAnimales.requests;
 
+import AdopcionAnimales.animals.Animal;
+import AdopcionAnimales.animals.AnimalsRepository;
 import AdopcionAnimales.api.utils.PaginationInfo;
 import AdopcionAnimales.api.requests.*;
 import AdopcionAnimales.users.User;
@@ -20,12 +22,14 @@ public class RequestServiceImpl implements RequestService{
     private RequestMapper requestMapper;
     private RequestRepository requestRepository;
     private UsersRepository usersRepository;
+    private AnimalsRepository animalsRepository;
 
     @Autowired
-    public RequestServiceImpl(RequestMapper requestMapper, RequestRepository requestRepository, UsersRepository usersRepository) {
+    public RequestServiceImpl(RequestMapper requestMapper, RequestRepository requestRepository, UsersRepository usersRepository, AnimalsRepository animalsRepository) {
         this.requestMapper = requestMapper;
         this.requestRepository = requestRepository;
         this.usersRepository = usersRepository;
+        this.animalsRepository = animalsRepository;
     }
 
     @Override
@@ -80,11 +84,20 @@ public class RequestServiceImpl implements RequestService{
     @Transactional
     public void deleteRequest(Long idRequest) {
         Request request = findRequestById(idRequest);
-        User user = getUser();
-        user.getRequests().remove(request);
+        if(request != null){
+            Animal animal = animalsRepository.findById(request.getAnimal().getId()).orElse(null);
+            User user = getUser();
 
-        usersRepository.save(user);
-        requestRepository.delete(request);
+            if(animal != null)
+            {
+                user.getRequests().remove(request);
+                animal.getRequest().remove(request);
+
+                requestRepository.delete(request);
+                animalsRepository.save(animal);
+                usersRepository.save(user);
+            }
+        }
     }
 
     @Override
