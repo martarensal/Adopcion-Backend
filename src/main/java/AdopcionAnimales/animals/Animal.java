@@ -6,6 +6,7 @@ import AdopcionAnimales.types.Type;
 import AdopcionAnimales.users.User;
 
 import javax.persistence.*;
+import javax.persistence.Table;
 import java.util.Set;
 
 @Entity

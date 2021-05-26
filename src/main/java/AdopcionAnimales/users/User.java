@@ -143,12 +143,8 @@ public class User implements UserDetails {
     @Override
     public Collection<? extends GrantedAuthority> getAuthorities() {
         Collection<GrantedAuthority> roleList = new ArrayList<>();
-        String assignedRole = null;
-        if (rol == "ROLE_ADMIN")
-            assignedRole = "ROLE_ADMIN";
-        else if (rol == "ROLE_USER")
-            assignedRole = "ROLE_USER";
-        roleList.add(new SimpleGrantedAuthority(assignedRole));
+
+        roleList.add(new SimpleGrantedAuthority(rol));
         return roleList;
     }
 
