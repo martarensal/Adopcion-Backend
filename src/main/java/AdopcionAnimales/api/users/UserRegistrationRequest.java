@@ -33,9 +33,12 @@ public class UserRegistrationRequest   {
   @JsonProperty("phone")
   private String phone = null;
 
+  @JsonProperty("role")
+  private String role = null;
+/*
   /**
    * Gets or Sets role
-   */
+
   public enum RoleEnum {
     USER("user"),
     
@@ -64,7 +67,26 @@ public class UserRegistrationRequest   {
     }
   }
   @JsonProperty("role")
-  private RoleEnum role = null;
+  private RoleEnum role = null;*/
+  public UserRegistrationRequest role(String role){
+    this.role = role;
+    return this;
+  }
+  /**
+   * Get role
+   * @return role
+   **/
+
+  @ApiModelProperty(example = "ROLE_USER", required = true, value = "")
+  @NotNull
+
+  public String getRole() {
+    return role;
+  }
+
+  public void setRole(String role) {
+    this.role = role;
+  }
 
   public UserRegistrationRequest username(String username) {
     this.username = username;
@@ -185,27 +207,6 @@ public class UserRegistrationRequest   {
   public void setPhone(String phone) {
     this.phone = phone;
   }
-
-  public UserRegistrationRequest role(RoleEnum role) {
-    this.role = role;
-    return this;
-  }
-
-  /**
-   * Get role
-   * @return role
-  **/
-  @ApiModelProperty(example = "user", required = true, value = "")
-  @NotNull
-
-  public RoleEnum getRole() {
-    return role;
-  }
-
-  public void setRole(RoleEnum role) {
-    this.role = role;
-  }
-
 
   @Override
   public boolean equals(Object o) {
