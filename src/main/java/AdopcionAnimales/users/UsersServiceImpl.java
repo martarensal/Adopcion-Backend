@@ -52,7 +52,6 @@ public class UsersServiceImpl implements UsersService {
         User user = userRepository.findUserByUsername(username);
         if (user == null)
             throw new IllegalArgumentException("El usuario " + username + " no ha sido encontrado");
-
         userRepository.delete(user);
     }
 
