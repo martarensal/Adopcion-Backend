@@ -68,39 +68,39 @@ public class UsersApiController implements UsersApi {
         return new ResponseEntity<UserResponse>(userService.getUserById(idUser), HttpStatus.OK);
     }
 
-    public ResponseEntity<Void> modifyUserEmail(@ApiParam(value = "",required=true) @PathVariable("username") String username,@ApiParam(value = "The new user's email"  )  @Valid @RequestBody UserEmailChangeRequest body) throws UniqueEmailException {
-            userService.modifyUserEmail(body, username);
+    public ResponseEntity<Void> modifyUserEmail(@ApiParam(value = "",required=true) @PathVariable("idUser") Long idUser,@ApiParam(value = "The new user's email"  )  @Valid @RequestBody UserEmailChangeRequest body) throws UniqueEmailException {
+            userService.modifyUserEmail(body, idUser);
             return new ResponseEntity<Void>(HttpStatus.OK);
     }
     public ResponseEntity<Void> modifyUserLastnames(
-            @ApiParam(value = "", required = true) @PathVariable("username") String username,
+            @ApiParam(value = "", required = true) @PathVariable("idUser") Long idUser,
             @ApiParam(value = "The new user's lastnames") @Valid @RequestBody UserLastnameChangeRequest body) {
-        userService.modifyUserLastnames(body, username);
+        userService.modifyUserLastnames(body, idUser);
         return new ResponseEntity<Void>(HttpStatus.OK);
     }
 
-    public ResponseEntity<Void> modifyUserName(@ApiParam(value = "",required=true) @PathVariable("username") String username,@ApiParam(value = "The new user's name"  )  @Valid @RequestBody UserNameChangeRequest body) {
-        userService.modifyUserName(body, username);
+    public ResponseEntity<Void> modifyUserName(@ApiParam(value = "",required=true) @PathVariable("idUser") Long idUser,@ApiParam(value = "The new user's name"  )  @Valid @RequestBody UserNameChangeRequest body) {
+        userService.modifyUserName(body, idUser);
         return new ResponseEntity<Void>(HttpStatus.OK);
     }
 
-    public ResponseEntity<Void> modifyUserPassword(@ApiParam(value = "",required=true) @PathVariable("username") String username,@ApiParam(value = "The new user's password"  )  @Valid @RequestBody UserPasswordChangeRequest body) {
-        userService.modifyUserPassword(body, username);
+    public ResponseEntity<Void> modifyUserPassword(@ApiParam(value = "",required=true) @PathVariable("idUser") Long idUser,@ApiParam(value = "The new user's password"  )  @Valid @RequestBody UserPasswordChangeRequest body) {
+        userService.modifyUserPassword(body, idUser);
         return new ResponseEntity<Void>(HttpStatus.NOT_IMPLEMENTED);
     }
 
-    public ResponseEntity<Void> modifyUserPhone(@ApiParam(value = "",required=true) @PathVariable("username") String username,@ApiParam(value = "The new user's phone"  )  @Valid @RequestBody UserPhoneChangeRequest body) {
-        userService.modifyUserPhone(body, username);
+    public ResponseEntity<Void> modifyUserPhone(@ApiParam(value = "",required=true) @PathVariable("idUser") Long idUser,@ApiParam(value = "The new user's phone"  )  @Valid @RequestBody UserPhoneChangeRequest body) {
+        userService.modifyUserPhone(body, idUser);
         return new ResponseEntity<Void>(HttpStatus.OK);
     }
 
-    public ResponseEntity<Void> modifyUserRole(@ApiParam(value = "",required=true) @PathVariable("username") String username,@ApiParam(value = "The new user's role"  )  @Valid @RequestBody UserRoleChangeRequest body) {
+    public ResponseEntity<Void> modifyUserRole(@ApiParam(value = "",required=true) @PathVariable("idUser") Long idUser,@ApiParam(value = "The new user's role"  )  @Valid @RequestBody UserRoleChangeRequest body) {
         String accept = request.getHeader("Accept");
         return new ResponseEntity<Void>(HttpStatus.OK);
     }
 
-    public ResponseEntity<Void> modifyUserUsername(@ApiParam(value = "",required=true) @PathVariable("username") String username,@ApiParam(value = "The new user's username"  )  @Valid @RequestBody UserUsernameChangeRequest body) throws UniqueUsernameException {
-        userService.modifyUserUsername(body, username);
+    public ResponseEntity<Void> modifyUserUsername(@ApiParam(value = "",required=true) @PathVariable("idUser") Long idUser,@ApiParam(value = "The new user's username"  )  @Valid @RequestBody UserUsernameChangeRequest body) throws UniqueUsernameException {
+        userService.modifyUserUsername(body, idUser);
         return new ResponseEntity<Void>(HttpStatus.OK);
     }
 

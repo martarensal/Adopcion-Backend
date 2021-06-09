@@ -50,10 +50,10 @@ public interface UsersApi {
         @ApiResponse(code = 400, message = "bad input parameter"),
         @ApiResponse(code = 200, message = "operation completed successfully"),
         @ApiResponse(code = 401, message = "The requested page needs a username and a password") })
-    @RequestMapping(value = "/users/{username}/email",
+    @RequestMapping(value = "/users/{idUser}/email",
         consumes = { "application/json" },
         method = RequestMethod.PUT)
-    ResponseEntity<Void> modifyUserEmail(@ApiParam(value = "",required=true) @PathVariable("username") String username,@ApiParam(value = "The new user's email"  )  @Valid @RequestBody UserEmailChangeRequest body) throws UniqueEmailException;
+    ResponseEntity<Void> modifyUserEmail(@ApiParam(value = "",required=true) @PathVariable("idUser") Long idUser,@ApiParam(value = "The new user's email"  )  @Valid @RequestBody UserEmailChangeRequest body) throws UniqueEmailException;
 
     @ApiOperation(value = "Modifies the user's lastnames", nickname = "modifyUserLastnames", notes = "The user username you want to modify", authorizations = {
         @Authorization(value = "ApiKeyAuth")    }, tags={  })
@@ -61,10 +61,10 @@ public interface UsersApi {
         @ApiResponse(code = 400, message = "bad input parameter"),
         @ApiResponse(code = 200, message = "operation completed successfully"),
         @ApiResponse(code = 401, message = "The requested page needs a username and a password") })
-    @RequestMapping(value = "/users/{username}/lastnames",
+    @RequestMapping(value = "/users/{idUser}/lastnames",
         consumes = { "application/json" },
         method = RequestMethod.PUT)
-    ResponseEntity<Void> modifyUserLastnames(@ApiParam(value = "",required=true) @PathVariable("username") String username,@ApiParam(value = "The new user's lastnames"  )  @Valid @RequestBody UserLastnameChangeRequest body);
+    ResponseEntity<Void> modifyUserLastnames(@ApiParam(value = "",required=true) @PathVariable("idUser") Long idUser,@ApiParam(value = "The new user's lastnames"  )  @Valid @RequestBody UserLastnameChangeRequest body);
 
 
     @ApiOperation(value = "Modifies the user's name", nickname = "modifyUserName", notes = "The user username you want to modify", authorizations = {
@@ -73,10 +73,10 @@ public interface UsersApi {
         @ApiResponse(code = 400, message = "bad input parameter"),
         @ApiResponse(code = 200, message = "operation completed successfully"),
         @ApiResponse(code = 401, message = "The requested page needs a username and a password") })
-    @RequestMapping(value = "/users/{username}/name",
+    @RequestMapping(value = "/users/{idUser}/name",
         consumes = { "application/json" },
         method = RequestMethod.PUT)
-    ResponseEntity<Void> modifyUserName(@ApiParam(value = "",required=true) @PathVariable("username") String username,@ApiParam(value = "The new user's name"  )  @Valid @RequestBody UserNameChangeRequest body);
+    ResponseEntity<Void> modifyUserName(@ApiParam(value = "",required=true) @PathVariable("idUser") Long idUser,@ApiParam(value = "The new user's name"  )  @Valid @RequestBody UserNameChangeRequest body);
 
 
     @ApiOperation(value = "Modifies the user's password", nickname = "modifyUserPassword", notes = "The user username you want to modify", authorizations = {
@@ -85,10 +85,10 @@ public interface UsersApi {
         @ApiResponse(code = 400, message = "bad input parameter"),
         @ApiResponse(code = 200, message = "operation completed successfully"),
         @ApiResponse(code = 401, message = "The requested page needs a username and a password") })
-    @RequestMapping(value = "/users/{username}/password",
+    @RequestMapping(value = "/users/{idUser}/password",
         consumes = { "application/json" },
         method = RequestMethod.PUT)
-    ResponseEntity<Void> modifyUserPassword(@ApiParam(value = "",required=true) @PathVariable("username") String username,@ApiParam(value = "The new user's password"  )  @Valid @RequestBody UserPasswordChangeRequest body);
+    ResponseEntity<Void> modifyUserPassword(@ApiParam(value = "",required=true) @PathVariable("idUser") Long idUser,@ApiParam(value = "The new user's password"  )  @Valid @RequestBody UserPasswordChangeRequest body);
 
 
     @ApiOperation(value = "Modifies the user's phone", nickname = "modifyUserPhone", notes = "The user username you want to modify", authorizations = {
@@ -97,10 +97,10 @@ public interface UsersApi {
         @ApiResponse(code = 400, message = "bad input parameter"),
         @ApiResponse(code = 200, message = "operation completed successfully"),
         @ApiResponse(code = 401, message = "The requested page needs a username and a password") })
-    @RequestMapping(value = "/users/{username}/phone",
+    @RequestMapping(value = "/users/{idUser}/phone",
         consumes = { "application/json" },
         method = RequestMethod.PUT)
-    ResponseEntity<Void> modifyUserPhone(@ApiParam(value = "",required=true) @PathVariable("username") String username,@ApiParam(value = "The new user's phone"  )  @Valid @RequestBody UserPhoneChangeRequest body);
+    ResponseEntity<Void> modifyUserPhone(@ApiParam(value = "",required=true) @PathVariable("idUser") Long idUser,@ApiParam(value = "The new user's phone"  )  @Valid @RequestBody UserPhoneChangeRequest body);
 
 
     @ApiOperation(value = "Modifies the user's role", nickname = "modifyUserRole", notes = "The user username you want to modify", authorizations = {
@@ -109,10 +109,10 @@ public interface UsersApi {
         @ApiResponse(code = 400, message = "bad input parameter"),
         @ApiResponse(code = 200, message = "operation completed successfully"),
         @ApiResponse(code = 401, message = "The requested page needs a username and a password") })
-    @RequestMapping(value = "/users/{username}/role",
+    @RequestMapping(value = "/users/{idUser}/role",
         consumes = { "application/json" },
         method = RequestMethod.PUT)
-    ResponseEntity<Void> modifyUserRole(@ApiParam(value = "",required=true) @PathVariable("username") String username,@ApiParam(value = "The new user's role"  )  @Valid @RequestBody UserRoleChangeRequest body);
+    ResponseEntity<Void> modifyUserRole(@ApiParam(value = "",required=true) @PathVariable("idUser") Long idUser,@ApiParam(value = "The new user's role"  )  @Valid @RequestBody UserRoleChangeRequest body);
 
 
     @ApiOperation(value = "Modifies the user's username", nickname = "modifyUserUsername", notes = "The user username you want to modify", authorizations = {
@@ -121,10 +121,10 @@ public interface UsersApi {
         @ApiResponse(code = 400, message = "bad input parameter"),
         @ApiResponse(code = 200, message = "operation completed successfully"),
         @ApiResponse(code = 401, message = "The requested page needs a username and a password") })
-    @RequestMapping(value = "/users/{username}/username",
+    @RequestMapping(value = "/users/{idUser}/username",
         consumes = { "application/json" },
         method = RequestMethod.PUT)
-    ResponseEntity<Void> modifyUserUsername(@ApiParam(value = "",required=true) @PathVariable("username") String username,@ApiParam(value = "The new user's username"  )  @Valid @RequestBody UserUsernameChangeRequest body) throws UniqueUsernameException;
+    ResponseEntity<Void> modifyUserUsername(@ApiParam(value = "",required=true) @PathVariable("idUser") Long idUser,@ApiParam(value = "The new user's username"  )  @Valid @RequestBody UserUsernameChangeRequest body) throws UniqueUsernameException;
 
     @ApiOperation(value = "List all users", nickname = "getAllUsers", notes = "This operation is permited for both user and admin", response = UserPaginatedResponse.class, responseContainer = "List", authorizations = {
             @Authorization(value = "ApiKeyAuth")    }, tags={ })
@@ -140,7 +140,7 @@ public interface UsersApi {
     );
 
     @ApiOperation(value = "Finds a user", nickname = "getUser", notes = "", response = UserResponse.class, authorizations = {
-            @Authorization(value = "ApiKeyAuth")    }, tags={ "Users", })
+            @Authorization(value = "ApiKeyAuth")    }, tags={})
     @ApiResponses(value = {
             @ApiResponse(code = 200, message = "search results matching criteria", response = UserResponse.class),
             @ApiResponse(code = 400, message = "bad input parameter"),

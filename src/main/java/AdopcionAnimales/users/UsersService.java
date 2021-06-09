@@ -12,13 +12,13 @@ public interface UsersService extends UserDetailsService {
     UserResponse getUserById(Long idUser) throws EntityNotFoundException;
     void registerUser(UserRegistrationRequest registrationRequest) throws UniqueUsernameException;
     void deleteUser(String username) throws IllegalArgumentException;
-    void modifyUserLastnames(UserLastnameChangeRequest userLastnameChangeRequest, String username);
-    void modifyUserName(UserNameChangeRequest userNameChangeRequest, String username);
-    void modifyUserPassword(UserPasswordChangeRequest userPasswordChangeRequest, String username);
-    void modifyUserUsername(UserUsernameChangeRequest usernameChangeRequest, String username) throws UniqueUsernameException;
-    void modifyUserPhone(UserPhoneChangeRequest userPhoneChangeRequest, String username);
-    void modifyUserRole(UserRoleChangeRequest userRoleChangeRequest, String username);
-    void modifyUserEmail(UserEmailChangeRequest userEmailChangeRequest, String username) throws UniqueEmailException;
+    void modifyUserLastnames(UserLastnameChangeRequest userLastnameChangeRequest, Long idUser);
+    void modifyUserName(UserNameChangeRequest userNameChangeRequest, Long idUSer);
+    void modifyUserPassword(UserPasswordChangeRequest userPasswordChangeRequest, Long idUSer);
+    void modifyUserUsername(UserUsernameChangeRequest usernameChangeRequest, Long idUSer) throws UniqueUsernameException;
+    void modifyUserPhone(UserPhoneChangeRequest userPhoneChangeRequest, Long idUSer);
+    void modifyUserRole(UserRoleChangeRequest userRoleChangeRequest, Long idUSer);
+    void modifyUserEmail(UserEmailChangeRequest userEmailChangeRequest, Long idUSer) throws UniqueEmailException;
     UserPaginatedResponse searchUsersByUsername(String username, Integer page, Integer size)  throws EntityNotFoundException;
     UserPaginatedResponse getAllUsers(Integer page, Integer size);
 

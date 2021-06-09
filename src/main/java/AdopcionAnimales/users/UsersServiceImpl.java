@@ -57,8 +57,8 @@ public class UsersServiceImpl implements UsersService {
 
     @Override
     @Transactional
-    public void modifyUserPhone(UserPhoneChangeRequest userPhoneChangeRequest, String username) {
-        User user = findUserByUsername(username);
+    public void modifyUserPhone(UserPhoneChangeRequest userPhoneChangeRequest, Long idUser) {
+        User user = findUserById(idUser);
 
         user.setPhone(userPhoneChangeRequest.getNewPhone());
         userRepository.save(user);
@@ -66,8 +66,8 @@ public class UsersServiceImpl implements UsersService {
 
     @Override
     @Transactional
-    public void modifyUserRole(UserRoleChangeRequest userRoleChangeRequest, String username) {
-        User user = findUserByUsername(username);
+    public void modifyUserRole(UserRoleChangeRequest userRoleChangeRequest, Long idUser) {
+        User user = findUserById(idUser);
 
         user.setRol(userRoleChangeRequest.getNewRole());
         userRepository.save(user);
@@ -75,8 +75,8 @@ public class UsersServiceImpl implements UsersService {
 
     @Override
     @Transactional
-    public void modifyUserLastnames(UserLastnameChangeRequest userLastnameChangeRequest, String username) {
-        User user = findUserByUsername(username);
+    public void modifyUserLastnames(UserLastnameChangeRequest userLastnameChangeRequest, Long idUser) {
+        User user = findUserById(idUser);
 
         user.setLastnames(userLastnameChangeRequest.getNewLastname());
         userRepository.save(user);
@@ -84,8 +84,8 @@ public class UsersServiceImpl implements UsersService {
 
     @Override
     @Transactional
-    public void modifyUserName(UserNameChangeRequest userNameChangeRequest, String username) {
-        User user = findUserByUsername(username);
+    public void modifyUserName(UserNameChangeRequest userNameChangeRequest, Long idUser) {
+        User user = findUserById(idUser);
 
         user.setName(userNameChangeRequest.getNewName());
         userRepository.save(user);
@@ -93,18 +93,18 @@ public class UsersServiceImpl implements UsersService {
 
     @Override
     @Transactional
-    public void modifyUserPassword(UserPasswordChangeRequest userPasswordChangeRequest, String username) {
-        User user = findUserByUsername(username);
+    public void modifyUserPassword(UserPasswordChangeRequest userPasswordChangeRequest, Long idUser) {
+        User user = findUserById(idUser);
 
-        user.setPassword(userPasswordChangeRequest.getNewPassword());
+        user.setPassword(passwordEncoder.encode(userPasswordChangeRequest.getNewPassword()));
         userRepository.save(user);
     }
 
     @Override
     @Transactional
-    public void modifyUserUsername(UserUsernameChangeRequest usernameChangeRequest, String username)
+    public void modifyUserUsername(UserUsernameChangeRequest usernameChangeRequest, Long idUser)
             throws UniqueUsernameException {
-        User user = findUserByUsername(username);
+        User user = findUserById(idUser);
 
         user.setUsername(usernameChangeRequest.getNewUsername());
         try {
@@ -143,8 +143,8 @@ public class UsersServiceImpl implements UsersService {
 
     @Override
     @Transactional
-    public void modifyUserEmail(UserEmailChangeRequest userEmailChangeRequest, String username) throws UniqueEmailException {
-        User user = findUserByUsername(username);
+    public void modifyUserEmail(UserEmailChangeRequest userEmailChangeRequest, Long idUser) throws UniqueEmailException {
+        User user = findUserById(idUser);
         user.setEmail(userEmailChangeRequest.getNewEmail());
 
         try {
