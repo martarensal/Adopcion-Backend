@@ -14,6 +14,7 @@ import java.util.Objects;
 @Validated
 @javax.annotation.Generated(value = "io.swagger.codegen.v3.generators.java.SpringCodegen", date = "2021-02-24T16:55:56.237+01:00[Europe/Paris]")
 public class AnimalResponse   {
+
   @JsonProperty("name")
   private String name = null;
 

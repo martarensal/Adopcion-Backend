@@ -12,7 +12,11 @@ import org.springframework.stereotype.Service;
 
 import javax.persistence.EntityNotFoundException;
 import javax.transaction.Transactional;
+import java.io.File;
+import java.io.FileOutputStream;
+import java.io.IOException;
 import java.util.Arrays;
+import java.util.Base64;
 import java.util.List;
 import java.util.stream.Collectors;
 
@@ -33,16 +37,31 @@ public class AnimalServiceImpl implements AnimalService{
 
     @Override
     @Transactional
-    public void addAnimal(AnimalCreationRequest animalCreationRequest){
+    public void addAnimal(AnimalCreationRequest animalCreationRequest, String username) throws IOException {
+        String base64 = animalCreationRequest.getImage();
+        animalCreationRequest.setImage("");
+
         Animal newAnimal = animalMapper.animalCreationRequestToAnimal(animalCreationRequest);
         newAnimal.setStatus("HOMELESS");
         User user = getUser();
 
         newAnimal.setUser(user);
+
         user.getAnimals().add(animalsRepository.save(newAnimal));
+
+        String idAnimal = newAnimal.getId().toString();
+        String fileName = "img\\" + idAnimal + ".png";
+        try(FileOutputStream stream = new FileOutputStream(fileName)) {
+            stream.write(decode(base64));
+        }
+        newAnimal.setImage(fileName);
 
         animalsRepository.save(newAnimal);
         usersRepository.save(user);
+    }
+
+    private static byte[] decode(String base64String){
+        return Base64.getDecoder().decode(base64String);
     }
 
     @Override
@@ -220,11 +239,8 @@ public class AnimalServiceImpl implements AnimalService{
         return user;
     }
 
-    /*private User findUser(String username) {
-        User user = usersRepository.findUserByUsernameWithAnimals(username);
-        if(user == null)
-            throw new EntityNotFoundException("Usuario no encontrado");
-        return user;
-    }*/
+    private User findUserById(Long id) {
+        return usersRepository.findById(id).orElse(null);
+    }
 
 }

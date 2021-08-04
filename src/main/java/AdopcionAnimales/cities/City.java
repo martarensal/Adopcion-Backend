@@ -13,7 +13,7 @@ public class City {
     private Long id;
     private String name;
     private String province;
-    private String autonomousCommunity;
+    private String autonomous_community;
 
     @OneToMany(mappedBy = "city")
     private Set<Animal> animals;
@@ -21,7 +21,7 @@ public class City {
     public City(String name,String province, String autonomousCommunity){
         this.name = name;
         this.province = province;
-        this.autonomousCommunity = autonomousCommunity;
+        this.autonomous_community = autonomousCommunity;
     }
     public City(){}
 
@@ -50,11 +50,11 @@ public class City {
     }
 
     public String getAutonomousCommunity() {
-        return autonomousCommunity;
+        return autonomous_community;
     }
 
     public void setAutonomousCommunity(String autonomousCommunity) {
-        this.autonomousCommunity = autonomousCommunity;
+        this.autonomous_community = autonomousCommunity;
     }
 
     public Set<Animal> getAnimals() {

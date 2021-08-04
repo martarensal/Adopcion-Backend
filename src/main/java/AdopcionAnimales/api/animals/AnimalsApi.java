@@ -12,6 +12,7 @@ import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
 import javax.validation.Valid;
+import java.io.IOException;
 import java.util.List;
 
 @javax.annotation.Generated(value = "io.swagger.codegen.v3.generators.java.SpringCodegen", date = "2021-02-24T16:55:56.237+01:00[Europe/Paris]")
@@ -23,10 +24,10 @@ public interface AnimalsApi {
             @ApiResponse(code = 201, message = "Animal created"),
             @ApiResponse(code = 400, message = "invalid input, object invalid"),
             @ApiResponse(code = 401, message = "The requested page needs a username and a password") })
-    @RequestMapping(value = "/animals",
+    @RequestMapping(value = "users/{username}/animals",
             consumes = { "application/json" },
             method = RequestMethod.POST)
-    ResponseEntity<Void> addAnimal(@ApiParam(value = "Animal to add"  )  @Valid @RequestBody AnimalCreationRequest body);
+    ResponseEntity<Void> addAnimal(@ApiParam(value = "",required=true) @PathVariable("username") String username, @ApiParam(value = "Animal to add"  )  @Valid @RequestBody AnimalCreationRequest body) throws IOException;
 
     @ApiOperation(value = "Deletes an animal", nickname = "deleteAnimal", notes = "Deletes the animal linked to a user", authorizations = {
             @Authorization(value = "ApiKeyAuth")    }, tags={  })

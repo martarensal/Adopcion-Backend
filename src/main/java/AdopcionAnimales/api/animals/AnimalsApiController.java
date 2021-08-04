@@ -15,6 +15,7 @@ import org.springframework.web.bind.annotation.RequestParam;
 
 import javax.servlet.http.HttpServletRequest;
 import javax.validation.Valid;
+import java.io.IOException;
 import java.util.List;
 import java.util.stream.Collectors;
 
@@ -36,8 +37,8 @@ public class AnimalsApiController implements AnimalsApi {
         this.animalService = animalService;
     }
 
-    public ResponseEntity<Void> addAnimal(@ApiParam(value = "Animal to add"  )  @Valid @RequestBody AnimalCreationRequest body) {
-        animalService.addAnimal(body);
+    public ResponseEntity<Void> addAnimal(@ApiParam(value = "", required = true) @PathVariable("username") String username, @ApiParam(value = "Animal to add"  )  @Valid @RequestBody AnimalCreationRequest body) throws IOException {
+        animalService.addAnimal(body, username);
         return new ResponseEntity<Void>(HttpStatus.OK);
     }
 

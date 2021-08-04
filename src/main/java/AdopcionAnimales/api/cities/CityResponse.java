@@ -13,6 +13,9 @@ import java.util.Objects;
 @Validated
 @javax.annotation.Generated(value = "io.swagger.codegen.v3.generators.java.SpringCodegen", date = "2021-02-24T16:55:56.237+01:00[Europe/Paris]")
 public class CityResponse   {
+  @JsonProperty("id")
+  private Long id = null;
+
   @JsonProperty("name")
   private String name = null;
 
@@ -25,6 +28,26 @@ public class CityResponse   {
   public CityResponse name(String name) {
     this.name = name;
     return this;
+  }
+  public CityResponse id(Long id) {
+    this.id = id;
+    return this;
+  }
+
+  /**
+   * Get id
+   *
+   * @return id
+   **/
+  @ApiModelProperty(example = "1", required = true, value = "")
+  @NotNull
+
+  public Long getId() {
+    return id;
+  }
+
+  public void setId(Long id) {
+    this.id = id;
   }
 
   /**
@@ -92,21 +115,22 @@ public class CityResponse   {
       return false;
     }
     CityResponse cityResponse = (CityResponse) o;
-    return Objects.equals(this.name, cityResponse.name) &&
+    return Objects.equals(this.id, cityResponse.id) && Objects.equals(this.name, cityResponse.name) &&
         Objects.equals(this.province, cityResponse.province) &&
         Objects.equals(this.autonomousCommunity, cityResponse.autonomousCommunity);
   }
 
   @Override
   public int hashCode() {
-    return Objects.hash(name, province, autonomousCommunity);
+    return Objects.hash(id, name, province, autonomousCommunity);
   }
 
   @Override
   public String toString() {
     StringBuilder sb = new StringBuilder();
     sb.append("class CityResponse {\n");
-    
+
+    sb.append("    id: ").append(toIndentedString(id)).append("\n");
     sb.append("    name: ").append(toIndentedString(name)).append("\n");
     sb.append("    province: ").append(toIndentedString(province)).append("\n");
     sb.append("    autonomousCommunity: ").append(toIndentedString(autonomousCommunity)).append("\n");

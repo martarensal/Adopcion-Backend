@@ -80,4 +80,16 @@ public class CitiesApiController implements CitiesApi {
                                                                       @Valid Integer size) {
         return new ResponseEntity<CityPaginatedResponse>(cityService.getCitiesFromProvinces(province, page, size), HttpStatus.OK);
     }
+
+    @Override
+    public ResponseEntity<CityPaginatedResponse> getProvincesFromCommunity(String autonomous_community, @Valid Integer page,
+                                                                        @Valid Integer size) {
+        return new ResponseEntity<CityPaginatedResponse>(cityService.getProvincesFromCommunity(autonomous_community, page, size), HttpStatus.OK);
+    }
+
+    @Override
+    public ResponseEntity<CityPaginatedResponse> getAutonomousCommunity(@Valid Integer page,
+                                                           @Valid Integer size) {
+        return new ResponseEntity<CityPaginatedResponse>(cityService.getAutonomousCommunity(page, size), HttpStatus.OK);
+    }
 }

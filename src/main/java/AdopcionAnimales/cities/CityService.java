@@ -10,7 +10,9 @@ public interface CityService {
     void addCity(CityCreationRequest cityCreationRequest) throws ConstraintViolationException;;
     void deleteCity(Long idCity);
     CityPaginatedResponse getCities( Integer page, Integer size);
+    CityPaginatedResponse getAutonomousCommunity( Integer page, Integer size);
     CityPaginatedResponse getCitiesFromProvinces(String province, Integer page, Integer size);
+    CityPaginatedResponse getProvincesFromCommunity(String autonomous_community, Integer page, Integer size);
     void modifyCityName(CityNameChangeRequest cityNameChangeRequest, Long idCity);
     void modifyCityProvince(CityProvinceChangeRequest cityProvinceChangeRequest, Long idCity);
     void modifyCityAutonomousCommunity(CityAutonomousCommunityChangeRequest cityAutonomousCommunityChangeRequest, Long idCity);

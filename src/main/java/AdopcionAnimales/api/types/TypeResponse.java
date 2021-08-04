@@ -1,5 +1,6 @@
 package AdopcionAnimales.api.types;
 
+import AdopcionAnimales.api.cities.CityResponse;
 import com.fasterxml.jackson.annotation.JsonProperty;
 import io.swagger.annotations.ApiModelProperty;
 import org.springframework.validation.annotation.Validated;
@@ -13,9 +14,31 @@ import java.util.Objects;
 @Validated
 @javax.annotation.Generated(value = "io.swagger.codegen.v3.generators.java.SpringCodegen", date = "2021-02-24T16:55:56.237+01:00[Europe/Paris]")
 public class TypeResponse   {
+  @JsonProperty("id")
+  private Long id = null;
+
   @JsonProperty("name")
   private String name = null;
+  public TypeResponse id(Long id) {
+    this.id = id;
+    return this;
+  }
 
+  /**
+   * Get id
+   *
+   * @return id
+   **/
+  @ApiModelProperty(example = "1", required = true, value = "")
+  @NotNull
+
+  public Long getId() {
+    return id;
+  }
+
+  public void setId(Long id) {
+    this.id = id;
+  }
   public TypeResponse name(String name) {
     this.name = name;
     return this;

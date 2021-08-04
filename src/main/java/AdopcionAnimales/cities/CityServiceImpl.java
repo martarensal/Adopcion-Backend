@@ -93,6 +93,21 @@ public class CityServiceImpl implements CityService{
 
     @Override
     @Transactional
+    public CityPaginatedResponse getAutonomousCommunity( Integer page, Integer size) {
+
+        Page<City> matchedCommunity = cityRepository.getAutonomousCommunities(PageRequest.of(page, size));
+        return getCityPaginatedResponse(matchedCommunity);
+    }
+
+    @Override
+    @Transactional
+    public CityPaginatedResponse getProvincesFromCommunity(String autonomous_community, Integer page, Integer size) {
+
+        Page<City> matchedCities = cityRepository.getProvincesFromCommunity(autonomous_community, PageRequest.of(page, size));
+        return getCityPaginatedResponse(matchedCities);
+    }
+    @Override
+    @Transactional
     public CityPaginatedResponse getCitiesFromProvinces(String province, Integer page, Integer size) {
 
         Page<City> matchedCities = cityRepository.getCitiesFromProvinces(province, PageRequest.of(page, size));

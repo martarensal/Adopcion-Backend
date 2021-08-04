@@ -157,8 +157,7 @@ public class UsersServiceImpl implements UsersService {
 
     @Override
     @Transactional
-    public User findUserById(Long id) {
-        return userRepository.findById(id).orElse(null);
+    public User findUserById(Long id) {return userRepository.findById(id).orElse(null);
     }
 
     @Override
