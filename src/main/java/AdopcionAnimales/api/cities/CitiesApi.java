@@ -62,7 +62,7 @@ public interface CitiesApi {
         produces = { "application/json" }, 
         method = RequestMethod.GET)
     ResponseEntity<CityPaginatedResponse> getCities(@ApiParam(value = "the number of the page") @Valid @RequestParam(value = "page", required = false, defaultValue = "0") Integer page,
-                                                    @ApiParam(value = "the number of element per page") @Valid @RequestParam(value = "size", required = false, defaultValue = "25") Integer size);
+                                                    @ApiParam(value = "the number of element per page") @Valid @RequestParam(value = "size", required = false, defaultValue = "600") Integer size);
 
     @ApiOperation(value = "List all cities from a province", nickname = "getCitiesFromProvinces", notes = "Searches for a city. This operation is permited for both user and admin", response = CityPaginatedResponse.class, responseContainer = "List", authorizations = {
             @Authorization(value = "ApiKeyAuth")    }, tags={  })
@@ -75,7 +75,7 @@ public interface CitiesApi {
             method = RequestMethod.GET)
     ResponseEntity<CityPaginatedResponse> getCitiesFromProvinces(@ApiParam(value = "", required = true) @PathVariable("province") String province,
                                                                  @ApiParam(value = "the number of the page") @Valid @RequestParam(value = "page", required = false, defaultValue = "0") Integer page,
-                                                                 @ApiParam(value = "the number of element per page") @Valid @RequestParam(value = "size", required = false, defaultValue = "25") Integer size);
+                                                                 @ApiParam(value = "the number of element per page") @Valid @RequestParam(value = "size", required = false, defaultValue = "600") Integer size);
 
     @ApiOperation(value = "List all provinces from a community", nickname = "getProvinciesFromCommunities", notes = "Searches for a province. ", response = CityPaginatedResponse.class, responseContainer = "List", authorizations = {
             @Authorization(value = "ApiKeyAuth")    }, tags={  })
@@ -88,7 +88,7 @@ public interface CitiesApi {
             method = RequestMethod.GET)
     ResponseEntity<CityPaginatedResponse> getProvincesFromCommunity(@ApiParam(value = "", required = true) @PathVariable("autonomous_community") String autonomous_community,
                                                                  @ApiParam(value = "the number of the page") @Valid @RequestParam(value = "page", required = false, defaultValue = "0") Integer page,
-                                                                 @ApiParam(value = "the number of element per page") @Valid @RequestParam(value = "size", required = false, defaultValue = "25") Integer size);
+                                                                 @ApiParam(value = "the number of element per page") @Valid @RequestParam(value = "size", required = false, defaultValue = "600") Integer size);
 
 
     @ApiOperation(value = "Modifies the city's name", nickname = "modifyCityName", notes = "The id of the city you want to modify", authorizations = {
@@ -135,6 +135,6 @@ public interface CitiesApi {
             produces = { "application/json" },
             method = RequestMethod.GET)
     ResponseEntity<CityPaginatedResponse> getAutonomousCommunity(@ApiParam(value = "the number of the page") @Valid @RequestParam(value = "page", required = false, defaultValue = "0") Integer page,
-                                                    @ApiParam(value = "the number of element per page") @Valid @RequestParam(value = "size", required = false, defaultValue = "25") Integer size);
+                                                    @ApiParam(value = "the number of element per page") @Valid @RequestParam(value = "size", required = false, defaultValue = "600") Integer size);
 
 }

@@ -21,6 +21,13 @@ public class AnimalCreationRequest   {
   @JsonProperty("age")
   private Integer age = null;
 
+
+  @JsonProperty("type_id")
+  private Long type_id = 0l;
+
+  @JsonProperty("city_id")
+  private Long city_id = 0l;
+
   /**
    * Gets or Sets size
    */
@@ -141,9 +148,9 @@ public class AnimalCreationRequest   {
    */
   public enum StatusEnum {
     ADOPTED("adopted"),
-    
+
     HOMELESS("homeless"),
-    
+
     SHELTER("shelter");
 
     private String value;
@@ -217,6 +224,46 @@ public class AnimalCreationRequest   {
   public AnimalCreationRequest size(SizeEnum size) {
     this.size = size;
     return this;
+  }
+
+  public AnimalCreationRequest type_id(Long type_id) {
+    this.type_id = type_id;
+    return this;
+  }
+
+  /**
+   * Get type_id
+   * @return type_id
+   **/
+  @ApiModelProperty(example = "1", required = true, value = "")
+  @NotNull
+
+  public Long getType_id() {
+    return type_id;
+  }
+
+  public void setType_id(Long type_id) {
+    this.type_id = type_id;
+  }
+
+  public AnimalCreationRequest city_id(Long city_id) {
+    this.city_id = city_id;
+    return this;
+  }
+
+  /**
+   * Get city_id
+   * @return city_id
+   **/
+  @ApiModelProperty(example = "1", required = true, value = "")
+  @NotNull
+
+  public Long getCity_id() {
+    return city_id;
+  }
+
+  public void setCity_id(Long city_id) {
+    this.city_id = city_id;
   }
 
   /**

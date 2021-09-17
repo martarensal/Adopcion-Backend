@@ -1,5 +1,7 @@
 package AdopcionAnimales.api.animals;
 
+import AdopcionAnimales.cities.City;
+import AdopcionAnimales.types.Type;
 import com.fasterxml.jackson.annotation.JsonCreator;
 import com.fasterxml.jackson.annotation.JsonProperty;
 import com.fasterxml.jackson.annotation.JsonValue;
@@ -307,6 +309,45 @@ public class AnimalResponse   {
     this.image = image;
   }
 
+  @JsonProperty("type")
+  private Type type = null;
+  public AnimalResponse type(Type type) {
+    this.type = type;
+    return this;
+  }
+
+  /**
+   * Get type
+   * @return type
+   **/
+  @ApiModelProperty(example = "Perro", value = "")
+
+  public Type getType() {
+    return type;
+  }
+
+  public void setType(Type type) {
+    this.type = type;
+  }
+
+  @JsonProperty("city")
+  private City city = null;
+  public AnimalResponse city(City city) {
+    this.city = city;
+    return this;
+  }
+  /**
+   * Get city
+   * @return city
+   **/
+  @ApiModelProperty(example = "Puerto real", value = "")
+
+  public City getCity() {
+    return city;
+  }
+  public void setCity(City city) {
+    this.city = city;
+  }
 
   @Override
   public boolean equals(Object o) {
@@ -323,12 +364,14 @@ public class AnimalResponse   {
         Objects.equals(this.colour, animalResponse.colour) &&
         Objects.equals(this.sex, animalResponse.sex) &&
         Objects.equals(this.status, animalResponse.status) &&
-        Objects.equals(this.image, animalResponse.image);
+        Objects.equals(this.image, animalResponse.image) &&
+        Objects.equals(this.type, animalResponse.type) &&
+            Objects.equals(this.city, animalResponse.city);
   }
 
   @Override
   public int hashCode() {
-    return Objects.hash(name, size, age, colour, sex, status, image);
+    return Objects.hash(name, size, age, colour, sex, status, image, type, city);
   }
 
   @Override
@@ -343,6 +386,8 @@ public class AnimalResponse   {
     sb.append("    sex: ").append(toIndentedString(sex)).append("\n");
     sb.append("    status: ").append(toIndentedString(status)).append("\n");
     sb.append("    image: ").append(toIndentedString(image)).append("\n");
+    sb.append("    city: ").append(toIndentedString(city)).append("\n");
+    sb.append("    type: ").append(toIndentedString(type)).append("\n");
     sb.append("}");
     return sb.toString();
   }

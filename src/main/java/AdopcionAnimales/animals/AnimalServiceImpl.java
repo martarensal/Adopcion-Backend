@@ -2,6 +2,10 @@ package AdopcionAnimales.animals;
 
 import AdopcionAnimales.api.utils.PaginationInfo;
 import AdopcionAnimales.api.animals.*;
+import AdopcionAnimales.cities.City;
+import AdopcionAnimales.cities.CityRepository;
+import AdopcionAnimales.types.Type;
+import AdopcionAnimales.types.TypeRepository;
 import AdopcionAnimales.users.User;
 import AdopcionAnimales.users.UsersRepository;
 import AdopcionAnimales.utils.SecurityUtils;
@@ -25,13 +29,17 @@ public class AnimalServiceImpl implements AnimalService{
 
     private AnimalsRepository animalsRepository;
     private UsersRepository usersRepository;
+    private CityRepository citiesRepository;
+    private TypeRepository typeRepository;
     private AnimalMapper animalMapper;
 
     @Autowired
-    public AnimalServiceImpl(AnimalsRepository animalsRepository, UsersRepository usersRepository, AnimalMapper animalMapper) {
+    public AnimalServiceImpl(AnimalsRepository animalsRepository, UsersRepository usersRepository, TypeRepository typeRepository, CityRepository citiesRepository, AnimalMapper animalMapper) {
         super();
         this.animalsRepository = animalsRepository;
         this.usersRepository = usersRepository;
+        this.citiesRepository = citiesRepository;
+        this.typeRepository = typeRepository;
         this.animalMapper = animalMapper;
     }
 
@@ -46,14 +54,25 @@ public class AnimalServiceImpl implements AnimalService{
         User user = getUser();
 
         newAnimal.setUser(user);
-
+        City city = citiesRepository.findByCityId(animalCreationRequest.getCity_id());
+        newAnimal.setCity(city);
+        Type type = typeRepository.findByTypeId(animalCreationRequest.getType_id());
+        newAnimal.setType(type);
         user.getAnimals().add(animalsRepository.save(newAnimal));
 
         String idAnimal = newAnimal.getId().toString();
-        String fileName = "img\\" + idAnimal + ".png";
-        try(FileOutputStream stream = new FileOutputStream(fileName)) {
-            stream.write(decode(base64));
+        String fileName = "";
+        if(base64.length() <= 0){
+            fileName = "img\\nophoto.png";
+
+        }else
+        {
+            fileName = "img\\" + idAnimal + ".png";
+            try(FileOutputStream stream = new FileOutputStream(fileName)) {
+                stream.write(decode(base64));
+            }
         }
+
         newAnimal.setImage(fileName);
 
         animalsRepository.save(newAnimal);
