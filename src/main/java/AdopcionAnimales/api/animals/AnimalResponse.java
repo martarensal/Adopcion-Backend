@@ -332,7 +332,7 @@ public class AnimalResponse   {
   }
 
   @JsonProperty("city")
-  private CityResponse city = null;
+  private String city = null;
   /*public AnimalResponse city(City city) {
     this.city = city;
     return this;
@@ -343,10 +343,10 @@ public class AnimalResponse   {
    **/
   @ApiModelProperty(example = "Puerto real", value = "")
 
-  public CityResponse getCity() {
+  public String getCity() {
     return city;
   }
-  public void setCity(CityResponse city) {
+  public void setCity(String city) {
     this.city = city;
   }
 
