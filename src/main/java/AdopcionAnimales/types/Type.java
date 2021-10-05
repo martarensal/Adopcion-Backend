@@ -1,6 +1,9 @@
 package AdopcionAnimales.types;
 
 import AdopcionAnimales.animals.Animal;
+import AdopcionAnimales.requests.Request;
+import com.fasterxml.jackson.annotation.JsonManagedReference;
+import org.hibernate.annotations.Proxy;
 
 import javax.persistence.*;
 import java.util.Set;
@@ -16,7 +19,13 @@ public class Type {
     @OneToMany(mappedBy = "type")
     private Set<Animal> animals;
 
+    public Type(Long id, String name, Set<Animal> animals){
+        this.id = id;
+        this.name= name;
+        this.animals = animals;
+    }
     public Type(){}
+
     public void setId(Long id) {
         this.id = id;
     }

@@ -46,7 +46,7 @@ public interface RequestsApi {
             @ApiResponse(code = 200, message = "The search was successfull", response = RequestPaginatedResponse.class),
             @ApiResponse(code = 401, message = "The requested page needs a username and a password"),
             @ApiResponse(code = 500, message = "Internal server error") })
-    @RequestMapping(value = "user/{username}/requests",
+    @RequestMapping(value = "users/{username}/requests",
             produces = { "application/json" },
             method = RequestMethod.GET)
     ResponseEntity<RequestPaginatedResponse> getRequestsFromUser(

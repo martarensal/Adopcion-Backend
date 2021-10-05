@@ -95,6 +95,7 @@ public class AnimalServiceImpl implements AnimalService{
     public AnimalPaginatedResponse getAnimalsFromUser(String username, Integer page, Integer size) {
 
         Page<Animal> matchedAnimals = animalsRepository.getAnimalsFromUsers(username, PageRequest.of(page, size));
+        System.out.println(getAnimalPaginatedResponse(matchedAnimals));
         return getAnimalPaginatedResponse(matchedAnimals);
     }
 

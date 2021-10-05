@@ -1,5 +1,6 @@
 package AdopcionAnimales.api.animals;
 
+import AdopcionAnimales.api.cities.CityResponse;
 import AdopcionAnimales.cities.City;
 import AdopcionAnimales.types.Type;
 import com.fasterxml.jackson.annotation.JsonCreator;
@@ -310,11 +311,11 @@ public class AnimalResponse   {
   }
 
   @JsonProperty("type")
-  private Type type = null;
-  public AnimalResponse type(Type type) {
-    this.type = type;
+  private String type = null;
+/*  public AnimalResponse type(Type type) {
+    this.type = type.getName();
     return this;
-  }
+  }*/
 
   /**
    * Get type
@@ -322,30 +323,30 @@ public class AnimalResponse   {
    **/
   @ApiModelProperty(example = "Perro", value = "")
 
-  public Type getType() {
+  public String getType() {
     return type;
   }
 
-  public void setType(Type type) {
+  public void setType(String type) {
     this.type = type;
   }
 
   @JsonProperty("city")
-  private City city = null;
-  public AnimalResponse city(City city) {
+  private CityResponse city = null;
+  /*public AnimalResponse city(City city) {
     this.city = city;
     return this;
-  }
+  }*/
   /**
    * Get city
    * @return city
    **/
   @ApiModelProperty(example = "Puerto real", value = "")
 
-  public City getCity() {
+  public CityResponse getCity() {
     return city;
   }
-  public void setCity(City city) {
+  public void setCity(CityResponse city) {
     this.city = city;
   }
 

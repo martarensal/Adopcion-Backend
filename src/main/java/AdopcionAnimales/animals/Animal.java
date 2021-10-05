@@ -4,9 +4,12 @@ import AdopcionAnimales.cities.City;
 import AdopcionAnimales.requests.Request;
 import AdopcionAnimales.types.Type;
 import AdopcionAnimales.users.User;
+import com.fasterxml.jackson.annotation.JsonBackReference;
+import com.fasterxml.jackson.annotation.JsonManagedReference;
+import org.hibernate.annotations.Fetch;
+import org.hibernate.annotations.FetchMode;
 
 import javax.persistence.*;
-import javax.persistence.Table;
 import java.util.Set;
 
 @Entity
@@ -26,12 +29,12 @@ public class Animal {
 
     @ManyToOne
     private User user;
-    @OneToMany(mappedBy = "animal")
-    private Set<Request> request;
     @ManyToOne
     private City city;
     @ManyToOne
     private Type type;
+    @OneToMany(mappedBy = "animal")
+    private Set<Request> request;
 
     public Animal(Long id, String name, int age, String size, String colour, String sex, String status, String image, User user, Set<Request> request, City city, Type type) {
         this.id = id;

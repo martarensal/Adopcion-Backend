@@ -2,13 +2,19 @@ package AdopcionAnimales.animals;
 
 import AdopcionAnimales.api.animals.AnimalCreationRequest;
 import AdopcionAnimales.api.animals.AnimalResponse;
+import AdopcionAnimales.types.Type;
 import org.mapstruct.Mapper;
+import org.mapstruct.Mapping;
 
 import java.util.List;
 import java.util.Set;
 
 @Mapper(componentModel = "spring")
-public interface AnimalMapper {
-    List<AnimalResponse> animalsToAnimalsResponse(List<Animal> animals);
-    Animal animalCreationRequestToAnimal(AnimalCreationRequest animalCreationRequest);
+public abstract class AnimalMapper {
+    public String typeToString(Type t)
+    {
+        return t.getName();
+    }
+    public abstract List<AnimalResponse> animalsToAnimalsResponse(List<Animal> animals);
+    public abstract Animal animalCreationRequestToAnimal(AnimalCreationRequest animalCreationRequest);
 }

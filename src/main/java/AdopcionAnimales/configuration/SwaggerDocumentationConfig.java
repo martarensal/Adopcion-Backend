@@ -1,7 +1,10 @@
 package AdopcionAnimales.configuration;
 
+import com.fasterxml.jackson.databind.ObjectMapper;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
+import org.springframework.http.converter.json.MappingJackson2HttpMessageConverter;
+import org.springframework.web.servlet.config.annotation.EnableWebMvc;
 import springfox.documentation.builders.ApiInfoBuilder;
 import springfox.documentation.builders.PathSelectors;
 import springfox.documentation.builders.RequestHandlerSelectors;
@@ -31,7 +34,6 @@ public class SwaggerDocumentationConfig {
             .contact(new Contact("","", ""))
             .build();
     }
-
     @Bean
     public Docket customImplementation(){
         return new Docket(DocumentationType.SWAGGER_2)
