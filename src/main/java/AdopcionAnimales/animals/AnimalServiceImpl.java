@@ -16,7 +16,6 @@ import org.springframework.stereotype.Service;
 
 import javax.persistence.EntityNotFoundException;
 import javax.transaction.Transactional;
-import java.io.File;
 import java.io.FileOutputStream;
 import java.io.IOException;
 import java.util.Arrays;
@@ -95,7 +94,6 @@ public class AnimalServiceImpl implements AnimalService{
     public AnimalPaginatedResponse getAnimalsFromUser(String username, Integer page, Integer size) {
 
         Page<Animal> matchedAnimals = animalsRepository.getAnimalsFromUsers(username, PageRequest.of(page, size));
-        System.out.println(getAnimalPaginatedResponse(matchedAnimals));
         return getAnimalPaginatedResponse(matchedAnimals);
     }
 
@@ -180,13 +178,33 @@ public class AnimalServiceImpl implements AnimalService{
     public void modifyAnimalImage(AnimalImageChangeRequest animalImageChangeRequest, Long idAnimal){
         Animal animal = findAnimalById(idAnimal);
         if(animal != null) {
-            animal.setImage(animalImageChangeRequest.getNewAnimalImage());
+            String base64 = animalImageChangeRequest.getNewAnimalImage();
+            animalImageChangeRequest.setNewAnimalImage("");
+
+            String fileName = "";
+            if(base64.length() <= 0){
+                fileName = "img\\nophoto.png";
+
+            }else
+            {
+                fileName = "img\\" + idAnimal + ".png";
+                try(FileOutputStream stream = new FileOutputStream(fileName)) {
+                    stream.write(decode(base64));
+                } catch (IOException e) {
+                    e.printStackTrace();
+                }
+            }
+
+            animal.setImage(fileName);
+            //animal.setImage(animalImageChangeRequest.getNewAnimalImage());
             animalsRepository.save(animal);
         }
     }
     @Override
     @Transactional
     public void modifyAnimalName(AnimalNameChangeRequest animalNameChangeRequest, Long idAnimal){
+        System.out.println(animalNameChangeRequest + " animal name change request");
+        System.out.println(idAnimal + " id animal");
         Animal animal = findAnimalById(idAnimal);
         if(animal != null) {
             animal.setName(animalNameChangeRequest.getNewAnimalName());

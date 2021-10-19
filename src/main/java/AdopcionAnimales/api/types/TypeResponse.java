@@ -1,6 +1,5 @@
 package AdopcionAnimales.api.types;
 
-import AdopcionAnimales.api.cities.CityResponse;
 import com.fasterxml.jackson.annotation.JsonProperty;
 import io.swagger.annotations.ApiModelProperty;
 import org.springframework.validation.annotation.Validated;
