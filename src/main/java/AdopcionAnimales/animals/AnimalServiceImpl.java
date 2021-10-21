@@ -1,5 +1,6 @@
 package AdopcionAnimales.animals;
 
+import AdopcionAnimales.api.cities.CityNameChangeRequest;
 import AdopcionAnimales.api.utils.PaginationInfo;
 import AdopcionAnimales.api.animals.*;
 import AdopcionAnimales.cities.City;
@@ -18,6 +19,8 @@ import javax.persistence.EntityNotFoundException;
 import javax.transaction.Transactional;
 import java.io.FileOutputStream;
 import java.io.IOException;
+import java.nio.file.Files;
+import java.nio.file.Paths;
 import java.util.Arrays;
 import java.util.Base64;
 import java.util.List;
@@ -82,16 +85,22 @@ public class AnimalServiceImpl implements AnimalService{
         return Base64.getDecoder().decode(base64String);
     }
 
+    private static String encode(String imagePath) throws IOException{
+        byte[] data = Files.readAllBytes(Paths.get(imagePath));
+        return Base64.getEncoder().encodeToString(data);
+    }
+
+
     @Override
     @Transactional
-    public AnimalPaginatedResponse getAnimals(Integer page, Integer size) {
+    public AnimalPaginatedResponse getAnimals(Integer page, Integer size) throws IOException {
         Page<Animal> matchedAnimals = animalsRepository.getAnimals(PageRequest.of(page, size));
         return getAnimalPaginatedResponse(matchedAnimals);
     }
 
     @Override
     @Transactional
-    public AnimalPaginatedResponse getAnimalsFromUser(String username, Integer page, Integer size) {
+    public AnimalPaginatedResponse getAnimalsFromUser(String username, Integer page, Integer size) throws IOException {
 
         Page<Animal> matchedAnimals = animalsRepository.getAnimalsFromUsers(username, PageRequest.of(page, size));
         return getAnimalPaginatedResponse(matchedAnimals);
@@ -100,7 +109,7 @@ public class AnimalServiceImpl implements AnimalService{
     @Override
     @Transactional
     public AnimalPaginatedResponse getAnimalsFromAnyFilter(Long idCity, Integer minAge, Integer maxAge, String colour, String animalSize,
-                                                           String sex, Integer page, Integer size) {
+                                                           String sex, Integer page, Integer size) throws IOException {
         List<String> partsColour = null;
         List<String> partsAnimalSize = null;
         if(colour != null ){
@@ -120,10 +129,17 @@ public class AnimalServiceImpl implements AnimalService{
         return getAnimalPaginatedResponse(matchedAnimals);
     }
 
-    private AnimalPaginatedResponse getAnimalPaginatedResponse(Page<Animal> matchedAnimals) {
+    private AnimalPaginatedResponse getAnimalPaginatedResponse(Page<Animal> matchedAnimals) throws IOException {
         List<Animal> animals = matchedAnimals.stream().collect(Collectors.toList());
 
         List<AnimalResponse> animalResponses = animalMapper.animalsToAnimalsResponse(animals);
+        for(int i = 0; i < animalResponses.size(); i++)
+        {
+            String image = animalResponses.get(i).getImage();
+            String base64 = encode(image);
+            animalResponses.get(i).setImage(base64);
+        }
+        //System.out.println(animalResponses);
 
         PaginationInfo paginationInfo = new PaginationInfo();
         paginationInfo.setTotalElements(matchedAnimals.getNumberOfElements());

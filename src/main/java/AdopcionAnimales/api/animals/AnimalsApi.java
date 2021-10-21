@@ -134,7 +134,7 @@ public interface AnimalsApi {
     ResponseEntity<AnimalPaginatedResponse> getAnimalsFromUser(
             @ApiParam(value = "", required = true) @PathVariable("username") String username,
             @ApiParam(value = "the number of the page") @Valid @RequestParam(value = "page", required = false, defaultValue = "0") Integer page,
-            @ApiParam(value = "the number of element per page") @Valid @RequestParam(value = "size", required = false, defaultValue = "25") Integer size);
+            @ApiParam(value = "the number of element per page") @Valid @RequestParam(value = "size", required = false, defaultValue = "25") Integer size) throws IOException;
 
     @ApiOperation(value = "List all animals", nickname = "getAnimals", notes = "List all animals", response = AnimalPaginatedResponse.class, responseContainer = "List", authorizations = {
             @Authorization(value = "ApiKeyAuth")    }, tags={  })
@@ -147,7 +147,7 @@ public interface AnimalsApi {
             method = RequestMethod.GET)
     ResponseEntity<AnimalPaginatedResponse> getAnimals(
             @ApiParam(value = "the number of the page") @Valid @RequestParam(value = "page", required = false, defaultValue = "0") Integer page,
-            @ApiParam(value = "the number of element per page") @Valid @RequestParam(value = "size", required = false, defaultValue = "25") Integer size);
+            @ApiParam(value = "the number of element per page") @Valid @RequestParam(value = "size", required = false, defaultValue = "25") Integer size) throws IOException;
 
     @ApiOperation(value = "Searches the animals with a filter", nickname = "getAnimalsFromAnyFilter", notes = "", response = AnimalPaginatedResponse.class, responseContainer = "List", authorizations = {
             @Authorization(value = "ApiKeyAuth")    }, tags={  })
@@ -166,6 +166,6 @@ public interface AnimalsApi {
             @ApiParam(value = "", required = false) @RequestParam(required = false) String animalSize,
             @ApiParam(value = "", required = false) @RequestParam(required = false) String sex,
             @ApiParam(value = "the number of the page") @Valid @RequestParam(value = "page", required = false, defaultValue = "0") Integer page,
-            @ApiParam(value = "the number of element per page") @Valid @RequestParam(value = "size", required = false, defaultValue = "25") Integer size);
+            @ApiParam(value = "the number of element per page") @Valid @RequestParam(value = "size", required = false, defaultValue = "25") Integer size) throws IOException;
 
 }

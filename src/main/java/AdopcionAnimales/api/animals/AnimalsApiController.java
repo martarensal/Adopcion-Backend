@@ -80,17 +80,17 @@ public class AnimalsApiController implements AnimalsApi {
     }
 
     public ResponseEntity<AnimalPaginatedResponse> getAnimalsFromUser(String username, @Valid Integer page,
-                                                                            @Valid Integer size) {
+                                                                            @Valid Integer size) throws IOException {
         return new ResponseEntity<AnimalPaginatedResponse>(animalService.getAnimalsFromUser(username, page, size), HttpStatus.OK);
     }
 
     public ResponseEntity<AnimalPaginatedResponse> getAnimalsFromAnyFilter(Long idCity, Integer minAge, Integer maxAge, String colour, String animalSize, String sex, @Valid Integer page,
-                                                                      @Valid Integer size) {
+                                                                      @Valid Integer size) throws IOException {
         return new ResponseEntity<AnimalPaginatedResponse>(animalService.getAnimalsFromAnyFilter(idCity, minAge, maxAge, colour, animalSize, sex, page, size), HttpStatus.OK);
     }
 
     public ResponseEntity<AnimalPaginatedResponse> getAnimals(@Valid Integer page,
-                                                                      @Valid Integer size) {
+                                                                      @Valid Integer size) throws IOException {
         return new ResponseEntity<AnimalPaginatedResponse>(animalService.getAnimals(page, size), HttpStatus.OK);
     }
 
