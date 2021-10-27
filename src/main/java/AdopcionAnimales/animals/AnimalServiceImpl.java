@@ -1,6 +1,4 @@
 package AdopcionAnimales.animals;
-
-import AdopcionAnimales.api.cities.CityNameChangeRequest;
 import AdopcionAnimales.api.utils.PaginationInfo;
 import AdopcionAnimales.api.animals.*;
 import AdopcionAnimales.cities.City;
@@ -219,8 +217,8 @@ public class AnimalServiceImpl implements AnimalService{
     @Override
     @Transactional
     public void modifyAnimalName(AnimalNameChangeRequest animalNameChangeRequest, Long idAnimal){
-        System.out.println(animalNameChangeRequest + " animal name change request");
-        System.out.println(idAnimal + " id animal");
+        //System.out.println(animalNameChangeRequest + " animal name change request");
+        //System.out.println(idAnimal + " id animal");
         Animal animal = findAnimalById(idAnimal);
         if(animal != null) {
             animal.setName(animalNameChangeRequest.getNewAnimalName());
@@ -278,6 +276,37 @@ public class AnimalServiceImpl implements AnimalService{
             }
         }
 
+    }
+    @Override
+    @Transactional
+    public void modifyAnimalCity(AnimalCityChangeRequest animalCityChangeRequest, Long idAnimal){
+
+        Animal animal = findAnimalById(idAnimal);
+        if(animal != null) {
+            City city = citiesRepository.findByCityId(animalCityChangeRequest.getNewAnimalCity_id());
+
+            animal.setCity(city);
+            animalsRepository.save(animal);
+        }
+
+    }
+    @Override
+    @Transactional
+    public void modifyAnimalType(AnimalTypeChangeRequest animalTypeChangeRequest, Long idAnimal){
+        Animal animal = findAnimalById(idAnimal);
+
+        if(animal != null) {
+            //System.out.println(animalTypeChangeRequest.getAnimalType_id().toString() + " animaltypechangerequest");
+
+
+            Type type = typeRepository.findByTypeId(animalTypeChangeRequest.getAnimalType_id());
+
+            //System.out.println(type.getName() + "el id en el tipo");
+            //System.out.println(type.getId().toString() + "el id en el tipo");
+
+            animal.setType(type);
+            animalsRepository.save(animal);
+        }
     }
 
     @Override

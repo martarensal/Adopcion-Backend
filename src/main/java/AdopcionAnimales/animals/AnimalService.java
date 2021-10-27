@@ -23,5 +23,8 @@ public interface AnimalService {
     void modifyAnimalSex(AnimalSexChangeRequest animalSexChangeRequest, Long idAnimal);
     void modifyAnimalSize(AnimalSizeChangeRequest animalSizeChangeRequest, Long idAnimal);
     void modifyAnimalStatus(AnimalStatusChangeRequest animalStatusChangeRequest, Long idAnimal);
+    void modifyAnimalCity(AnimalCityChangeRequest animalCityChangeRequest, Long idAnimal);
+    void modifyAnimalType(AnimalTypeChangeRequest animalTypeChangeRequest, Long idAnimal);
+
     Animal findAnimalById(Long id);
 }

@@ -79,6 +79,15 @@ public class AnimalsApiController implements AnimalsApi {
         return new ResponseEntity<Void>(HttpStatus.OK);
     }
 
+    public ResponseEntity<Void> modifyAnimalCity(@ApiParam(value = "By passing in the appropriate animal code, you can modify the animal.",required=true) @PathVariable("idAnimal") Long idAnimal,@ApiParam(value = "The animal's new city"  )  @Valid @RequestBody AnimalCityChangeRequest body) {
+        animalService.modifyAnimalCity(body, idAnimal);
+        return new ResponseEntity<Void>(HttpStatus.OK);
+    }
+    public ResponseEntity<Void> modifyAnimalType(@ApiParam(value = "By passing in the appropriate animal code, you can modify the animal.",required=true) @PathVariable("idAnimal") Long idAnimal,@ApiParam(value = "The animal's new status"  )  @Valid @RequestBody AnimalTypeChangeRequest body) {
+        animalService.modifyAnimalType(body, idAnimal);
+        return new ResponseEntity<Void>(HttpStatus.OK);
+    }
+
     public ResponseEntity<AnimalPaginatedResponse> getAnimalsFromUser(String username, @Valid Integer page,
                                                                             @Valid Integer size) throws IOException {
         return new ResponseEntity<AnimalPaginatedResponse>(animalService.getAnimalsFromUser(username, page, size), HttpStatus.OK);
