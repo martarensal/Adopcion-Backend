@@ -107,7 +107,7 @@ public class AnimalServiceImpl implements AnimalService{
     @Override
     @Transactional
     public AnimalPaginatedResponse getAnimalsFromAnyFilter(Long idCity, Integer minAge, Integer maxAge, String colour, String animalSize,
-                                                           String sex, Integer page, Integer size) throws IOException {
+                                                           String sex, Long idType, Integer page, Integer size) throws IOException {
         List<String> partsColour = null;
         List<String> partsAnimalSize = null;
         if(colour != null ){
@@ -123,7 +123,7 @@ public class AnimalServiceImpl implements AnimalService{
                 partsAnimalSize = Arrays.asList(animalSize);
         }
 
-        Page<Animal> matchedAnimals = animalsRepository.findAnimalByAnyFilter(idCity, minAge, maxAge, partsColour, partsAnimalSize, sex, PageRequest.of(page, size));
+        Page<Animal> matchedAnimals = animalsRepository.findAnimalByAnyFilter(idCity, minAge, maxAge, partsColour, partsAnimalSize, sex, idType, PageRequest.of(page, size));
         return getAnimalPaginatedResponse(matchedAnimals);
     }
 

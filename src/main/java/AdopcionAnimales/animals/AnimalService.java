@@ -14,7 +14,7 @@ public interface AnimalService {
     void addAnimal(AnimalCreationRequest animalCreationRequest, String username) throws IOException;
     AnimalPaginatedResponse getAnimals(Integer page, Integer size) throws IOException;
     AnimalPaginatedResponse getAnimalsFromUser(String username, Integer page, Integer size) throws IOException;
-    AnimalPaginatedResponse getAnimalsFromAnyFilter(Long idCity, Integer minAge, Integer maxAge, String colour, String animalSize, String sex, Integer page, Integer size) throws IOException;
+    AnimalPaginatedResponse getAnimalsFromAnyFilter(Long idCity, Integer minAge, Integer maxAge, String colour, String animalSize, String sex, Long idType, Integer page, Integer size) throws IOException;
     void deleteAnimal(Long idAnimal);
     void modifyAnimalAge(AnimalAgeChangeRequest animalAgeChangeRequest, Long idAnimal);
     void modifyAnimalColour(AnimalColourChangeRequest animalColourChangeRequest, Long idAnimal);
