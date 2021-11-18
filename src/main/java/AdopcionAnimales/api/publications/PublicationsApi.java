@@ -10,6 +10,7 @@ import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
 import javax.validation.Valid;
+import java.io.IOException;
 import java.util.List;
 
 @javax.annotation.Generated(value = "io.swagger.codegen.v3.generators.java.SpringCodegen", date = "2021-02-24T16:55:56.237+01:00[Europe/Paris]")
@@ -25,7 +26,7 @@ public interface PublicationsApi {
     @RequestMapping(value = "/publications",
             consumes = { "application/json" },
             method = RequestMethod.POST)
-    ResponseEntity<Void> addPublication(@ApiParam(value = "Publication to add"  )  @Valid @RequestBody PublicationCreationRequest body);
+    ResponseEntity<Void> addPublication(@ApiParam(value = "Publication to add"  )  @Valid @RequestBody PublicationCreationRequest body) throws IOException;
 
     @ApiOperation(value = "Searches for a publication made by an user", nickname = "getPublicationFromUser", notes = "Searches for a publication made by an user.", response = PublicationPaginatedResponse.class, responseContainer = "List", authorizations = {
             @Authorization(value = "ApiKeyAuth")    }, tags={  })
@@ -38,7 +39,7 @@ public interface PublicationsApi {
             method = RequestMethod.GET)
     ResponseEntity<PublicationPaginatedResponse> getPublicationsFromUser( @ApiParam(value = "", required = true) @PathVariable("username") String username,
                                                                           @ApiParam(value = "the number of the page") @Valid @RequestParam(value = "page", required = false, defaultValue = "0") Integer page,
-                                                                          @ApiParam(value = "the number of element per page") @Valid @RequestParam(value = "size", required = false, defaultValue = "25") Integer size);
+                                                                          @ApiParam(value = "the number of element per page") @Valid @RequestParam(value = "size", required = false, defaultValue = "25") Integer size) throws IOException;
 
     @ApiOperation(value = "List all publications", nickname = "searchPublication", notes = "Searches for a publication.", response = PublicationResponse.class, responseContainer = "List", authorizations = {
             @Authorization(value = "ApiKeyAuth")    }, tags={  })
@@ -50,7 +51,7 @@ public interface PublicationsApi {
             produces = { "application/json" },
             method = RequestMethod.GET)
     ResponseEntity<PublicationPaginatedResponse> getPublications( @ApiParam(value = "the number of the page") @Valid @RequestParam(value = "page", required = false, defaultValue = "0") Integer page,
-                                                                  @ApiParam(value = "the number of element per page") @Valid @RequestParam(value = "size", required = false, defaultValue = "25") Integer size);
+                                                                  @ApiParam(value = "the number of element per page") @Valid @RequestParam(value = "size", required = false, defaultValue = "25") Integer size) throws IOException;
 
     @ApiOperation(value = "Deletes a publication", nickname = "deletePublication", notes = "", authorizations = {
         @Authorization(value = "ApiKeyAuth")    }, tags={  })

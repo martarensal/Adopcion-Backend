@@ -15,6 +15,7 @@ import org.springframework.web.bind.annotation.RequestBody;
 
 import javax.servlet.http.HttpServletRequest;
 import javax.validation.Valid;
+import java.io.IOException;
 import java.util.List;
 
 @javax.annotation.Generated(value = "io.swagger.codegen.v3.generators.java.SpringCodegen", date = "2021-02-24T16:55:56.237+01:00[Europe/Paris]")
@@ -36,18 +37,18 @@ public class PublicationsApiController implements PublicationsApi {
         this.publicationService = publicationService;
     }
 
-    public ResponseEntity<Void> addPublication(@ApiParam(value = "Publication to add") @Valid @RequestBody PublicationCreationRequest body) {
+    public ResponseEntity<Void> addPublication(@ApiParam(value = "Publication to add") @Valid @RequestBody PublicationCreationRequest body) throws IOException {
         publicationService.addPublication(body);
         return new ResponseEntity<Void>(HttpStatus.OK);
     }
 
     public ResponseEntity<PublicationPaginatedResponse> getPublicationsFromUser(String username, @Valid Integer page,
-                                                                      @Valid Integer size) {
+                                                                      @Valid Integer size) throws IOException {
         return new ResponseEntity<PublicationPaginatedResponse>(publicationService.getPublicationsFromUser(username, page, size), HttpStatus.OK);
     }
 
     public ResponseEntity<PublicationPaginatedResponse> getPublications(@Valid Integer page,
-                                                              @Valid Integer size) {
+                                                              @Valid Integer size) throws IOException {
         return new ResponseEntity<PublicationPaginatedResponse>(publicationService.getPublications(page, size), HttpStatus.OK);
     }
 

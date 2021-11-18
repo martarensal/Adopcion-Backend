@@ -1,5 +1,6 @@
 package AdopcionAnimales.api.publications;
 
+import AdopcionAnimales.api.animals.AnimalResponse;
 import com.fasterxml.jackson.annotation.JsonProperty;
 import io.swagger.annotations.ApiModelProperty;
 import org.springframework.validation.annotation.Validated;
@@ -23,6 +24,56 @@ public class PublicationResponse   {
     return this;
   }
 
+  @JsonProperty("image")
+  private String image = null;
+
+  @JsonProperty("description")
+  private String description = null;
+
+
+
+
+
+  public PublicationResponse description(String description) {
+    this.description = description;
+    return this;
+  }
+
+  /**
+   * Get description
+   * @return description
+   **/
+  @ApiModelProperty(example = "description", value = "")
+
+  public String getDescription() {
+    return description;
+  }
+
+  public void setDescription(String description) {
+    this.description = description;
+  }
+
+
+
+
+  public PublicationResponse image(String image) {
+    this.image = image;
+    return this;
+  }
+
+  /**
+   * Get image
+   * @return image
+   **/
+  @ApiModelProperty(example = "animal.png", value = "")
+
+  public String getImage() {
+    return image;
+  }
+
+  public void setImage(String image) {
+    this.image = image;
+  }
   /**
    * Get publicationDate
    * @return publicationDate

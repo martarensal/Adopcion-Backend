@@ -16,8 +16,13 @@ public class Publication {
     @ManyToOne
     private User user;
 
-    public Publication(OffsetDateTime publicationDate){
+    private String image;
+    private String description;
+
+    public Publication(OffsetDateTime publicationDate, String image, String description){
         this.publicationDate = publicationDate;
+        this.image = image;
+        this.description = description;
     }
     public Publication(){}
 
@@ -43,5 +48,21 @@ public class Publication {
 
     public void setUser(User user) {
         this.user = user;
+    }
+
+    public String getImage() {
+        return image;
+    }
+
+    public void setImage(String image) {
+        this.image = image;
+    }
+
+    public String getDescription() {
+        return description;
+    }
+
+    public void setDescription(String description) {
+        this.description = description;
     }
 }
