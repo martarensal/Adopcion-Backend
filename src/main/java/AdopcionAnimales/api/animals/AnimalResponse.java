@@ -329,10 +329,6 @@ public class AnimalResponse   {
 
   @JsonProperty("type")
   private String type = null;
-/*  public AnimalResponse type(Type type) {
-    this.type = type.getName();
-    return this;
-  }*/
 
   /**
    * Get type
@@ -364,6 +360,27 @@ public class AnimalResponse   {
     this.city = city;
   }
 
+  @JsonProperty("user")
+  private Long user = null;
+
+  public AnimalResponse user(Long user) {
+    this.user = user;
+    return this;
+  }
+  /**
+   * Get user
+   * @return user
+   **/
+  @ApiModelProperty(example = "1", value = "")
+
+  public Long getUser() {
+    return user;
+  }
+
+  public void setUser(Long user) {
+    this.user = user;
+  }
+
   @Override
   public boolean equals(Object o) {
     if (this == o) {
@@ -381,12 +398,13 @@ public class AnimalResponse   {
         Objects.equals(this.status, animalResponse.status) &&
         Objects.equals(this.image, animalResponse.image) &&
         Objects.equals(this.type, animalResponse.type) &&
-            Objects.equals(this.city, animalResponse.city);
+            Objects.equals(this.city, animalResponse.city)&&
+            Objects.equals(this.user, animalResponse.user);
   }
 
   @Override
   public int hashCode() {
-    return Objects.hash(name, size, age, colour, sex, status, image, type, city);
+    return Objects.hash(name, size, age, colour, sex, status, image, type, city, user);
   }
 
   @Override
@@ -403,6 +421,8 @@ public class AnimalResponse   {
     sb.append("    image: ").append(toIndentedString(image)).append("\n");
     sb.append("    city: ").append(toIndentedString(city)).append("\n");
     sb.append("    type: ").append(toIndentedString(type)).append("\n");
+    sb.append("    user: ").append(toIndentedString(user)).append("\n");
+
     sb.append("}");
     return sb.toString();
   }
