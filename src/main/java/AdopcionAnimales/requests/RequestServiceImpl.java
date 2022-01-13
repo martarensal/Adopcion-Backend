@@ -4,6 +4,7 @@ import AdopcionAnimales.animals.Animal;
 import AdopcionAnimales.animals.AnimalsRepository;
 import AdopcionAnimales.api.utils.PaginationInfo;
 import AdopcionAnimales.api.requests.*;
+import AdopcionAnimales.types.Type;
 import AdopcionAnimales.users.User;
 import AdopcionAnimales.users.UsersRepository;
 import AdopcionAnimales.utils.SecurityUtils;
@@ -39,8 +40,8 @@ public class RequestServiceImpl implements RequestService{
         User user = getUser();
 
         newRequest.setUser(user);
-
-        System.out.println("primero"+ newRequest.getType());
+        Animal animal = animalsRepository.findByAnimalId(requestCreationRequest.getAnimal_id());
+        newRequest.setAnimal(animal);
 
         user.getRequests().add(requestRepository.save(newRequest));
 
@@ -166,4 +167,6 @@ public class RequestServiceImpl implements RequestService{
             throw new EntityNotFoundException("Usuario no encontrado");
         return user;
     }
+
+
 }

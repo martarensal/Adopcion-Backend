@@ -1,5 +1,6 @@
 package AdopcionAnimales.animals;
 
+import AdopcionAnimales.types.Type;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
 import org.springframework.data.jpa.repository.Query;
@@ -18,6 +19,9 @@ public interface AnimalsRepository extends CrudRepository<Animal, Long>{
 
     @Query("select a from Animal a ")
     Page<Animal> getAnimals(Pageable page);
+
+    @Query("select a from Animal a where a.id = :idAnimal")
+    Animal findByAnimalId(Long idAnimal);
 
     @Query("SELECT a FROM Animal a WHERE (:city_id is null or a.city.id = :city_id)" + " and (:type_id is null or a.type.id = :type_id)"  +
             " and (:minAge is null or a.age >= :minAge) and (:maxAge is null or a.age <= :maxAge) and ((:colour) is null or a.colour IN (:colour)) " +

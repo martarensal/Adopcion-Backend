@@ -28,6 +28,15 @@ public class RequestCreationRequest   {
     return this;
   }
 
+  @JsonProperty("animal_id")
+  private Long animal_id = 0l;
+
+  public Long getAnimal_id() {
+    return animal_id;
+  }
+  public void setAnimal_id() {
+    this.animal_id = animal_id;;
+  }
   /**
    * Get startDate
    * @return startDate
