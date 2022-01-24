@@ -1,5 +1,6 @@
 package AdopcionAnimales.api.requests;
 
+import AdopcionAnimales.api.animals.AnimalResponse;
 import com.fasterxml.jackson.annotation.JsonCreator;
 import com.fasterxml.jackson.annotation.JsonProperty;
 import com.fasterxml.jackson.annotation.JsonValue;
@@ -17,6 +18,27 @@ import java.util.Objects;
 @Validated
 @javax.annotation.Generated(value = "io.swagger.codegen.v3.generators.java.SpringCodegen", date = "2021-02-24T16:55:56.237+01:00[Europe/Paris]")
 public class RequestResponse   {
+
+  @JsonProperty("id")
+  private Long id = null;
+  public RequestResponse id(Long id) {
+    this.id = id;
+    return this;
+  }
+
+  /**
+   * Get id
+   *
+   * @return id
+   **/
+  @ApiModelProperty(example = "1", required = true, value = "")
+  public Long getId() {
+    return id;
+  }
+
+  public void setId(Long id) {
+    this.id = id;
+  }
   /**
    * Gets or Sets type
    */
