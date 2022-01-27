@@ -5,6 +5,8 @@
  */
 package AdopcionAnimales.api.publications;
 
+import AdopcionAnimales.api.animals.AnimalImageChangeRequest;
+import AdopcionAnimales.api.animals.AnimalNameChangeRequest;
 import io.swagger.annotations.*;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;

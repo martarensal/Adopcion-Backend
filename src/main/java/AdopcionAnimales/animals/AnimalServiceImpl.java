@@ -1,4 +1,5 @@
 package AdopcionAnimales.animals;
+import AdopcionAnimales.api.users.UserResponse;
 import AdopcionAnimales.api.utils.PaginationInfo;
 import AdopcionAnimales.api.animals.*;
 import AdopcionAnimales.cities.City;
@@ -77,6 +78,17 @@ public class AnimalServiceImpl implements AnimalService{
 
         animalsRepository.save(newAnimal);
         usersRepository.save(user);
+    }
+
+    @Override
+    @Transactional
+    public AnimalResponse getAnimalById(Long idAnimal) throws EntityNotFoundException, IOException {
+
+        Animal animal = animalsRepository.findById(idAnimal).orElse(null);
+        if(animal == null)
+            throw new EntityNotFoundException("Animal no encontrado");
+
+        return animalMapper.animalToAnimalResponse(animal);
     }
 
     private static byte[] decode(String base64String){

@@ -1,10 +1,12 @@
 package AdopcionAnimales.animals;
 
 import AdopcionAnimales.api.animals.*;
+import AdopcionAnimales.api.users.UserResponse;
 import AdopcionAnimales.users.User;
 import io.swagger.models.auth.In;
 import org.springframework.stereotype.Service;
 
+import javax.persistence.EntityNotFoundException;
 import java.io.IOException;
 import java.util.List;
 import java.util.Set;
@@ -25,6 +27,8 @@ public interface AnimalService {
     void modifyAnimalStatus(AnimalStatusChangeRequest animalStatusChangeRequest, Long idAnimal);
     void modifyAnimalCity(AnimalCityChangeRequest animalCityChangeRequest, Long idAnimal);
     void modifyAnimalType(AnimalTypeChangeRequest animalTypeChangeRequest, Long idAnimal);
+    AnimalResponse getAnimalById(Long idAnimal) throws EntityNotFoundException, IOException;
+
 
     Animal findAnimalById(Long id);
 }

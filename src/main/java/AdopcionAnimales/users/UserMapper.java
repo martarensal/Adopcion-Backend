@@ -3,7 +3,6 @@ package AdopcionAnimales.users;
 import AdopcionAnimales.api.users.UserRegistrationRequest;
 import AdopcionAnimales.api.users.UserResponse;
 import org.mapstruct.Mapper;
-import org.mapstruct.Mapping;
 
 import java.util.List;
 

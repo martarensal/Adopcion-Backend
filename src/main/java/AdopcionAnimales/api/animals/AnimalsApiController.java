@@ -1,6 +1,7 @@
 package AdopcionAnimales.api.animals;
 
 import AdopcionAnimales.animals.AnimalService;
+import AdopcionAnimales.api.users.UserResponse;
 import com.fasterxml.jackson.databind.ObjectMapper;
 import io.swagger.annotations.ApiParam;
 import org.slf4j.Logger;
@@ -12,6 +13,7 @@ import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestBody;
 
+import javax.persistence.EntityNotFoundException;
 import javax.servlet.http.HttpServletRequest;
 import javax.validation.Valid;
 import java.io.IOException;
@@ -101,6 +103,11 @@ public class AnimalsApiController implements AnimalsApi {
     public ResponseEntity<AnimalPaginatedResponse> getAnimals(@Valid Integer page,
                                                                       @Valid Integer size) throws IOException {
         return new ResponseEntity<AnimalPaginatedResponse>(animalService.getAnimals(page, size), HttpStatus.OK);
+    }
+    public ResponseEntity<AnimalResponse> getAnimal(
+            @ApiParam(value = "By passing in the appropriate animal id, you can get the animal.", required = true) @PathVariable("idAnimal") Long idAnimal)
+            throws EntityNotFoundException, IOException {
+        return new ResponseEntity<AnimalResponse>(animalService.getAnimalById(idAnimal), HttpStatus.OK);
     }
 
 }
