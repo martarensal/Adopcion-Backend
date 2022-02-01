@@ -88,7 +88,11 @@ public class AnimalServiceImpl implements AnimalService{
         if(animal == null)
             throw new EntityNotFoundException("Animal no encontrado");
 
-        return animalMapper.animalToAnimalResponse(animal);
+        String image = animal.getImage();
+        String base64 = encode(image);
+        AnimalResponse animalResponse = animalMapper.animalToAnimalResponse(animal);
+        animalResponse.setImage(base64);
+        return animalResponse;
     }
 
     private static byte[] decode(String base64String){
