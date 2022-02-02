@@ -1,10 +1,10 @@
 package AdopcionAnimales.publications;
 
 import AdopcionAnimales.animals.Animal;
+import AdopcionAnimales.api.animals.AnimalImageChangeRequest;
+import AdopcionAnimales.api.animals.AnimalNameChangeRequest;
 import AdopcionAnimales.api.animals.AnimalPaginatedResponse;
-import AdopcionAnimales.api.publications.PublicationCreationRequest;
-import AdopcionAnimales.api.publications.PublicationDateChangeRequest;
-import AdopcionAnimales.api.publications.PublicationPaginatedResponse;
+import AdopcionAnimales.api.publications.*;
 import org.springframework.stereotype.Service;
 
 import java.io.IOException;
@@ -17,6 +17,8 @@ public interface PublicationService {
     PublicationPaginatedResponse getPublications(Integer page, Integer size) throws IOException;
     PublicationPaginatedResponse getPublicationsFromUser(String username, Integer page, Integer size) throws IOException;
     void deletePublication(Long idAnimal);
+    void modifyPublicationImage(PublicationImageChangeRequest publicationImageChangeRequest, Long idPublication);
+    void modifyPublicationDescription(PublicationDescriptionChangeRequest publicationDescriptionChangeRequest, Long idPublication);
     void modifyPublicationDate(PublicationDateChangeRequest publicationDateChangeRequest, Long idPublication);
     Publication findPublicationById(Long id);
 }

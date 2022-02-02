@@ -78,4 +78,26 @@ public interface PublicationsApi {
         method = RequestMethod.PUT)
     ResponseEntity<Void> modifyPublicationDate(@ApiParam(value = "",required=true) @PathVariable("idPublication") Long idPublication,@ApiParam(value = "The trip's new departure date and time"  )  @Valid @RequestBody PublicationDateChangeRequest body);
 
+    @ApiOperation(value = "Modifies the publication's description", nickname = "modifyDescription", notes = "", authorizations = {
+            @Authorization(value = "ApiKeyAuth")    }, tags={  })
+    @ApiResponses(value = {
+            @ApiResponse(code = 400, message = "bad input parameter"),
+            @ApiResponse(code = 200, message = "operation completed successfully"),
+            @ApiResponse(code = 401, message = "The requested page needs a username and a password") })
+    @RequestMapping(value = "/publications/{idPublication}/description",
+            consumes = { "application/json" },
+            method = RequestMethod.PUT)
+    ResponseEntity<Void> modifyPublicationDescription(@ApiParam(value = "By passing in the appropriate publication code, you can modify the publication.",required=true) @PathVariable("idPublication") Long idPublication,@ApiParam(value = "The publication's new description"  )  @Valid @RequestBody PublicationDescriptionChangeRequest body);
+
+    @ApiOperation(value = "Modifies the publication's image", nickname = "modifyPublicationImage", notes = "", authorizations = {
+            @Authorization(value = "ApiKeyAuth")    }, tags={  })
+    @ApiResponses(value = {
+            @ApiResponse(code = 400, message = "bad input parameter"),
+            @ApiResponse(code = 200, message = "operation completed successfully"),
+            @ApiResponse(code = 401, message = "The requested page needs a username and a password") })
+    @RequestMapping(value = "/publications/{idPublication}/image",
+            consumes = { "application/json" },
+            method = RequestMethod.PUT)
+    ResponseEntity<Void> modifyPublicationImage(@ApiParam(value = "By passing in the appropriate publication code, you can modify the publication.",required=true) @PathVariable("idPublication") Long idPublcation,@ApiParam(value = "The publication's new image"  )  @Valid @RequestBody PublicationImageChangeRequest body);
+
 }

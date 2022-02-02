@@ -1,13 +1,12 @@
 package AdopcionAnimales.publications;
 
 import AdopcionAnimales.animals.Animal;
+import AdopcionAnimales.api.animals.AnimalImageChangeRequest;
+import AdopcionAnimales.api.animals.AnimalNameChangeRequest;
 import AdopcionAnimales.api.animals.AnimalResponse;
+import AdopcionAnimales.api.publications.*;
 import AdopcionAnimales.api.utils.PaginationInfo;
 
-import AdopcionAnimales.api.publications.PublicationCreationRequest;
-import AdopcionAnimales.api.publications.PublicationDateChangeRequest;
-import AdopcionAnimales.api.publications.PublicationPaginatedResponse;
-import AdopcionAnimales.api.publications.PublicationResponse;
 import AdopcionAnimales.users.User;
 import AdopcionAnimales.users.UsersRepository;
 import AdopcionAnimales.utils.SecurityUtils;
@@ -100,6 +99,41 @@ public class PublicationServiceImpl implements PublicationService{
         publication.setPublicationDate(publicationDateChangeRequest.getNewPublicationDate());
 
         publicationRepository.save(publication);
+    }
+    @Override
+    @Transactional
+    public void modifyPublicationImage(PublicationImageChangeRequest publicationImageChangeRequest, Long idPublication){
+        Publication publication = findPublicationById(idPublication);
+        if(publication != null) {
+            String base64 = publicationImageChangeRequest.getnewPublicationImage();
+            publicationImageChangeRequest.setnewPublicationImage("");
+
+            String fileName = "";
+            if(base64.length() <= 0){
+                fileName = "img\\nophoto.png";
+
+            }else
+            {
+                fileName = "img\\" + idPublication + ".png";
+                try(FileOutputStream stream = new FileOutputStream(fileName)) {
+                    stream.write(decode(base64));
+                } catch (IOException e) {
+                    e.printStackTrace();
+                }
+            }
+
+            publication.setImage(fileName);
+            publicationRepository.save(publication);
+        }
+    }
+    @Override
+    @Transactional
+    public void modifyPublicationDescription(PublicationDescriptionChangeRequest publicationDescriptionChangeRequest, Long idPublication){
+        Publication publication = findPublicationById(idPublication);
+        if(publication != null) {
+            publication.setDescription(publicationDescriptionChangeRequest.getnewPublicationDescription());
+            publicationRepository.save(publication);
+        }
     }
 
     private User getUser() {

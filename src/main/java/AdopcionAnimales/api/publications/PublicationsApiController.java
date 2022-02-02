@@ -1,5 +1,7 @@
 package AdopcionAnimales.api.publications;
 
+import AdopcionAnimales.api.animals.AnimalImageChangeRequest;
+import AdopcionAnimales.api.animals.AnimalNameChangeRequest;
 import AdopcionAnimales.api.animals.AnimalPaginatedResponse;
 import AdopcionAnimales.publications.PublicationService;
 import com.fasterxml.jackson.databind.ObjectMapper;
@@ -59,6 +61,17 @@ public class PublicationsApiController implements PublicationsApi {
 
     public ResponseEntity<Void> modifyPublicationDate(@ApiParam(value = "",required=true) @PathVariable("idPublication") Long idPublication,@ApiParam(value = "The new publication date and time"  )  @Valid @RequestBody PublicationDateChangeRequest body) {
         publicationService.modifyPublicationDate(body, idPublication);
+        return new ResponseEntity<Void>(HttpStatus.OK);
+    }
+
+    public ResponseEntity<Void> modifyPublicationImage(@ApiParam(value = "By passing in the appropriate publication code, you can modify the publication.",required=true) @PathVariable("idPublication") Long idPublication,@ApiParam(value = "The publication's new image"  )  @Valid @RequestBody PublicationImageChangeRequest body) {
+        System.out.println(body);
+        publicationService.modifyPublicationImage(body, idPublication);
+        return new ResponseEntity<Void>(HttpStatus.OK);
+    }
+
+    public ResponseEntity<Void> modifyPublicationDescription(@ApiParam(value = "By passing in the appropriate publication code, you can modify the publication.",required=true) @PathVariable("idPublication") Long idPublication,@ApiParam(value = "The publication's new description" )  @Valid @RequestBody PublicationDescriptionChangeRequest body) {
+        publicationService.modifyPublicationDescription(body, idPublication);
         return new ResponseEntity<Void>(HttpStatus.OK);
     }
 
