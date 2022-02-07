@@ -32,11 +32,11 @@ public class AnimalCreationRequest   {
    * Gets or Sets size
    */
   public enum SizeEnum {
-    SMALL("small"),
+    PEQUEÑO("pequeño"),
     
-    MEDIUM("medium"),
+    MEDIANO("mediano"),
     
-    BIG("big");
+    GRANDE("grande");
 
     private String value;
 
@@ -67,23 +67,23 @@ public class AnimalCreationRequest   {
    * Gets or Sets colour
    */
   public enum ColourEnum {
-    WHITE("white"),
-    
-    BLACK("black"),
-    
-    BROWN("brown"),
-    
-    LIGHTBROWN("lightbrown"),
-    
-    GREEN("green"),
-    
-    RED("red"),
-    
-    YELLOW("yellow"),
-    
-    BLUE("blue"),
-    
-    ORANGE("orange");
+    BLANCO("blanco"),
+
+    NEGRO("negro"),
+
+    MARRON("marron"),
+
+    CANELA("canela"),
+
+    VERDE("verde"),
+
+    ROJO("rojo"),
+
+    AMARILLO("amarillo"),
+
+    AZUL("azul"),
+
+    NARANJA("naranja");
 
     private String value;
 
@@ -114,9 +114,9 @@ public class AnimalCreationRequest   {
    * Gets or Sets sex
    */
   public enum SexEnum {
-    MALE("male"),
+    MACHO("macho"),
     
-    FEMALE("female");
+    HEMBRA("hembra");
 
     private String value;
 
@@ -147,11 +147,11 @@ public class AnimalCreationRequest   {
    * Gets or Sets status
    */
   public enum StatusEnum {
-    ADOPTED("adopted"),
+    ADOPTADO("adoptado"),
 
-    HOMELESS("homeless"),
+    SIN_HOGAR("sin hogar"),
 
-    SHELTER("shelter");
+    ACOGIDO("acogido");
 
     private String value;
 
@@ -270,7 +270,7 @@ public class AnimalCreationRequest   {
    * Get size
    * @return size
   **/
-  @ApiModelProperty(example = "small", required = true, value = "")
+  @ApiModelProperty(example = "pequeño", required = true, value = "")
   @NotNull
 
   public SizeEnum getSize() {
@@ -290,7 +290,7 @@ public class AnimalCreationRequest   {
    * Get colour
    * @return colour
   **/
-  @ApiModelProperty(example = "brown", required = true, value = "")
+  @ApiModelProperty(example = "marron", required = true, value = "")
   @NotNull
 
   public ColourEnum getColour() {
@@ -310,7 +310,7 @@ public class AnimalCreationRequest   {
    * Get sex
    * @return sex
   **/
-  @ApiModelProperty(example = "male", required = true, value = "")
+  @ApiModelProperty(example = "hembra", required = true, value = "")
   @NotNull
 
   public SexEnum getSex() {
@@ -330,7 +330,7 @@ public class AnimalCreationRequest   {
    * Get status
    * @return status
   **/
-  @ApiModelProperty(example = "homeless", required = true, value = "")
+  @ApiModelProperty(example = "sin hogar", required = true, value = "")
   @NotNull
 
   public StatusEnum getStatus() {

@@ -42,11 +42,11 @@ public class AnimalResponse   {
    * Gets or Sets size
    */
   public enum SizeEnum {
-    SMALL("small"),
-    
-    MEDIUM("medium"),
-    
-    BIG("big");
+    PEQUEÑO("pequeño"),
+
+    MEDIANO("mediano"),
+
+    GRANDE("grande");
 
     private String value;
 
@@ -80,23 +80,23 @@ public class AnimalResponse   {
    * Gets or Sets colour
    */
   public enum ColourEnum {
-    WHITE("white"),
-    
-    BLACK("black"),
-    
-    BROWN("brown"),
-    
-    LIGHTBROWN("lightbrown"),
-    
-    GREEN("green"),
-    
-    RED("red"),
-    
-    YELLOW("yellow"),
-    
-    BLUE("blue"),
-    
-    ORANGE("orange");
+    BLANCO("blanco"),
+
+    NEGRO("negro"),
+
+    MARRON("marron"),
+
+    CANELA("canela"),
+
+    VERDE("verde"),
+
+    ROJO("rojo"),
+
+    AMARILLO("amarillo"),
+
+    AZUL("azul"),
+
+    NARANJA("naranja");
 
     private String value;
 
@@ -127,9 +127,9 @@ public class AnimalResponse   {
    * Gets or Sets sex
    */
   public enum SexEnum {
-    MALE("male"),
-    
-    FEMALE("female");
+    MACHO("macho"),
+
+    HEMBRA("hembra");
 
     private String value;
 
@@ -160,11 +160,11 @@ public class AnimalResponse   {
    * Gets or Sets status
    */
   public enum StatusEnum {
-    ADOPTED("adopted"),
-    
-    HOMELESS("homeless"),
-    
-    SHELTER("shelter");
+    ADOPTADO("adoptado"),
+
+    SIN_HOGAR("sin hogar"),
+
+    ACOGIDO("acogido");
 
     private String value;
 
@@ -222,7 +222,7 @@ public class AnimalResponse   {
    * Get size
    * @return size
   **/
-  @ApiModelProperty(example = "small", value = "")
+  @ApiModelProperty(example = "pequeño", value = "")
 
   public SizeEnum getSize() {
     return size;
@@ -260,7 +260,7 @@ public class AnimalResponse   {
    * Get colour
    * @return colour
   **/
-  @ApiModelProperty(example = "brown", value = "")
+  @ApiModelProperty(example = "marron", value = "")
 
   public ColourEnum getColour() {
     return colour;
@@ -279,7 +279,7 @@ public class AnimalResponse   {
    * Get sex
    * @return sex
   **/
-  @ApiModelProperty(example = "male", value = "")
+  @ApiModelProperty(example = "macho", value = "")
 
   public SexEnum getSex() {
     return sex;
@@ -298,7 +298,7 @@ public class AnimalResponse   {
    * Get status
    * @return status
   **/
-  @ApiModelProperty(example = "Adopted", value = "")
+  @ApiModelProperty(example = "adoptado", value = "")
 
   public StatusEnum getStatus() {
     return status;

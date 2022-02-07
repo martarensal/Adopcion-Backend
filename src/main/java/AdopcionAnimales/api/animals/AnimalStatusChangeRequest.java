@@ -19,11 +19,11 @@ public class AnimalStatusChangeRequest   {
    * Gets or Sets newAnimalStatus
    */
   public enum NewAnimalStatusEnum {
-    ADOPTED("adopted"),
-    
-    HOMELESS("homeless"),
-    
-    SHELTER("shelter");
+    ADOPTADO("adoptado"),
+
+    SIN_HOGAR("sin hogar"),
+
+    ACOGIDO("acogido");
 
     private String value;
 
@@ -59,7 +59,7 @@ public class AnimalStatusChangeRequest   {
    * Get newAnimalStatus
    * @return newAnimalStatus
   **/
-  @ApiModelProperty(example = "Adopted", required = true, value = "")
+  @ApiModelProperty(example = "adoptado", required = true, value = "")
   @NotNull
 
   public String getNewAnimalStatus() {

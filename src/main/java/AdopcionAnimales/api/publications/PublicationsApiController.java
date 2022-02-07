@@ -65,7 +65,6 @@ public class PublicationsApiController implements PublicationsApi {
     }
 
     public ResponseEntity<Void> modifyPublicationImage(@ApiParam(value = "By passing in the appropriate publication code, you can modify the publication.",required=true) @PathVariable("idPublication") Long idPublication,@ApiParam(value = "The publication's new image"  )  @Valid @RequestBody PublicationImageChangeRequest body) {
-        System.out.println(body);
         publicationService.modifyPublicationImage(body, idPublication);
         return new ResponseEntity<Void>(HttpStatus.OK);
     }
@@ -74,7 +73,4 @@ public class PublicationsApiController implements PublicationsApi {
         publicationService.modifyPublicationDescription(body, idPublication);
         return new ResponseEntity<Void>(HttpStatus.OK);
     }
-
-
-
 }

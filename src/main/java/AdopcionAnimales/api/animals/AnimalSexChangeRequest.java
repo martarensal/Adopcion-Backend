@@ -19,9 +19,9 @@ public class AnimalSexChangeRequest   {
    * Gets or Sets newAnimalSex
    */
   public enum NewAnimalSexEnum {
-    MALE("male"),
-    
-    FEMALE("female");
+    MACHO("macho"),
+
+    HEMBRA("hembra");
 
     private String value;
 
@@ -57,7 +57,7 @@ public class AnimalSexChangeRequest   {
    * Get newAnimalSex
    * @return newAnimalSex
   **/
-  @ApiModelProperty(example = "MALE", required = true, value = "")
+  @ApiModelProperty(example = "macho", required = true, value = "")
   @NotNull
 
   public String getNewAnimalSex() {

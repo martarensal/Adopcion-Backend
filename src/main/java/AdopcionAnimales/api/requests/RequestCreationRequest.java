@@ -81,11 +81,11 @@ public class RequestCreationRequest   {
    * Gets or Sets status
    */
   public enum StatusEnum {
-    ACCEPTED("accepted"),
+    ACEPTADA("aceptada"),
 
-    REJECTED("rejected"),
+    RECHAZADA("rechazada"),
 
-    SENT("sent");
+    ENVIADA("enviada");
 
     private String value;
 
@@ -121,7 +121,7 @@ public class RequestCreationRequest   {
    * Get status
    * @return status
    **/
-  @ApiModelProperty(example = "sent", required = true, value = "")
+  @ApiModelProperty(example = "enviada", required = true, value = "")
   @NotNull
 
   public StatusEnum getStatus() {
@@ -136,9 +136,9 @@ public class RequestCreationRequest   {
    * Gets or Sets type
    */
   public enum TypeEnum {
-    SHELTER("shelter"),
+    ACOGIDA("acogida"),
     
-    ADOPTION("adoption");
+    ADOPCION("adopcion");
 
     private String value;
 
@@ -174,7 +174,7 @@ public class RequestCreationRequest   {
    * Get type
    * @return type
   **/
-  @ApiModelProperty(example = "shelter", required = true, value = "")
+  @ApiModelProperty(example = "acogida", required = true, value = "")
   @NotNull
 
   public TypeEnum getType() {

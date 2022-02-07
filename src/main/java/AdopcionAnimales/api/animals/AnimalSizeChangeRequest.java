@@ -19,11 +19,11 @@ public class AnimalSizeChangeRequest   {
    * Gets or Sets newAnimalSize
    */
   public enum NewAnimalSizeEnum {
-    SMALL("small"),
-    
-    MEDIUM("medium"),
-    
-    BIG("big");
+    PEQUEÑO("pequeño"),
+
+    MEDIANO("mediano"),
+
+    GRANDE("grande");
 
     private String value;
 
@@ -59,7 +59,7 @@ public class AnimalSizeChangeRequest   {
    * Get newAnimalSize
    * @return newAnimalSize
   **/
-  @ApiModelProperty(example = "small", required = true, value = "")
+  @ApiModelProperty(example = "pequeño", required = true, value = "")
   @NotNull
 
   public String getNewAnimalSize() {

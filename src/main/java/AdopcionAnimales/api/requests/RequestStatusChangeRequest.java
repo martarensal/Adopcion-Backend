@@ -20,11 +20,11 @@ public class RequestStatusChangeRequest   {
      * Gets or Sets newRequestStatus
      */
     public enum NewRequestStatusEnum {
-        ACCEPTED("Accepted"),
+        ACEPTADA("aceptada"),
 
-        SENT("sent"),
+        RECHAZADA("rechazada"),
 
-        REJECTED("rejected");
+        ENVIADA("enviada");
 
         private String value;
 
@@ -60,7 +60,7 @@ public class RequestStatusChangeRequest   {
      * Get newRequestStatus
      * @return newRequestStatus
      **/
-    @ApiModelProperty(example = "Sent", required = true, value = "")
+    @ApiModelProperty(example = "enviada", required = true, value = "")
     @NotNull
 
     public String getNewRequestStatus() {

@@ -18,23 +18,23 @@ public class AnimalColourChangeRequest   {
    * Gets or Sets newAnimalColour
    */
   public enum NewAnimalColourEnum {
-    WHITE("white"),
+    BLANCO("blanco"),
     
-    BLACK("black"),
+    NEGRO("negro"),
     
-    BROWN("brown"),
+    MARRON("marron"),
     
-    LIGHTBROWN("lightbrown"),
+    CANELA("canela"),
     
-    GREEN("green"),
+    VERDE("verde"),
     
-    RED("red"),
+    ROJO("rojo"),
     
-    YELLOW("yellow"),
+    AMARILLO("amarillo"),
     
-    BLUE("blue"),
+    AZUL("azul"),
     
-    ORANGE("orange");
+    NARANJA("naranja");
 
     private String value;
 
@@ -70,7 +70,7 @@ public class AnimalColourChangeRequest   {
    * Get newAnimalColour
    * @return newAnimalColour
   **/
-  @ApiModelProperty(example = "brown", required = true, value = "")
+  @ApiModelProperty(example = "marron", required = true, value = "")
 
   public String getNewAnimalColour() {
     return newAnimalColour;

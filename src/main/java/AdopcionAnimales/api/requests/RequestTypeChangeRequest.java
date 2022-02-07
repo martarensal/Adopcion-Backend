@@ -19,10 +19,9 @@ public class RequestTypeChangeRequest   {
      * Gets or Sets newRequestType
      */
     public enum NewRequestTypeEnum {
-        ADOPTION("adoption"),
+        ACOGIDA("acogida"),
 
-        SHELTER("shelter");
-
+        ADOPCION("adopcion");
         private String value;
 
         NewRequestTypeEnum(String value) {
@@ -57,7 +56,7 @@ public class RequestTypeChangeRequest   {
      * Get newRequestType
      * @return newRequestType
      **/
-    @ApiModelProperty(example = "Adopted", required = true, value = "")
+    @ApiModelProperty(example = "adopcion", required = true, value = "")
     @NotNull
 
     public String getNewRequestType() {

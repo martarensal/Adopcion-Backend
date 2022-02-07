@@ -43,9 +43,9 @@ public class RequestResponse   {
    * Gets or Sets type
    */
   public enum TypeEnum {
-    ADOPTION("adoption"),
-    
-    SHELTER("shelter");
+    ACOGIDA("acogida"),
+
+    ADOPCION("adopcion");
 
     private String value;
 
@@ -82,11 +82,11 @@ public class RequestResponse   {
    * Gets or Sets status
    */
   public enum StatusEnum {
-    SENT("sent"),
-    
-    ACCEPTED("accepted"),
-    
-    REJECTED("rejected");
+    ACEPTADA("aceptada"),
+
+    RECHAZADA("rechazada"),
+
+    ENVIADA("enviada");
 
     private String value;
 
@@ -122,7 +122,7 @@ public class RequestResponse   {
    * Get type
    * @return type
   **/
-  @ApiModelProperty(example = "shelter", required = true, value = "")
+  @ApiModelProperty(example = "acogida", required = true, value = "")
   @NotNull
 
   public TypeEnum getType() {
@@ -184,7 +184,7 @@ public class RequestResponse   {
    * Get status
    * @return status
   **/
-  @ApiModelProperty(example = "sent", required = true, value = "")
+  @ApiModelProperty(example = "enviada", required = true, value = "")
   @NotNull
 
   public StatusEnum getStatus() {

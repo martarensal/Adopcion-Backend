@@ -1,5 +1,4 @@
 package AdopcionAnimales.animals;
-import AdopcionAnimales.api.users.UserResponse;
 import AdopcionAnimales.api.utils.PaginationInfo;
 import AdopcionAnimales.api.animals.*;
 import AdopcionAnimales.cities.City;
@@ -51,7 +50,7 @@ public class AnimalServiceImpl implements AnimalService{
         animalCreationRequest.setImage("");
 
         Animal newAnimal = animalMapper.animalCreationRequestToAnimal(animalCreationRequest);
-        newAnimal.setStatus("HOMELESS");
+        newAnimal.setStatus("SIN_HOGAR");
         User user = getUser();
 
         newAnimal.setUser(user);
@@ -153,7 +152,6 @@ public class AnimalServiceImpl implements AnimalService{
             String base64 = encode(image);
             animalResponses.get(i).setImage(base64);
         }
-        //System.out.println(animalResponses);
 
         PaginationInfo paginationInfo = new PaginationInfo();
         paginationInfo.setTotalElements(matchedAnimals.getNumberOfElements());
@@ -226,15 +224,13 @@ public class AnimalServiceImpl implements AnimalService{
             }
 
             animal.setImage(fileName);
-            //animal.setImage(animalImageChangeRequest.getNewAnimalImage());
             animalsRepository.save(animal);
         }
     }
     @Override
     @Transactional
     public void modifyAnimalName(AnimalNameChangeRequest animalNameChangeRequest, Long idAnimal){
-        //System.out.println(animalNameChangeRequest + " animal name change request");
-        //System.out.println(idAnimal + " id animal");
+
         Animal animal = findAnimalById(idAnimal);
         if(animal != null) {
             animal.setName(animalNameChangeRequest.getNewAnimalName());
@@ -312,14 +308,7 @@ public class AnimalServiceImpl implements AnimalService{
         Animal animal = findAnimalById(idAnimal);
 
         if(animal != null) {
-            //System.out.println(animalTypeChangeRequest.getAnimalType_id().toString() + " animaltypechangerequest");
-
-
             Type type = typeRepository.findByTypeId(animalTypeChangeRequest.getAnimalType_id());
-
-            //System.out.println(type.getName() + "el id en el tipo");
-            //System.out.println(type.getId().toString() + "el id en el tipo");
-
             animal.setType(type);
             animalsRepository.save(animal);
         }
