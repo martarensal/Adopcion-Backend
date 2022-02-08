@@ -51,10 +51,6 @@ public class PublicationResponse   {
   @JsonProperty("description")
   private String description = null;
 
-
-
-
-
   public PublicationResponse description(String description) {
     this.description = description;
     return this;
@@ -73,9 +69,6 @@ public class PublicationResponse   {
   public void setDescription(String description) {
     this.description = description;
   }
-
-
-
 
   public PublicationResponse image(String image) {
     this.image = image;
@@ -110,8 +103,26 @@ public class PublicationResponse   {
   public void setPublicationDate(OffsetDateTime publicationDate) {
     this.publicationDate = publicationDate;
   }
+  @JsonProperty("user")
+  private Long user = null;
 
+  public PublicationResponse user(Long user) {
+    this.user = user;
+    return this;
+  }
+  /**
+   * Get user
+   * @return user
+   **/
+  @ApiModelProperty(example = "1", value = "")
 
+  public Long getUser() {
+    return user;
+  }
+
+  public void setUser(Long user) {
+    this.user = user;
+  }
   @Override
   public boolean equals(Object o) {
     if (this == o) {
@@ -121,12 +132,14 @@ public class PublicationResponse   {
       return false;
     }
     PublicationResponse publicationResponse = (PublicationResponse) o;
-    return Objects.equals(this.publicationDate, publicationResponse.publicationDate);
+    return Objects.equals(this.publicationDate, publicationResponse.publicationDate)&&
+    Objects.equals(this.user, publicationResponse.user);
+
   }
 
   @Override
   public int hashCode() {
-    return Objects.hash(publicationDate);
+    return Objects.hash(publicationDate, description, image, user);
   }
 
   @Override
@@ -135,6 +148,9 @@ public class PublicationResponse   {
     sb.append("class PublicationResponse {\n");
     
     sb.append("    publicationDate: ").append(toIndentedString(publicationDate)).append("\n");
+    sb.append("    description: ").append(toIndentedString(description)).append("\n");
+    sb.append("    image: ").append(toIndentedString(image)).append("\n");
+    sb.append("    user: ").append(toIndentedString(user)).append("\n");
     sb.append("}");
     return sb.toString();
   }
