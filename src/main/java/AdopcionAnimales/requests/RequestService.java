@@ -16,4 +16,5 @@ public interface RequestService {
     void modifyRequestStatus(RequestStatusChangeRequest requestStatusChangeRequest, Long idRequest);
     void modifyRequestType(RequestTypeChangeRequest requestTypeChangeRequest, Long idRequest);
     Request findRequestById(Long id);
+    RequestPaginatedResponse getAnimalRequests(Long idAnimal, Integer page, Integer size);
 }

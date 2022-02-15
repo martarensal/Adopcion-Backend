@@ -1,7 +1,9 @@
 package AdopcionAnimales.api.animals;
 
 import AdopcionAnimales.animals.AnimalService;
-import AdopcionAnimales.api.users.UserResponse;
+import AdopcionAnimales.api.requests.RequestPaginatedResponse;
+import AdopcionAnimales.api.requests.RequestResponse;
+import AdopcionAnimales.requests.RequestService;
 import com.fasterxml.jackson.databind.ObjectMapper;
 import io.swagger.annotations.ApiParam;
 import org.slf4j.Logger;
@@ -29,12 +31,14 @@ public class AnimalsApiController implements AnimalsApi {
 
     private final HttpServletRequest request;
     private AnimalService animalService;
+    private RequestService requestService;
 
     @Autowired
-    public AnimalsApiController(ObjectMapper objectMapper, HttpServletRequest request, AnimalService animalService) {
+    public AnimalsApiController(ObjectMapper objectMapper, HttpServletRequest request, AnimalService animalService, RequestService requestService) {
         this.objectMapper = objectMapper;
         this.request = request;
         this.animalService = animalService;
+        this.requestService = requestService;
     }
 
     public ResponseEntity<Void> addAnimal(@ApiParam(value = "", required = true) @PathVariable("username") String username, @ApiParam(value = "Animal to add"  )  @Valid @RequestBody AnimalCreationRequest body) throws IOException {
@@ -108,6 +112,14 @@ public class AnimalsApiController implements AnimalsApi {
             @ApiParam(value = "By passing in the appropriate animal id, you can get the animal.", required = true) @PathVariable("idAnimal") Long idAnimal)
             throws EntityNotFoundException, IOException {
         return new ResponseEntity<AnimalResponse>(animalService.getAnimalById(idAnimal), HttpStatus.OK);
+    }
+
+    public ResponseEntity<RequestPaginatedResponse> getAnimalRequests(
+            @ApiParam(value = "By passing in the appropriate animal id, you can get the animal request.", required = true) @PathVariable("idAnimal") Long idAnimal, @Valid Integer page,
+            @Valid Integer size)
+            throws EntityNotFoundException, IOException {
+        return new ResponseEntity<RequestPaginatedResponse>(requestService.getAnimalRequests(idAnimal, page, size), HttpStatus.OK);
+
     }
 
 }

@@ -17,4 +17,6 @@ public interface RequestRepository extends CrudRepository<Request, Long> {
     @Query("select r from Request r ")
     Page<Request> getRequests(Pageable page);
 
+    @Query ("select r from Request r where r.animal.id = :idAnimal")
+    Page<Request> getAnimalRequests(@Param("idAnimal") Long idAnimal, Pageable page);
 }

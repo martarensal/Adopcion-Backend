@@ -167,6 +167,13 @@ public class RequestServiceImpl implements RequestService{
             throw new EntityNotFoundException("Usuario no encontrado");
         return user;
     }
+    @Override
+    @Transactional
+    public RequestPaginatedResponse getAnimalRequests(Long idAnimal, Integer page, Integer size){
+        Page<Request> matchedRequests = requestRepository.getAnimalRequests(idAnimal, PageRequest.of(page, size));
+        System.out.println(matchedRequests);
+        return getRequestPaginatedResponse(matchedRequests);
+    }
 
 
 }

@@ -7,6 +7,8 @@ package AdopcionAnimales.api.animals;
 
 import AdopcionAnimales.api.cities.CityPaginatedResponse;
 import AdopcionAnimales.api.cities.CityResponse;
+import AdopcionAnimales.api.requests.RequestPaginatedResponse;
+import AdopcionAnimales.api.requests.RequestResponse;
 import AdopcionAnimales.api.users.UserResponse;
 import io.swagger.annotations.*;
 import org.springframework.http.ResponseEntity;
@@ -193,6 +195,7 @@ public interface AnimalsApi {
 
             @ApiParam(value = "the number of the page") @Valid @RequestParam(value = "page", required = false, defaultValue = "0") Integer page,
             @ApiParam(value = "the number of element per page") @Valid @RequestParam(value = "size", required = false, defaultValue = "25") Integer size) throws IOException;
+
     @ApiOperation(value = "Finds a animal", nickname = "getAnimal", notes = "", response = AnimalResponse.class, authorizations = {
             @Authorization(value = "ApiKeyAuth")    }, tags={})
     @ApiResponses(value = {
@@ -205,4 +208,19 @@ public interface AnimalsApi {
             method = RequestMethod.GET)
     ResponseEntity<AnimalResponse> getAnimal(@ApiParam(value = "By passing in the appropriate user id, you can get the animal.",required=true) @PathVariable("idAnimal") Long animalId
     ) throws IOException;
+
+    @ApiOperation(value = "Get animal request", nickname = "getAnimalRequest", notes = "", response = AnimalResponse.class, authorizations = {
+            @Authorization(value = "ApiKeyAuth")    }, tags={})
+    @ApiResponses(value = {
+            @ApiResponse(code = 200, message = "search results matching criteria", response = AnimalResponse.class),
+            @ApiResponse(code = 400, message = "bad input parameter"),
+            @ApiResponse(code = 404, message = "animal not found"),
+            @ApiResponse(code = 401, message = "The requested page needs a username and a password") })
+    @RequestMapping(value = "/animals/{idAnimal}/requests",
+            produces = { "application/json" },
+            method = RequestMethod.GET)
+    ResponseEntity<RequestPaginatedResponse> getAnimalRequests(@ApiParam(value = "By passing in the appropriate user id, you can get the animal request.",required=true) @PathVariable("idAnimal") Long animalId,
+     @ApiParam(value = "the number of the page") @Valid @RequestParam(value = "page", required = false, defaultValue = "0") Integer page,
+                                                               @ApiParam(value = "the number of element per page") @Valid @RequestParam(value = "size", required = false, defaultValue = "25") Integer size) throws IOException;
+
 }
