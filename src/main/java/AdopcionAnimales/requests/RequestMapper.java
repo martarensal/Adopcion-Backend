@@ -15,6 +15,7 @@ import java.util.Set;
 @Mapper(componentModel = "spring")
 public interface RequestMapper {
     public default Long animalToLong(Animal a) { return a.getId();}
+    public default Long userToLong(User u) { return u.getIdUser();}
 
     List<RequestResponse> requestToRequestResponse(List<Request> request);
     Request requestCreationRequestToRequest(RequestCreationRequest requestCreationRequest);

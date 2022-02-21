@@ -39,6 +39,28 @@ public class RequestResponse   {
   public void setId(Long id) {
     this.id = id;
   }
+
+  @JsonProperty("user")
+  private Long user = null;
+
+  public RequestResponse user(Long user) {
+    this.user = user;
+    return this;
+  }
+  /**
+   * Get user
+   * @return user
+   **/
+  @ApiModelProperty(example = "1", value = "")
+
+  public Long getUser() {
+    return user;
+  }
+
+  public void setUser(Long user) {
+    this.user = user;
+  }
+
   /**
    * Gets or Sets type
    */
@@ -208,12 +230,14 @@ public class RequestResponse   {
     return Objects.equals(this.type, requestResponse.type) &&
         Objects.equals(this.startDate, requestResponse.startDate) &&
         Objects.equals(this.endDate, requestResponse.endDate) &&
-        Objects.equals(this.status, requestResponse.status);
+        Objects.equals(this.status, requestResponse.status) &&
+            Objects.equals(this.user, requestResponse.user);
+
   }
 
   @Override
   public int hashCode() {
-    return Objects.hash(type, startDate, endDate, status);
+    return Objects.hash(type, startDate, endDate, status, user);
   }
 
   @Override
@@ -225,6 +249,8 @@ public class RequestResponse   {
     sb.append("    startDate: ").append(toIndentedString(startDate)).append("\n");
     sb.append("    endDate: ").append(toIndentedString(endDate)).append("\n");
     sb.append("    status: ").append(toIndentedString(status)).append("\n");
+    sb.append("    user: ").append(toIndentedString(user)).append("\n");
+
     sb.append("}");
     return sb.toString();
   }
