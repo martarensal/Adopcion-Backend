@@ -28,7 +28,5 @@ public interface AnimalService {
     void modifyAnimalCity(AnimalCityChangeRequest animalCityChangeRequest, Long idAnimal);
     void modifyAnimalType(AnimalTypeChangeRequest animalTypeChangeRequest, Long idAnimal);
     AnimalResponse getAnimalById(Long idAnimal) throws EntityNotFoundException, IOException;
-
-
     Animal findAnimalById(Long id);
 }
